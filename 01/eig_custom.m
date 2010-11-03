@@ -5,6 +5,7 @@ function res = eig_custom(A)
   # berechnet zu einer reellen, symmetrischen Matrix (A = A^T) die Eigenwerte
   # und gibt sie in einer Diagonalmatrix wieder zurück.
 
+  A = A + A';    # so wird A symmetrisch
   size = size(A)(1);
   A1 = zeros(size);
   max_iterations = 1e3;
