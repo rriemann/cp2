@@ -5,9 +5,7 @@ function res = eig_custom(A)
   % berechnet zu einer reellen, symmetrischen Matrix (A = A^T) die Eigenwerte
   % und gibt sie in einer Diagonalmatrix wieder zurück.
 
-  #size = size(A)(1);
-  #A1 = zeros(size);
-  max_iterations = 1e4;
+  max_iterations = 1e5;
   A = (A + A.')/2;
 
   n = size(A)(1);
@@ -20,24 +18,6 @@ function res = eig_custom(A)
   ss = sum(sum(A2))-trace(A2); % ineffizient, da Spur-Elemente doppelt berechnet werden
 
   while iterations < max_iterations
-%<<<<<<< HEAD
-   %# A1 = zeros(size);
-   %# disp(SS(A));
-   %# disp(10*eps*(size^2-size));
-    %if SS(A) > 10*eps*(size^2-size)
-      %for q = [2:size]
-        %for p = [1:q-1]
-          %# disp([q, p]);
-          %theta = (A(q,q)-A(p,p))/(2*A(p,q));
-          %# disp(theta);
-          %t = sign(theta)/(abs(theta)+sqrt(theta^2+1));
-          %c = 1/sqrt(t^2+1);
-          %s = t*c;
-          %tau = s/(1+c);
-          %for i = [[1:p-1], [p+1:q-1], [q+1:size]]
-            %A1(i,p) = A(i,p)-s*(A(i,q)+tau*A(i,p));
-            %A1(i,q) = A(i,q)+s*(A(i,p)-tau*A(i,q));
-%=======
     if ss > 10*eps*(n^2-n)
       for q = [2:n]
         for p = [1:q-1]
