@@ -5,17 +5,21 @@ function res = eig_custom(A)
   # berechnet zu einer reellen, symmetrischen Matrix (A = A^T) die Eigenwerte
   # und gibt sie in einer Diagonalmatrix wieder zurück.
 
-  A = A + A';    # so wird A symmetrisch
+  A = 1/2*(A + A');    # so wird A symmetrisch
   size = size(A)(1);
   A1 = zeros(size);
-  max_iterations = 1e3;
+  max_iterations = 5e4;
   iterations = 0;
   while iterations < max_iterations
+   # A1 = zeros(size);
+   # disp(SS(A));
+   # disp(10*eps*(size^2-size));
     if SS(A) > 10*eps*(size^2-size)
       for q = [2:size]
         for p = [1:q-1]
           # disp([q, p]);
           theta = (A(q,q)-A(p,p))/(2*A(p,q));
+          # disp(theta);
           t = sign(theta)/(abs(theta)+sqrt(theta^2+1));
           c = 1/sqrt(t^2+1);
           s = t*c;
