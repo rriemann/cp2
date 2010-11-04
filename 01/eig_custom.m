@@ -52,7 +52,7 @@ function res = eig_custom(A)
   end
   disp('Iterationen:');
   disp(iterations);
-  V.'*Abak*V
+  V.'*Abak*V - A
   V'*V
   res = A;
 end
