@@ -34,12 +34,12 @@ function res = eig_custom(A)
               A1(p,i) = A1(i,p);
               A1(i,q) = A(i,q)+s*(A(i,p)-tau*A(i,q));
               A1(q,i) = A1(i,q);
-
-              V1(i,p) = V(i,p) - s*(V(i,q) + tau*V(i,p));
-              V1(i,q) = V(i,q) + s*(V(i,p) - tau*V(i,q));
-              V = V1;
-
             end
+            
+            V1(:,p) = V(:,p) - s*(V(:,q) + tau*V(:,p));
+            V1(:,q) = V(:,q) + s*(V(:,p) - tau*V(:,q));
+            V = V1;
+            
             A1(p,p) = A(p,p)-t*A(p,q);
             A1(q,q) = A(q,q)+t*A(p,q);
             A1(p,q) = 0;
@@ -52,7 +52,7 @@ function res = eig_custom(A)
   end
   disp('Iterationen:');
   disp(iterations);
-  V'*Abak*V
+  V.'*Abak*V
   V'*V
   res = A;
 end
