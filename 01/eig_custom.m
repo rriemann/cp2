@@ -18,6 +18,8 @@ function res = eig_custom(A)
   ss = sum(sum(A2))-trace(A2); % ineffizient, da Spur-Elemente doppelt berechnet werden
 
   while iterations < max_iterations
+    #fuer aufgabe b)
+    V = eye(n);
     if ss > 10*eps*(n^2-n)
       for q = [2:n]
         for p = [1:q-1]
