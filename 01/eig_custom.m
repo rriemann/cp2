@@ -20,6 +20,8 @@ function res = eig_custom(A)
   while iterations < max_iterations
     #fuer aufgabe b)
     V = eye(n);
+    counter = 0;
+    
     if ss > 10*eps*(n^2-n)
       for q = [2:n]
         for p = [1:q-1]
@@ -28,6 +30,15 @@ function res = eig_custom(A)
             t = sign(theta)/(abs(theta)+sqrt(theta^2+1));
             c = 1/sqrt(t^2+1);
             s = t*c;
+            
+            if counter == 0
+              V(p,p) = c;
+              V(p,q) = s;
+              V(q,p) = -s;
+              V(q,q) = c;
+            end
+            counter = 1;
+            
             tau = s/(1+c);
             #A1
             for i = [[1:p-1], [p+1:q-1], [q+1:n]]
@@ -35,6 +46,10 @@ function res = eig_custom(A)
               A1(p,i) = A1(i,p);
               A1(i,q) = A(i,q)+s*(A(i,p)-tau*A(i,q));
               A1(q,i) = A(i,q);
+              if counter > 0
+                V(i,p) = V(p,p)*c - V(q,p)*s;
+                V(i,q) = V(p,q)*c + V(q,q)*s;
+              end
             end
             #A1
             A1(p,p) = A(p,p)-t*A(p,q);
@@ -57,5 +72,6 @@ function res = eig_custom(A)
   end
   disp('Iterationen:');
   disp(iterations);
+  A*A'
   res = A;
 end
