@@ -1,5 +1,19 @@
 Nun sollen die in der Aufgabenstellung gegebenen Relationen
 \begin{eqnarray}
-
+v'_{ip} &=& v_{ip} - s(v_{iq} + τv_{ip}\\
+v'_{iq} &=& v_{iq} + s(v_{ip} - τv_{iq}
 \end{eqnarray}
-bewiesen werden.
+bewiesen werden. Dafür muss der konkrete Aufbau der Matrizen $P$ bekannt sein.
+Diese bestehen aus einer Einheitsmatrix, bei der einzig die Elemente in der
+$p$- bzw. $q$-ten Zeile bzw. Spalte verändert werden. Dies lässt sich wie folgt
+darstellen:
+\begin{equation}
+p_{ij} = \begin{cases}\begin{array}[h]{ll}
+1 & \mathrm{f"ur~} i=j \notin \{p,q\} \\c & \mathrm{f"ur~} i=j \in \{p,q\}\\s &
+\mathrm{f"ur~} i=p, j=q\\-s & \mathrm{f"ur~} i=q, j=p\\0 & \mathrm{sonst}
+\end{array}\end{cases}
+\end{equation}
+% auch interessant: (aber nur außerhalb der mathe-umgebung
+% \begin{tabbing}
+% 1 \= \quad \= iae\\c \> \> iaee\\s \> \> aie\\-s \> \> ie\\0 \> \> ieie
+% \end{tabbing}
