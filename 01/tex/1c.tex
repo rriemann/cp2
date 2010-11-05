@@ -1,12 +1,13 @@
 Nun sollen die in der Aufgabenstellung gegebenen Relationen
 \begin{eqnarray}
-v'_{ip} &=& v_{ip} - s(v_{iq} + τv_{ip}\\
-v'_{iq} &=& v_{iq} + s(v_{ip} - τv_{iq}
+v'_{ip} &=& v_{ip} - s(v_{iq} + τv_{ip})\\
+v'_{iq} &=& v_{iq} + s(v_{ip} - τv_{iq})
 \end{eqnarray}
-bewiesen werden. Dafür muss der konkrete Aufbau der Matrizen $P$ bekannt sein.
-Diese bestehen aus einer Einheitsmatrix, bei der einzig die Elemente in der
-$p$- bzw. $q$-ten Zeile bzw. Spalte verändert werden. Dies lässt sich wie folgt
-darstellen:
+bewiesen werden, wobei $v_{ab}$ bzw. $v'_{ab}$ die $(a,b)$-Komponente der
+Matrizen $V$ bzw. $V'$ sind. Um diese Relationen zu erhalten, muss der
+konkrete Aufbau der Matrizen $P$ bekannt sein. Diese bestehen aus einer
+Einheitsmatrix, bei der einzig die Elemente in der $p$- bzw. $q$-ten Zeile bzw.
+Spalte verändert werden. Dies lässt sich wie folgt darstellen:
 \begin{equation}
 p_{ij} = \begin{cases}\begin{array}[h]{ll}
 1 & \mathrm{f"ur~} i=j \notin \{p,q\} \\c & \mathrm{f"ur~} i=j \in \{p,q\}\\s &
@@ -17,3 +18,56 @@ p_{ij} = \begin{cases}\begin{array}[h]{ll}
 % \begin{tabbing}
 % 1 \= \quad \= iae\\c \> \> iaee\\s \> \> aie\\-s \> \> ie\\0 \> \> ieie
 % \end{tabbing}
+
+In dieser Gleichung für $p_{ij}$ stehen $c$ bzw. $s$ für den Kosinus bzw. Sinus
+des Drehwinkels φ:
+\begin{eqnarray}
+c &=& \cos(φ)\\
+s &=& \sin(φ)
+\end{eqnarray}
+
+Um die Definition der $P$-Matrizen in eine kompaktere Form zu bringen, wird nun
+eine Indexschreibweise mit Hilfe der Kronecker-Deltas $δ_{ij}$ verwendet:
+\begin{eqnarray}
+p_{ij} &=& δ_{ij} + s\cdot δ_{ip}δ_{jq} - s\cdot δ_{iq}δ_{jp} + (c-1)\cdot
+δ_{ip}δ_{jp} + (c-1)\cdot δ_{iq}δ_{jq}
+\end{eqnarray}
+Von den beiden Diagonalelementen muss jeweils eine eins abgezogen werden, um
+die durch den $δ_{ij}$-Term zu kompensieren. Wenn man nun eine „beliebige“
+Matrix $V$ mit $P$ multipliziert, ergeben sich (unter Verwendung der
+Einsteinschen Summenkonvention) die gesuchten Relationen:
+\begin{eqnarray}
+v'_{kj} &=& v_{ki} P_{ij} = v_{ki}δ_{ij} + s\cdot v_{ki}δ_{ip}δ_{jq} - s\cdot
+v_{ki}δ_{iq}δ_{jp} + (c-1)v_{ki}(δ_{ip}δ_{jp} + δ_{iq}δ_{jq})\\
+&=& v_{kj} + s\cdot v_{kp}δ_{jq} - s\cdot v_{kq}δ_{jp} + (c-1)(v_{kp}δ_{jp} +
+v_{kq}δ_{jq})
+\end{eqnarray}
+
+Nun kann eine Fallunterscheidung durchgeführt werden, die berücksichtigt,
+welche der Kronecker-Deltas null bzw. eins werden.
+
+\begin{eqnarray}
+\begin{array}[h]{cclcccl}
+j &\notin& {p,q} &:& v'_{kj} &=& v_{kj}\\
+j &=& p &:& v'_{kp} &=& v_{kp} - s\cdot v_{kq} + (c-1)v_{kp}\\
+&&&&&=& v_{kp} - s\cdot(v_{kq} - \frac{c-1}{s}v_{kp})\\
+j &=& q &:& v'_{kq} &=& v_{kq} + s\cdot v_{kp} + (c-1)v_{kq}\\
+&&&&&=& v_{kp} + s\cdot(v_{kq} + \frac{c-1}{s}v_{kp})
+\end{array}
+\label{eqn:vmatrix}
+\end{eqnarray}
+
+Schließlich wird gezeigt, dass man den jeweils auftretenden Bruch in die
+gewünschte Form bringen kann:
+\begin{eqnarray}
+\frac{c-1}{s} &=& \frac{s\cdot(c-1)}{s^2} = \frac{s\cdot(c-1)}{1-c^2} =
+\frac{s\cdot(c-1)}{(1-c)\cdot(1+c)}\\
+&=& -\frac{s}{c+1} \equiv -τ 
+\end{eqnarray}
+
+Dieses Ergebnis wird nun in \eref{vmatrix} eingesetzt:
+\begin{eqnarray}
+v'_{kp} &=& v_{kp} - s\cdot(v_{kq} + τv_{kp})\\
+v'_{kq} &=& v_{kp} + s\cdot(v_{kq} - τv_{kp})
+\end{eqnarray}
+Dies entspricht der gesuchten Lösung.
