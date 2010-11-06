@@ -1,0 +1,70 @@
+\section*{Quelltext}
+\lstinputlisting[firstline=1,firstnumber=1,label=lst:eig_custom,caption={eig\_custom.m}]{../eig_custom.m}
+
+\section*{Beispielaufruf}
+Zunächst wird in \lref{1} eine zufällige $5\times 5$-Matrix $A$ erzeugt.
+\begin{lstlisting}[label=lst:1]
+octave:2> A = rand(5)
+A =
+
+   0.297534   0.777789   0.664182   0.415014   0.269915
+   0.983294   0.115236   0.971651   0.263736   0.868703
+   0.564986   0.231347   0.975142   0.624327   0.553026
+   0.850511   0.754599   0.929670   0.898320   0.598623
+   0.083116   0.921160   0.806831   0.434421   0.425904
+\end{lstlisting}
+In \lref{2} wird die in \lref{eig_custom} definierte Funktion
+\texttt{eig\_custom} aufgerufen. Innerhalb dieser Funktion wird $A$ zunächst
+symmetrisch gemacht, so denn $A$ es noch nicht ist.
+
+Vor der Rückgabe der berechneten Eigenwerte, werden noch einige zusätzliche
+Ergebnisse zur Überprüfung ausgegeben.
+\begin{itemize}
+ \item Die Anzahl der in diesem Beispiel für Maschinengenauigkeit benötigten Iterationen:\\
+       4
+ \item Obwohl das Jacobi-Verfahren es nicht vorsieht, wird zusätzlich zur Berechnung
+       der Eigenwerte noch die Matrix $V$ berechnet, die die Gesamtdrehung zur
+       Diagonalisierung von $A$ beschreibt.
+       \[ D = V^TAV \]
+       Die Gültigkeit dieser Gleichung wird verifiziert. Man kann erkennen, dass
+       die Nichtdiagonal-Elemente von \texttt{V'*A*V} in der Größenordnung von
+       $10^{-16}$ liegen, welche das Limit der Maschinengenauigkeit darstellt.
+ \item Weiterhin wird die Orthogonalität der Drehmatrix $V$ geprüft. Mit
+       \[ V^TV = E \]
+       konnte verifiziert werden, dass $V$ in der Tat orthogonal ist.
+ \item Bevor dann der sortierte Spaltenvektor mit den gefundenen Eigenwerten
+       $λ_i$ zurückgegeben wird, wird das Ergebnis zunächst noch mit den
+       Eigenwerten aus der mitgelieferten Funktion \texttt{eig} verglichen. Die
+       Werte unterscheiden sich lediglich im Rahmen der Maschinengenauigkeit.
+\end{itemize}
+
+\begin{lstlisting}[label=lst:2]
+octave:3> eig_custom(A)
+Iterationen:
+ 4
+V'*A*V:
+   3.1059e+00  -2.1461e-13   1.2490e-16  -3.3307e-16  -6.6613e-16
+  -2.1452e-13  -9.6691e-01   2.1858e-16  -1.3878e-16  -1.1102e-16
+   1.0582e-16   2.7148e-16   1.7491e-01   5.6379e-17  -3.0358e-17
+  -2.3766e-16  -1.5959e-16   7.5460e-17   8.0324e-02  -7.2858e-17
+  -4.0246e-16  -1.2490e-16  -1.9082e-17  -8.3267e-17   3.1787e-01
+V'*V:
+   1.00000   0.00000  -0.00000  -0.00000   0.00000
+   0.00000   1.00000  -0.00000   0.00000   0.00000
+  -0.00000  -0.00000   1.00000  -0.00000  -0.00000
+  -0.00000   0.00000  -0.00000   1.00000  -0.00000
+   0.00000   0.00000  -0.00000  -0.00000   1.00000
+res-eig(A):
+   0.0000e+00
+  -8.3267e-17
+   0.0000e+00
+   2.2204e-16
+  -4.4409e-16
+ans =
+
+  -0.966908
+   0.080324
+   0.174906
+   0.317873
+   3.105941
+\end{lstlisting}

@@ -1,0 +1,23 @@
+\section*{Aufgabe 1d}
+In den Kommentaren von \lref{eig_custom} sind Hinweise zur Schätzung des
+Rechenaufwandes in Flops gegeben. Für ein groben Überblick werden nur die
+Anzahl $N$ an Multiplikationen und Divisionen gezählt. Hierbei wird unter anderem die
+Auswertung von trigonometrischen Funktionen vernachlässigt. Rechenschritte,
+die nicht wenigstens mit der Matrixdimension $n$ skalieren, werden ebenfalls
+vernachlässigt.
+
+Die Anzahl der notwendigen Iterationsschritte $I$ ist a priori nicht feststellbar
+und bleibt vorerst als Parameter in der Formel stehen.
+\begin{eqnarray*}
+ N &=& n^2 + I \sum^{n}_{q=2} \sum^{q-1}_{p=1} \left[ 2+2+2+1+1+n-2+2+2+1+1+2 \right] \\
+ N &=& n^2 + I \sum^{n}_{q=2} (q-1)(14+n) \\
+ N &=& n^2 + I \frac{n^2-n}{2}(14+n)
+\end{eqnarray*}
+Im Limes unendlich großer Matrizen erhalten wir
+\begin{equation*}
+ \lim_{n \to \infty} N = \frac{I}{2}n^3 = a n^3
+\end{equation*}
+
+Bei Variation von $n$ in den Grenzen von 10 bis hin zu 60, stellt man
+fest, dass  $I = 6$ ein typischer Wert ist. Somit liegt der Faktor $a$
+in der Größenordnung von 3.

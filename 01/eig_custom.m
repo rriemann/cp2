@@ -1,10 +1,9 @@
-#!/usr/bin/octave -q
 % kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
 
 function res = eig_custom(A)
-  % [λ₁, λ₂, …] = eig_custom(A)
-  % berechnet zur (n×n)-Matrix (A+A')/2 die Eigenwerte
-  % und gibt sie als sortieren Spaltenvektor aus
+  % res = eig_custom(A)
+  % berechnet zur (nxn)-Matrix (A+A')/2 die Eigenwerte
+  % und gibt sie als sortieren Spaltenvektor res aus
 
   A = (A + A.')/2;
   Abak = A;
@@ -15,12 +14,13 @@ function res = eig_custom(A)
   iterations = 0;
 
   % berechne S(A):
-  A2 = A.^2;
+  A2 = A.^2; % flops: n^2
   ssum = sum(sum(A2))-trace(A2); % ineffizient, da 2mal Spur-Elemente-Berechnung
+  ssum_min = eps*(n^2-n);
 
-  while ssum > eps*(n^2-n)
-    for q = [2:n] % flops: •n
-      for p = [1:q-1] % flops: •n
+  while ssum > ssum_min
+    for q = [2:n] % flops: *(n-1)
+      for p = [1:q-1] % flops: *(q-1)
           theta = (A(q,q)-A(p,p))/(2*A(p,q)); % flops: 2
           t = sign(theta)/(abs(theta)+sqrt(theta^2+1)); % flops: 2
           c = 1/sqrt(t^2+1); % flops: 2
@@ -33,7 +33,7 @@ function res = eig_custom(A)
           V = V1;
 
           % Diagonalisierung nach Jacobi-Methode
-          i = [[1:p-1], [p+1:q-1], [q+1:n]]; % flops: •n
+          i = [[1:p-1], [p+1:q-1], [q+1:n]]; % flops: *n
           A1(i,p) = A1(p,i) = A(i,p)-s*(A(i,q)+tau*A(i,p)); % flops: 2
           A1(i,q) = A1(q,i) = A(i,q)+s*(A(i,p)-tau*A(i,q)); % flops: 2
 
@@ -49,9 +49,9 @@ function res = eig_custom(A)
   end
   disp('Iterationen:');
   disp(iterations);
-  disp('V''•A•V:');
+  disp('V''*A*V:');
   disp(V.'*Abak*V);
-  disp('V''•V:');
+  disp('V''*V:');
   disp(V'*V);
   res = sort(diag(A));
   disp('res-eig(A):');

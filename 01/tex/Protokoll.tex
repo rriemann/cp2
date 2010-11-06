@@ -1,5 +1,6 @@
 \documentclass[a4paper,oneside,bibtotoc,smallheadings,pointlessnumbers,
 halfparskip,DIV15]{scrartcl}
+% kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; space-indent on;
 % tocleft,
 \usepackage[pdftex]{graphicx}
 \usepackage[ngerman]{babel}
@@ -12,28 +13,28 @@ halfparskip,DIV15]{scrartcl}
 \usepackage{subfig}
 \usepackage{siunitx}
 \sisetup{
-	seperr		=	true,
-	trapambigerr	=	true,
-	openerr		=	(,
-	closeerr	=	),
-	expproduct	=	cdot,
-	padnumber	=	both,
-	stickyper	=	true,
-	per		=	reciprocal,
-	trapambigfrac	=	true,
-	repeatunits	=	false,
-	openfrac	=	(,
-	closefrac	=	),
-	prefixsymbolic 	=	true,
-	prefixproduct	=	cdot,
-	decimalsymbol	=	comma,
-        tabnumalign     =       left,
-        tabtextalign    =       left
+  seperr         = true,
+  trapambigerr   = true,
+  openerr        = (,
+  closeerr       = ),
+  expproduct     = cdot,
+  padnumber      = both,
+  stickyper      = true,
+  per            = reciprocal,
+  trapambigfrac  = true,
+  repeatunits    = false,
+  openfrac       = (,
+  closefrac      = ),
+  prefixsymbolic = true,
+  prefixproduct  = cdot,
+  decimalsymbol  = comma,
+  tabnumalign    = left,
+  tabtextalign   = left
 }
 \usepackage{color}
 \definecolor{grey}{rgb}{.4,.4,.4}
 \definecolor{darkgreen}{rgb}{0,.35,0}
-\definecolor{ltgray}{gray}{0.90}
+\definecolor{ltgray}{gray}{0.95}
 % \definecolor{darkblue}{rgb}{0,0,.6}
 % \definecolor{darkred}{rgb}{.6,0,0}
 % \definecolor{red}{rgb}{.98,0,0}
@@ -45,7 +46,7 @@ halfparskip,DIV15]{scrartcl}
   sensitive=true,
   comment=[n][\itshape]{/*}{*/}
 }
-\lstset{language=C++,
+\lstdefinelanguage{C++}{
 %   commentstyle=\itshape\color{darkgreen},
 %   commentstyle=\color{darkgreen},
 %   keywordstyle=\bfseries, %\color{darkblue},
@@ -67,16 +68,40 @@ halfparskip,DIV15]{scrartcl}
   inputencoding=utf8,
 %   backgroundcolor=\color{ltgray}
 }
+% \usepackage{courier}
+\lstset{language=Matlab,
+%     keywords={break,case,catch,continue,else,elseif,end,for,function,global,if,otherwise,persistent,return,switch,try,while},
+%     basicstyle=\ttfamily\small,%\scriptsize,
+  basicstyle=\scriptsize,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape\color{blue},
+  stringstyle=\itshape,
+  identifierstyle=\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  tabsize=2,
+  showspaces=false,
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  columns=fixed,
+  captionpos=b,
+  extendedchars=\true,
+  inputencoding=utf8,
+  backgroundcolor=\color{ltgray},
+  postbreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow}}
+}
 \usepackage[pdftex]{hyperref}
 \hypersetup{
-% 	colorlinks	=	true,
-% 	urlcolor	=	darkblue,
-	pdftitle	=	{Protokoll zum F-Praktikumsversuch 'Compton-Effekt'},
-	pdfsubject	=	{Praktikumsversuch}
-	pdfauthor	=   	{robert.riemann@physik.hu-berlin.de,thomas.murach@physik.hu-berlin.de},
-	pdfkeywords	=	{Fortgeschrittenen-Praktikum,Praktikumsversuch, 2010, Compton-Effekt}
-% 	pdfcreator	=	{pdftex},
-% 	pdfproducer	=	{pdftex}
+%   colorlinks  = true,
+%   urlcolor    = darkblue,
+  pdftitle    = {Protokoll zum CPII-Übungsblatt 1},
+  pdfsubject  = {Protokoll Computational Physics}
+  pdfauthor   = {robert.riemann@physik.hu-berlin.de,thomas.murach@physik.hu-berlin.de},
+  pdfkeywords = {Computational Physics,CP,II,2010,Jacobi-Methode,Diagonalisierung,Eigenwerte, Eigenvektoren,eig,octave,matlab}
+%   pdfcreator  = {pdftex},
+%   pdfproducer = {pdftex}
 }
 
 \newcommand{\dd}[1]{\mathrm{d}#1\,} % declare dx operator, usage: \dd{x} for dx
@@ -85,9 +110,8 @@ halfparskip,DIV15]{scrartcl}
 \newcommand{\tref}[1]{Tab. (\ref{tab:#1})} % refer to a table, usage: \lref{label} for Tab. (...)
 \newcommand{\eref}[1]{Gl. (\ref{eqn:#1})} % refer to a equation, usage: \lref{label} for Tab. (...)
 
-
 \begin{document}
-% % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % %
 \title{{\centering \rule{15cm}{0.001cm}\\
 \Large{\textsc{Institut für Physik der
 Humboldt-Universität zu Berlin}}}\\ \centering \rule{15cm}{0.001cm}\\
@@ -111,11 +135,12 @@ Thomas Murach; Matr.Nr.: 517771\vspace{18mm}}
 % \twocolumn
 
 \newpage
-\tableofcontents
-\listoffigures
-\listoftables
-
+% \tableofcontents
+% \listoffigures
+% \listoftables
+\input{1a-b}
 \input{1c}
+\input{1d}
 % \input{auswertung}
 % \input{ergebnis}
 % \input{quellen}
@@ -123,15 +148,17 @@ Thomas Murach; Matr.Nr.: 517771\vspace{18mm}}
 
 % \section{Beispiele}
 % blabla
-% 
+%
 % Weitere Information sind der Versuchsbeschreibung im \cite{script} zu entnehmen.
-% 
+%
+% \lstinputlisting[firstline=2,firstnumber=1,label=lst:aufruf,caption={aufruf.m - Matlab Batchdatei}]{aufruf.m}
+%
 % \begin{eqnarray}
 % 	g &=& \SI{9.8157(11)}{\metre\per\second\squared} \\
 %         \left[ g \right] &=& \si{\metre\per\Square\second} % großschreibung!
 % 	\label{eqn:asdf}
 % \end{eqnarray}
-% 
+%
 % Dann kann man auf \eref{asdf} verweisen.
 
 
