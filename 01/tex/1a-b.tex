@@ -1,9 +1,14 @@
 \section*{Quelltext}
+Für die Bearbeitung der Aufgaben wurde, in Absprache mit dem
+Übungsgruppenleiter, Octave anstelle von Matlab verwendet. Der Quelltext der für
+die Diagonalisierung verwendeten Funktion ist im Folgenden dargestellt:
 \lstinputlisting[firstline=1,firstnumber=1,label=lst:eig_custom,caption={eig\_custom.m}]{../eig_custom.m}
 
 \section*{Beispielaufruf}
-Zunächst wird in \lref{1} eine zufällige $5\times 5$-Matrix $A$ erzeugt.
-\begin{lstlisting}[label=lst:1]
+Zunächst wird in \lref{rand_matrix} eine zufällige $5\times 5$-Matrix $A$
+erzeugt.
+\begin{lstlisting}[caption=Erzeugung einer Zufallsmatrix der
+Dimension $5\times 5$,label=lst:rand_matrix]
 octave:2> A = rand(5)
 A =
 
@@ -13,9 +18,17 @@ A =
    0.850511   0.754599   0.929670   0.898320   0.598623
    0.083116   0.921160   0.806831   0.434421   0.425904
 \end{lstlisting}
-In \lref{2} wird die in \lref{eig_custom} definierte Funktion
+In \lref{eig_custom_output} wird die in \lref{eig_custom} definierte Funktion
 \texttt{eig\_custom} aufgerufen. Innerhalb dieser Funktion wird $A$ zunächst
-symmetrisch gemacht, so denn $A$ es noch nicht ist.
+symmetrisch gemacht, da $A$ es im Allgemeinen noch nicht ist.
+
+Es wird so lange iteriert, bis die gewünschte Genauigkeit erreicht ist. Dabei
+wurde diese Genauigkeit nicht auf \texttt{eps}, sondern auf
+\texttt{eps*(n$^2$-n)} festgelegt, da sich bei der Matrix-Quadrierung die
+durch die Maschinengenauigkeit bedingten Rundungsfehler fortpflanzen und somit
+die Fehlerfunktion \texttt{ssum} nicht genauer sein kann als dieser Fehler. Da
+die Diagonalelemente nicht berücksichtigt werden, wird von $n^2$ noch $n$
+abgezogen.
 
 Vor der Rückgabe der berechneten Eigenwerte, werden noch einige zusätzliche
 Ergebnisse zur Überprüfung ausgegeben.
@@ -38,7 +51,8 @@ Ergebnisse zur Überprüfung ausgegeben.
        Werte unterscheiden sich lediglich im Rahmen der Maschinengenauigkeit.
 \end{itemize}
 
-\begin{lstlisting}[label=lst:2]
+\begin{lstlisting}[caption=Output des
+Funktionsaufrufs,label=lst:eig_custom_output]
 octave:3> eig_custom(A)
 Iterationen:
  4
