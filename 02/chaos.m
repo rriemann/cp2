@@ -27,7 +27,7 @@ end
 t_span = [0 300];
 ep = 1e-6;
 iterations = 200;
-options = odeset ('Events',@feve,'RelTol',1e-6, 'AbsTol', 1e-6, 'MaxStep', 1, 'InitialStep', 0.1);
+options = odeset('Events',@feve,'RelTol',1e-6, 'AbsTol', 1e-6, 'MaxStep', 1, 'InitialStep', 0.1);
 t_break = zeros(1,iterations);
 for i = [1:iterations]
   % Anfangswerte:
