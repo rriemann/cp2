@@ -1,6 +1,6 @@
+#!/usr/bin/octave -q
 % kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
 clear;
-% file chaos_ex.m
 
 global g nu;
 g=0.32; nu=0.3;
@@ -27,7 +27,7 @@ end
 t_span = [0 300];
 ep = 1e-6;
 iterations = 200;
-options = odeset ('Events',@feve,'RelTol',1e-6, 'AbsTol', 1e-6, 'MaxStep', 30);
+options = odeset ('Events',@feve,'RelTol',1e-6, 'AbsTol', 1e-6, 'MaxStep', 1, 'InitialStep', 0.1);
 t_break = zeros(1,iterations);
 for i = [1:iterations]
   % Anfangswerte:
@@ -54,7 +54,7 @@ t_mean = mean(t_break)
 t_std = std(t_break) % using N-1 by default
 
 % lamda calculations
-lamda = (log(0.1)-log(ep))./t_end;
+lamda = (log(0.1)-log(ep))./t_break;
 lamda_mean = mean(lamda)
 lamda_std = std(lamda)
 
