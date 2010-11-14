@@ -1,0 +1,18 @@
+\section*{Aufgabe 2.1a)}
+In dieser Aufgabe war der gegebene Quelltext zu verwenden und so abzuändern, 
+dass zwei Trajektorien mit beinahe gleichen Startbedingungen daraufhin
+untersucht werden können, ab welchem Zeitpunkt die Differenz der Orte größer als
+0,1 wird (siehe Aufgabenstellung). Diese Messung wird 200mal wiederholt, um
+statistische Aussagen über diesen Zeitpunkt treffen zu können.
+
+Der Octave-Quelltext dafür wird hier gezeigt:
+\lstinputlisting[firstline=1,firstnumber=1,label=lst:chaos,caption={chaos.m}]{../chaos.m}
+
+Wenn man diesen ausführt, so resultiert unter anderem der folgende Output:
+\begin{lstlisting}[caption=Output unseres Programms,label=lst:output]
+t_mean =  93.263
+t_std =  26.290
+t_conf_int =  1.8590
+lamda_mean =  0.13447
+lamda_std =  0.042518
+\end{lstlisting}
