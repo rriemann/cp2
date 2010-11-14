@@ -37,8 +37,8 @@ for i = [1:iterations]
   y1 = [y0(1)-ep*randn(); y0(2)-ep*randn()];
 
   % Integration:
-  [t,y] = ode45(@F_ex,t_span,[y0;y1],options);
-%    [t,y] = ode23(@F_ex,t_span,[y0;y1],options);
+%    [t,y] = ode45(@F_ex,t_span,[y0;y1],options);
+  [t,y] = ode23(@F_ex,t_span,[y0;y1],options);
   t_break(i) = t(end);
 end
 t_min = min(t_break);
