@@ -25,17 +25,20 @@ function [veve, vterm, vdir] = feve (t, y, varargin)
 end
 
 t_span = [0 300];
-ep = 1e-6;
+ep = 1e-6;              % standard: 1e-6
 iterations = 200;
 options = odeset('Events',@feve,'RelTol',1e-6, 'AbsTol', 1e-6, 'MaxStep', 1, 'InitialStep', 0.1);
+%  options = odeset('Events',@feve,'RelTol',1e-4, 'AbsTol', 1e-4, 'MaxStep', 1, 'InitialStep', 0.1);
 t_break = zeros(1,iterations);
+t_break23 = zeros(1,iterations);
 for i = [1:iterations]
   % Anfangswerte:
   y0 = [randn() ; randn()];
-  y1 = [y0(1)-ep*randn(); y0(2)-ep*randn()];      %war das so gemeint?
+  y1 = [y0(1)-ep*randn(); y0(2)-ep*randn()];
 
   % Integration:
-  [t,y] = ode45(@F_ex,t_span,[y0;y1],options);  %funktioniert so wohl nicht. man muss wohl ode 2mal aufrufen, für jedes y0/1 einmal
+  [t,y] = ode45(@F_ex,t_span,[y0;y1],options);
+%    [t,y] = ode23(@F_ex,t_span,[y0;y1],options);
   t_break(i) = t(end);
 end
 t_min = min(t_break);
@@ -52,6 +55,7 @@ print('figure.png')
 % Statistics:
 t_mean = mean(t_break)
 t_std = std(t_break) % using N-1 by default
+t_conf_int = t_std / sqrt(size(t_break)(2))
 
 % lamda calculations
 lamda = (log(0.1)-log(ep))./t_break;
