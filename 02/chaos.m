@@ -27,8 +27,8 @@ end
 t_span = [0 300];
 ep = 1e-6;              % standard: 1e-6
 iterations = 200;
-options = odeset('Events',@feve,'RelTol',1e-6, 'AbsTol', 1e-6, 'MaxStep', 1, 'InitialStep', 0.1);
-%  options = odeset('Events',@feve,'RelTol',1e-4, 'AbsTol', 1e-4, 'MaxStep', 1, 'InitialStep', 0.1);
+%  options = odeset('Events',@feve,'RelTol',1e-6, 'AbsTol', 1e-6, 'MaxStep', 1, 'InitialStep', 0.1);
+options = odeset('Events',@feve,'RelTol',1e-8, 'AbsTol', 1e-8, 'MaxStep', 1, 'InitialStep', 0.1);
 t_break = zeros(1,iterations);
 t_break23 = zeros(1,iterations);
 for i = [1:iterations]
@@ -37,8 +37,8 @@ for i = [1:iterations]
   y1 = [y0(1)-ep*randn(); y0(2)-ep*randn()];
 
   % Integration:
-%    [t,y] = ode45(@F_ex,t_span,[y0;y1],options);
-  [t,y] = ode23(@F_ex,t_span,[y0;y1],options);
+  [t,y] = ode45(@F_ex,t_span,[y0;y1],options);
+%    [t,y] = ode23(@F_ex,t_span,[y0;y1],options);
   t_break(i) = t(end);
 end
 t_min = min(t_break);
