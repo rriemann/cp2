@@ -1,0 +1,111 @@
+% epsilon = 1e-3 :
+t_mean =  41.880
+t_std =  19.029
+t_conf_int =  1.3455
+lamda_mean =  0.13599
+lamda_std =  0.068296
+
+% epsilon = 1e-4 :
+t_mean =  58.581
+t_std =  21.059
+t_conf_int =  1.4891
+lamda_mean =  0.13560
+lamda_std =  0.059542
+
+% epsilon = 1e-5 :
+t_mean =  77.887
+t_std =  24.037
+t_conf_int =  1.6997
+lamda_mean =  0.13231
+lamda_std =  0.050744
+
+% epsilon = 1e-6 :
+t_mean =  93.263
+t_std =  26.290
+t_conf_int =  1.8590
+lamda_mean =  0.13447
+lamda_std =  0.042518
+
+% epsilon = 1e-7 :
+t_mean =  111.43
+t_std =  30.210
+t_conf_int =  2.1362
+lamda_mean =  0.13425
+lamda_std =  0.042100
+
+% epsilon = 1e-8 :
+t_mean =  132.33
+t_std =  32.664
+t_conf_int =  2.3097
+lamda_mean =  0.12951
+lamda_std =  0.035118
+
+% epsilon = 1e-9 :
+t_mean =  147.54
+t_std =  35.278
+t_conf_int =  2.4945
+lamda_mean =  0.13190
+lamda_std =  0.031294
+
+% epsilon = 1e-10 :
+t_mean =  165.85
+t_std =  35.952
+t_conf_int =  2.5422
+lamda_mean =  0.13097
+lamda_std =  0.029193
+
+% epsilon = 1e-11 :
+t_mean =  187.01
+t_std =  38.102
+t_conf_int =  2.6942
+lamda_mean =  0.12842
+lamda_std =  0.026983
+
+% epsilon = 1e-12 :
+t_mean =  201.77
+t_std =  38.090
+t_conf_int =  2.6934
+lamda_mean =  0.13005
+lamda_std =  0.025120
+
+% ode23:
+t_mean =  94.436
+t_std =  27.936
+t_conf_int =  1.9754
+lamda_mean =  0.13497
+lamda_std =  0.052181
+
+% tolerances: 1e-4
+t_mean =  101.05
+t_std =  35.858
+t_conf_int =  2.5355
+lamda_mean =  0.12682
+lamda_std =  0.042406
+
+% tolerances: 1e-5
+t_mean =  96.247
+t_std =  27.123
+t_conf_int =  1.9179
+lamda_mean =  0.13065
+lamda_std =  0.044387
+
+% tolerances: 1e-6
+t_mean =  95.751
+t_std =  27.042
+t_conf_int =  1.9122
+lamda_mean =  0.13122
+lamda_std =  0.043747
+
+% tolerances: 1e-7
+t_mean =  96.477
+t_std =  25.769
+t_conf_int =  1.8221
+lamda_mean =  0.12799
+lamda_std =  0.034827
+
+% tolerances: 1e-8
+t_mean =  95.007
+t_std =  28.658
+t_conf_int =  2.0264
+lamda_mean =  0.13291
+lamda_std =  0.043255
