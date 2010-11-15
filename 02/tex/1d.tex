@@ -1,0 +1,66 @@
+\section*{Aufgabe 2.1d)}
+Schließlich sollten die systematischen Fehler abgeschätzt werden, indem man zum
+einen ε variiert und zum anderen statt \texttt{ode45} \texttt{ode23} verwendet,
+was prinzipiell ungenauere Ergebnisse liefert, oder auch direkt für
+\texttt{ode45} selbst andere Genauigkeiten fordert.
+
+\subsection*{Variation von ε}
+Wenn man die Breite der normalverteilten Zufallszahlen, die die Abweichung
+repräsentieren, ändert, so ergeben sich auch andere Zeitpunkte, bei denen im 
+Mittel die Abweichung der Trajektorien größer als 0,1 wird. Hier wurde ε so
+variiert, dass es sehr klein gegenüber den Werten von $y$ und $\dot{y}$ ist und
+deutlich größer als die Maschinengenauigkeit. Eine genaue Analyse des Einflusses 
+der Variation ist in \lref{epsilon} zu finden.
+
+\lstinputlisting[firstline=1,firstnumber=1,label=lst:epsilon,caption={Auswirkungen 
+der Wahl von ε auf die interessanten Größen}]{../syst_errors.dat}
+
+Wie man erkennen kann, nimmt die Zeit, die benötigt wird, um die gewünschte 
+Abweichung herbeizuführen, stetig größer für kleiner werdendes ε, was auch zu
+erwarten ist, da bei kleinerem ε die Ausgangspunkte und -geschwindigkeiten der
+bieden Trajektorien immer weniger voneinander abweichen. Weiterhin werden die 
+Verteilungen immer breiter, was sich in größeren Standardabweichungen und
+Vertrauensintervallen niederschlägt. Das bedeutet, dass bei die genaue Wahl der
+Abweichung in Bezug auf Richtung und Betrag für kleiner werdendes ε größeren
+Einfluss gewinnt.
+
+Schon die Wahl der nächstgrößeren bzw. -kleineren Größe von ε liefert deutlich
+andere Ergebnisse für \texttt{t\_mean}. Die Abweichungen betragen jeweils ca.
+17 Prozent. 
+
+Die Werte von λ schwanken von 0,1284 und 0,1360 und stimmen somit innerhalb der
+Standardabweichungen, die zwischen 0.025 und 0,07 liegen, näherungsweise überein.
+Die Wahl von ε hat hier also nur einen geringen Einfluss. Einzig die
+Standardabweichungen selbst werden für abnehmendes ε immer kleiner.
+
+Weiterhin ist der Einfluss der konkreten Wahl der Implementierung der numerischen
+Lösung der Differentialgleichung untersucht worden, indem statt \texttt{ode45}
+die Funktion \texttt{ode23} verwendet wurde. Hierfür wurden wieder 
+Standardparameter verwendet. Wie man erkennen kann, stimmen die Ergebnisse bis
+auf ca. 1 Prozent überein, und die Standardabweichungen nehmen ebenfalls beinah
+gleiche Werte an. Die Wahl der Funktion liefert demnach nur Unterschiede im 
+Prozentbereich und kann somit gegenüber dem Einfluss der Wahl von ε
+vernachlässigt werden.
+
+Schließlich wurden andere relative und absolute Genauigkeiten gefordert. Hierfür
+wurden wiederum Standardparameter gewählt (\texttt{ode45}, $ε=10^{-6}$). Dies
+führt den am Ende in \lref{epsilon} dargestellten Ergebnissen.
+
+Man kann erkennen, dass man durchaus eine Größenordnung von der Standard-Toleranz
+abweichen kann, ohne dass dies größere Auswirkungen auf \texttt{t\_mean} etc.
+hätte. Nur wenn man die Toleranz zu groß wählt resultieren auch stärkere
+Abweichungen in der Größenordnung von fünf Prozent.
+
+Der dominante systematische Fehler ist also in in der konkreten Wahl von ε zu
+suchen. Dieser beläuft sich auf ca. 17 \%, wenn man nur einen Bereich von $ε = 
+10^{-5}$ bis $ε = 10^{-7}$ zulässt.
+
+Die durch die verschiedenen Untersuchungen erhaltenen λ-Werte variieren zwischen
+0,127 ± 0,042 und 0,13599 ± 0,068 und sind somit im gesamten Bereich der
+Veränderungen der Parameter näherungsweise konstant geblieben.
+
+Eine weitere Erhöhung der Anzahl der Wiederholungen würde zu einer Erhöhung der 
+statistischen Genauigkeit führen. Da die statistischen Fehler, repräsentiert
+durch das Vertrauensintervall, im Bereich von ca. zwei Prozent liegt, dominiert
+insgesamt der systematische Fehler. Demnach ist es nicht sinnvoll, noch mehr 
+Versuche durchzuführen, um den gesamten Fehler deutlich zu senken.
