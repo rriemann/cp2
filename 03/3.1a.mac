@@ -1,0 +1,11 @@
+x0 : 0.12345$
+r  : 3.832$
+
+for i thru 200 do (
+  x0 : r*x0*(1-x0)
+);
+
+for i thru 10 do (
+  x0 : r*x0*(1-x0),
+  print(x0)
+);
