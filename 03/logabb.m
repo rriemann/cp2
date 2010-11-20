@@ -2,8 +2,7 @@
 
 global r
 clf;
-r1=4;r2=4;
-r=[r1:(r2-r1)/100:r2];
+r=[3.832, 3.9, 4];
 rvals=size(r,2);
 warmup=200;			% Anwendungen der Abb. vor P
 points=1000;			% # x-Werte pro r-Wert
@@ -22,16 +21,25 @@ for i=2:points,
 end
 xp=xp/(points-1);		% Liapunov Exponent
 
-subplot(2,1,1),
+subplot(3,1,1),
 plot(ones(points,1)*r,x,"."); hold on;
 title("logistische Abbildung");
 xlabel("r"); ylabel("x");
 axis([r(1)-0.01 r(rvals)+0.01 0 1]);
 
 
-subplot(2,1,2),
+subplot(3,1,2),
 plot(r,xp);hold on;
 title("Lyapunov Exponent");
 xlabel("r"); ylabel("lambda");
 axis([r(1)-0.01 r(rvals)+0.01 -1 1]);
 plot([r(1) r(rvals)],[0 0],":"); % Nullinie
+
+
+subplot(3,1,3),
+plot(r,xp);hold on;
+title("Histogramm");
+xlabel("x"); ylabel("Anzahl");
+axis([0,1]);
+hist(x);			% gleich fuer alle r-werte gleichzeitig
+				% mit einem 2. argument koennte man Nbins festlegen
