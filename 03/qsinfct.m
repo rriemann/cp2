@@ -1,3 +1,4 @@
-function [m] = qsinfct(x)
+function [m] = qsinfct(x,with_uncert)
 global q
-m=q.*sin(pi*x); 
+randnrs = with_uncert*1e-1*rand(1,100);
+m=q.*sin(pi*x) + randnrs; 
