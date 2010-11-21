@@ -20,6 +20,8 @@ for with_uncert = 0:1,
   end
   xp=xp/(points-1);				% Liapunov Exponent
 
+fig = gcf;
+set(fig, "visible", "off");
 %  figure(with_uncert+1);
   subplot(3,1,1),
   plot(ones(points,1)*q,x,".");% hold on;
