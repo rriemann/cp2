@@ -21,6 +21,8 @@ for i=2:points,
 end
 xp=xp/(points-1);		% Liapunov Exponent
 
+fig = gcf;
+set(fig, "visible", "off");
 subplot(3,1,1),
 plot(ones(points,1)*r,x,"."); hold on;
 %title("logistische Abbildung");
