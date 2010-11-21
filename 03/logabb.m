@@ -23,23 +23,23 @@ xp=xp/(points-1);		% Liapunov Exponent
 
 subplot(3,1,1),
 plot(ones(points,1)*r,x,"."); hold on;
-title("logistische Abbildung");
+%title("logistische Abbildung");
 xlabel("r"); ylabel("x");
 axis([r(1)-0.01 r(rvals)+0.01 0 1]);
 
 
 subplot(3,1,2),
 plot(r,xp);hold on;
-title("Lyapunov Exponent");
-xlabel("r"); ylabel("lambda");
+%title("Lyapunov Exponent");
+xlabel("r"); ylabel("λ");
 axis([r(1)-0.01 r(rvals)+0.01 -1 1]);
 plot([r(1) r(rvals)],[0 0],":"); % Nullinie
 
 
 subplot(3,1,3),
 plot(r,xp);hold on;
-title("Histogramm");
+%title("Histogramm");
 xlabel("x"); ylabel("Anzahl");
 axis([0,1]);
-hist(x);			% gleich fuer alle r-werte gleichzeitig
-				% mit einem 2. argument koennte man Nbins festlegen
+hist(x);
+print("logabb.png");
