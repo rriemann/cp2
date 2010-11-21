@@ -1,4 +1,5 @@
 \section*{Aufgabe 3.1a}
+\label{sec:1a}
 Im ersten Teil der Aufgabe war zu untersuchen, wie sich die logistische
 Abbildung $$M(x) = rx\cdot (1-x)$$ für $r$-Werte von 4, 3.9 und 3.832 verhält.
 Im Speziellen wurde das invariante Maß $ϱ(x)$ untersucht, indem für 1000 zu
@@ -26,3 +27,35 @@ Die resultierenden Plots sind in \fref{logabb} dargestellt.
   \caption{Output des Programms}
   \label{fig:logabb}
 \end{figure}
+
+Im obersten Plot sind die erreichten $x$-Werte in Abhängigkeit von $r$
+dargestellt. Wie man erkennen kann, werden für $r=3.9$ und $r=4$ im Rahmen der
+Auflösung der Graphik alle $x$-Werte etwa 0.1 bzw. 0 und eins erreicht, für
+$r=3.832$ dagegen werden nur 3 Punkte bzw. kleine, als Punkt erscheinende Werte
+angenommen. Die möglichen $x$-Werte sind also nicht dicht im Phasenraum,
+sondern nehmen nur drei diskrete Werte an. Dies äußert sich auch in den
+anderen beiden Plots. Im mittleren ist der Exponent kleiner als null, was
+zeigt, dass es sich hier um keine chaotische Bewegung handelt, und im
+Histogramm (unterster Plot) kann ebenfalls festgestellt werden, dass ϱ nur in
+drei Bins Werte ungleich null annimmt. Daher kann man für diesen Fall die
+Zustandsdichte mit Hilfe von Dirac’schen δ-Distributionen direkt angeben:
+\begin{eqnarray}
+ϱ(x) &=& \lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N}δ(x - M^{(n)}(x^0)
+\end{eqnarray}
+
+Es kann ausgenutzt werden, dass gilt:
+\begin{eqnarray}
+M^{(0)} &=& M^{(3)} = M^{(6)} = … \equiv x^0\\
+M^{(1)} &=& M^{(4)} = M^{(7)} = … \equiv x^1\\
+M^{(2)} &=& M^{(5)} = M^{(8)} = … \equiv x^2
+\end{eqnarray}
+
+Somit wird
+\begin{eqnarray}
+ϱ(x) &=& \lim_{N\to\infty}\frac{1}{N}\cdot\frac{N+1}{3}(δ(x - x^0) + δ(x
+- x^1) + δ(x - x^2))\\
+&=& \frac{1}{3}\cdot(δ(x - x^0) + δ(x - x^1) + δ(x - x^2)).
+\end{eqnarray}
+
+Für die anderen beiden $r$-Werte kann eine solche vereinfachte Form für ϱ nicht
+angegeben werden, da hier prinzipiell fast jeder $x$-Wert erreicht werden kann.

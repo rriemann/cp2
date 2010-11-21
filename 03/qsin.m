@@ -31,7 +31,7 @@ for with_uncert = 0:1,
   subplot(3,1,2),
   plot(q,xp);hold on;
   title("Lyapunov Exponent");
-  xlabel("q"); ylabel("lambda");
+  xlabel("q"); ylabel("λ");
   axis([q(1)-0.01 q(qvals)+0.01 -1 1]);
   plot([q(1) q(qvals)],[0 0],":"); % Nullinie
   hold off;
@@ -44,7 +44,7 @@ for with_uncert = 0:1,
   axis([0,1]);
   hist(x);		% gleich fuer alle q-werte gleichzeitig
 			% mit einem 2. argument koennte man Nbins festlegen
-  print(sprintf("qsin%i.pdf", with_uncert));
+  print(sprintf("qsin%i.png", with_uncert));
 %  print("qsin.pdf");
 %  hold off;
 end
