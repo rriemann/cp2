@@ -35,12 +35,13 @@ Wie man erkennen kann, stimmen die erreichten $x$-Werte für die beiden
 Genauigkeiten annähernd überein. Auch die Verläufe der λ-Werte stimmen überein.
 Einzig die Histogramme unterscheiden sich dadurch, dass durch die größere
 Ungenauigkeit auch $x$-Werte von deutlich unter null erreicht werden können,
-sodass negative Werte auftreten, die eigentlich nicht erwünscht sind. Offenbar
-hat dies aber kaum Auswirkungen auf das chaotische Verhalten.
+sodass negative Werte auftreten, die eigentlich nicht erwünscht sind. Auch
+die konkreten $x$-Werte nehmen je nach Genauigkeit unterschiedliche Werte an.
+Dazu muss angemerkt werden, dass es sich hierbei teilweise um einen Effekt der
+Einteilung in Bins handeln könnte, da für die ungenauere Rechnung die zehn Bins
+einen Bereich von $x \in [-1,1]$ abdecken, während die genauere Rechnung nur $x
+\in [0,1]$ berücksichtigt.
 
-Dies ist erstaunlich, da chaotische Abbildung sehr sensitiv auf kleine
-Veränderungen von Parametern sein sollte, was hier nicht bestätigt werden kann.
-Demnach weist diese Abbildung in diesem Sinne kein klassisch chaotisches
-Verhalten auf. Dennoch kommt es bei der Variation von $r$ zum chaotischen
-Verhalten, sodass es sich bei der betrachteten Abbildung um eine chaotische
-Abbildung handelt.
+Die Abbildung ist also sensitiv auf die Rechengenauigkeit, und auch bei der
+Variation von $r$ kommt es zum chaotischen Verhalten, sodass es sich bei der
+betrachteten Abbildung um eine chaotische Abbildung handelt.
