@@ -25,14 +25,14 @@ set(fig, "visible", "off");
 %  figure(with_uncert+1);
   subplot(3,1,1),
   plot(ones(points,1)*q,x,".");% hold on;
-  title("q*sin(πx)");
+%  title("q*sin(πx)");
   xlabel("q"); ylabel("x");
   axis([q(1)-0.01 q(qvals)+0.01 0 1]);
 
 
   subplot(3,1,2),
   plot(q,xp);hold on;
-  title("Lyapunov Exponent");
+%  title("Lyapunov Exponent");
   xlabel("q"); ylabel("λ");
   axis([q(1)-0.01 q(qvals)+0.01 -1 1]);
   plot([q(1) q(qvals)],[0 0],":"); % Nullinie
@@ -40,12 +40,10 @@ set(fig, "visible", "off");
 
 
   subplot(3,1,3),
-  plot(q,xp);%hold on;
-  title("Histogramm");
+  hist(x);
+%  title("Histogramm");
   xlabel("x"); ylabel("Anzahl");
-  axis([0,1]);
-  hist(x);		% gleich fuer alle q-werte gleichzeitig
-			% mit einem 2. argument koennte man Nbins festlegen
+%  axis([0,1]);
   print(sprintf("qsin%i.png", with_uncert));
 %  print("qsin.pdf");
 %  hold off;
