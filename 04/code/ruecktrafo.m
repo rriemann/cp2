@@ -1,12 +1,7 @@
 % function to retransform given fbar to f
+% kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
 
-function fbar = ruecktrafo(f,a)
-  dimf = size(f)(1);
-  fbar = zeros(dimf,1);
-
-  for i = 1:dimf,
-    for j = 1:dimf,
-      fbar(i) = a*exp(-sqrt(-1)*2*pi*(i-1)/dimf*j)*fbar(i);
-    end
-  end
- 
+function f = ruecktrafo(fbar,a)
+  dimfbar = size(fbar)(1);
+  f = a*exp(2*pi*i*[0:dimfbar-1]*[0:dimfbar-1]/dimfbar)*fbar;
+end
