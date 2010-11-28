@@ -30,6 +30,7 @@ f = trafo(sinfkt,1);
 semilogy(w,(abs(f)).^2, '@');
 axis([-30, 30,1e-5,1e5])
 print("sintrafo.png");
+clf;
 
 
 %  4.1c
@@ -51,9 +52,10 @@ clf;
 data = load("../data/chaosdata.mat");
 N = 1501;
 a = 0.2;
-L = a*N;
+L = a*(N-1);
 f = ruecktrafo(data.y(:,1),a);
-w = 2*pi/L*[[0:a:(N-1)/2*a],[-(N-1)*a:a:-(N+1)/2*a]]';
+ww = a*[-(N-1)/2:(N-1)/2]';
+w = [ww((N-1)/2+1:end);ww(1:(N-1)/2)];
 semilogy(w,(abs(f)).^2, '@');
-axis([-8, 8,1e-2,1e4]);
+%  axis([-8, 8,1e-2,1e4]);
 print("chaosdata_trafo.png");
