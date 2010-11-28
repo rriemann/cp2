@@ -1,0 +1,32 @@
+\section*{Aufgabe 4.2)}
+
+\lstinputlisting[firstline=51,label=lst:aufg42,caption={fourier.m}]{../code/fourier.m}
+
+\begin{figure}[htb]
+\centering
+  \includegraphics[width=0.7\textwidth,keepaspectratio]{../code/chaosdata_trafo-crop}
+  \caption{In den ω-Raum transformierte Funktion aus den Daten von \texttt{chaosdata.mat}. Auf der Abszisse sind
+  die ω-Werte aufgetragen, auf der Ordinate die Funktionswerte.}
+  \label{fig:chaos}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+  \includegraphics[width=0.7\textwidth,keepaspectratio]{../code/chaosdata_trafo_log-crop}
+  \caption{Equivalente, logarthmische Darstellung von \fref{chaos}}
+  \label{fig:chaoslog}
+\end{figure}
+
+Die chaotische Trajektorie aus Kap. 3 wurde mittels der zuvor eingeführten
+Transformation vom Ortsraum in den Impulsraum übersetzt (siehe \lref{aufg42}). Aus \fref{chaos} lässt
+sich entnehmen, dass nur ein sehr enges Frequenzspektrum zur Beschreibung der
+Trajektorie notwendig ist. Aus dem logarthmischen Plot in \fref{chaoslog} kann
+entnommen werden, dass die Werte außerhalb der Intervalls um den Ursprung zwar nicht
+null sind, doch mit zunehmenden Betrag von ω schnell abfallen.
+
+Man kann also über die chaotische Bewegung nun gewisse Aussagen anhand der
+Fourier-Analyse treffen. So schwingt die Trajektorie zumeist mit einer
+Winkelfrequenz von $|ω| < 10$. Größere Werte von ω können im wesentlichen
+unberücksichtigt bleiben. Die Wahrscheinlichkeit für eine sehr hohe Schwingungsabfolge
+($|ω| > 10$) ist also sehr gering und kommt im betrachteten Datensatz
+praktisch nicht vor.

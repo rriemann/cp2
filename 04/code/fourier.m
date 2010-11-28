@@ -55,10 +55,10 @@ L = a*(N-1);
 f = ruecktrafo(data.y(:,1),a);
 ww = a*[-(N-1)/2:(N-1)/2]';
 w = [ww((N-1)/2+1:end);ww(1:(N-1)/2)];
-semilogy(w,(abs(f)).^2, '@');
+semilogy(w,(abs(f)).^2, '+', "markersize", 6);
 axis([-75, 75,1e-2,1e4]);
-print("chaosdata_trafo_log.png");
+print("chaosdata_trafo_log.pdf");
 clf;
-plot(w,(abs(f)).^2, '@');
+plot(w,(abs(f)).^2, '+', "markersize", 6);
 axis([-15, 15])
-print("chaosdata_trafo.png");
+print("chaosdata_trafo.pdf");
