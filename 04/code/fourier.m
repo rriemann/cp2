@@ -23,25 +23,24 @@ N = 101;
 w0 = 5*2*pi/T;
 
 sinfkt = sin(w0*[0:T/(N-1):T]');
-%  w = trafo([0:T/(N-1):T]',T);		% berechnung der omegas. korrekt?
 % w entspricht k in der umgesetzten formel. daher ist w = 2pi/T*n mit n = [0:100]
 w = 2*pi/T*[[0:50],[-50:-1]]';
-f = trafo(sinfkt,1);
+f = ruecktrafo(sinfkt,1);
 semilogy(w,(abs(f)).^2, '@');
-axis([-30, 30,1e-5,1e5])
-print("sintrafo.png");
+axis([-30, 30,1e-2,1e4])
+print("sintrafo.pdf");
 
 
 %  4.1c
 gamma = 0.5;
 fkt = sin(w0*[0:T/(N-1):T]').*exp(-gamma*w0*[0:T/(N-1):T]');
-f = trafo(fkt,1);
+f = ruecktrafo(fkt,1);
 semilogy(w,(abs(f)).^2, '@');
 print("daempfung.png");
 
 w0 = 4.5*2*pi/T;
 sinfkt = sin(w0*[0:T/(N-1):T]');
-f = trafo(sinfkt,1);
+f = ruecktrafo(sinfkt,1);
 semilogy(w,(abs(f)).^2, '@');
 print("sintrafo2.png");
 clf;

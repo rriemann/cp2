@@ -75,6 +75,21 @@ Rücktransformation überein. Man kann also annehmen, dass die Transformationen 
 gewünscht funktionieren.
 
 \section*{Aufgabe 4.1b)}
+Im zweiten Teil der Aufgabe war eine Sinusfunktion aus dem $t$- in den ω-Raum zu
+transformieren, also $f(t) = \sin(ω_0t) → \tilde{f}(ω)$. Der entsprechende Code
+ist in \lref{sinfkt} dargestellt.
+
+\lstinputlisting[firstline=17,lastline=31,firstnumber=17,label=lst:sinfkt,caption={fourier.m}]{../code/fourier.m}
+
+Die entstehende Grafik ist in \fref{sintrafo} dargestellt.
+
+\begin{figure}[htb]
+\centering
+  \includegraphics[width=0.9\textwidth,keepaspectratio]{../code/sintrafo-crop}
+  \caption{In den ω-Raum transformierte von $\sin(ω_0t)$. Auf der Abszisse sind
+  die ω-Werte aufgetragen, auf der Ordinate die Funktionswerte.}
+  \label{fig:sintrafo}
+\end{figure}
 
 
 \section*{Aufgabe 4.1c)}
