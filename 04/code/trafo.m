@@ -3,5 +3,5 @@
 
 function f = trafo(fbar,L)
   dimfbar = size(fbar)(1);
-  f = 1/L*exp(2*pi*i*[0:dimfbar-1]*[0:dimfbar-1]/dimfbar)*fbar;
+  f = 1/L*exp(2*pi*i*[0:dimfbar-1]'*[0:dimfbar-1]/dimfbar)*fbar;
 end

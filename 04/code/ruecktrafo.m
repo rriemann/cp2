@@ -3,5 +3,5 @@
 
 function f = ruecktrafo(fbar,a)
   dimfbar = size(fbar)(1);
-  f = a*exp(2*pi*i*[0:dimfbar-1]*[0:dimfbar-1]/dimfbar)*fbar;
+  f = a*exp(-2*pi*i*[0:dimfbar-1]'*[0:dimfbar-1]/dimfbar)*fbar;
 end
