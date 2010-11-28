@@ -24,5 +24,6 @@ sinfkt = sin(w0*[0:T/(N-1):T]');
 % w entspricht k in der umgesetzten formel. daher ist w = 2pi/T*n mit n = [0:100]
 w = 2*pi/T*[[0:50],[-50:-1]]';
 f = trafo(sinfkt,1);
-plot(w,(abs(f)).^2);			% ka, ob das zu erwarten war ;)
+semilogy(w,(abs(f)).^2, '@');
+axis([-30, 30,1e-5,1e5])
 print("sintrafo.png");
