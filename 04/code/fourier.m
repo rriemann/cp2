@@ -19,6 +19,9 @@ N = 101;
 w0 = 2*pi/T;
 
 sinfkt = sin(w0*[0:T/(N-1):T]');
-w = trafo([0:T/(N-1):T]',T);		% berechnung der omegas. korrekt?
+%  w = trafo([0:T/(N-1):T]',T);		% berechnung der omegas. korrekt?
+% w entspricht k in der umgesetzten formel. daher ist w = 2pi/T*n mit n = [0:100]
+w = 2*pi/T*[0:100]';
 f = trafo(sinfkt,1);
 plot(w,(abs(f)).^2);			% ka, ob das zu erwarten war ;)
+print("sintrafo.png");
