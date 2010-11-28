@@ -37,13 +37,13 @@ gamma = 0.5;
 fkt = sin(w0*[0:T/(N-1):T]').*exp(-gamma*w0*[0:T/(N-1):T]');
 f = ruecktrafo(fkt,1);
 semilogy(w,(abs(f)).^2, '@');
-print("daempfung.png");
+print("daempfung.pdf");
 
 w0 = 4.5*2*pi/T;
 sinfkt = sin(w0*[0:T/(N-1):T]');
 f = ruecktrafo(sinfkt,1);
 semilogy(w,(abs(f)).^2, '@');
-print("sintrafo2.png");
+print("sintrafo2.pdf");
 clf;
 
 % 4.2

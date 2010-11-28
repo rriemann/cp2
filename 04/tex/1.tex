@@ -85,11 +85,40 @@ Die entstehende Grafik ist in \fref{sintrafo} dargestellt.
 
 \begin{figure}[htb]
 \centering
-  \includegraphics[width=0.9\textwidth,keepaspectratio]{../code/sintrafo-crop}
+  \includegraphics[width=0.7\textwidth,keepaspectratio]{../code/sintrafo-crop}
   \caption{In den ω-Raum transformierte von $\sin(ω_0t)$. Auf der Abszisse sind
   die ω-Werte aufgetragen, auf der Ordinate die Funktionswerte.}
   \label{fig:sintrafo}
 \end{figure}
 
+Wir hätten erwartet, dass es zwei diskrete Peaks gibt, da dies einer Zerlegung 
+einer Sinusfunktion in $e$-Funktionen entspricht. Hier sind allerdings viele 
+Funktionswerte ungleich null, was auf Ungenauigkeiten der Rechnung beruhen wird. 
+Diese Werte sind aber ca. vier bis fünf Größenordnungen kleiner als die der Maxima.
+So könnte beispielsweise die Maschinengenauigkeit von Bedeutung sein, und auch die
+numerische Implementation der Sinus- und Exponentialfunktionen ist nicht exakt. 
+Dies könnte durchaus für die Abweichungen verantwortlich sein.
 
 \section*{Aufgabe 4.1c)}
+Der letzte Teil der ersten Aufgabe befasst sich mit der Sinusfunktion, bei der 
+entweder eine Dämpfung hinzugefügt oder der Wert von $ω_0$ auf $4.5\cdot 2π/T$
+geändert wurde. Der Code dafür ist in \lref{1c} dargestellt.
+
+\lstinputlisting[firstline=36,lastline=47,firstnumber=36,label=lst:1c,caption={fourier.m}]{../code/fourier.m}
+
+Für die Dämpfung ergibt sich die Darstellung in \fref{daempfung}, für den
+veränderten $ω_0$-Wert die in \fref{w0}
+
+\begin{figure}[htb]
+\centering
+  \includegraphics[width=0.7\textwidth,keepaspectratio]{../code/daempfung-crop}
+  \caption{Transformierte der gedämpften Sinusfunktion}
+  \label{fig:daempfung}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+  \includegraphics[width=0.7\textwidth,keepaspectratio]{../code/sintrafo2-crop}
+  \caption{Transformierte der Sinusfunktion mit verändertem $ω_0$}
+  \label{fig:w0}
+\end{figure}
