@@ -1,0 +1,80 @@
+\section*{Aufgabe 4.1a)}
+Das Thema dieser Übung ist die Fouriertransformation. Diese kann mit numerischen
+Methoden auf einfache Weise durchgeführt werden. Die Grundlagen wurden dem Skript
+entnommen (Gl. (3.5) und (3.6)):
+\begin{eqnarray}
+f(x) &=& \frac{1}{L}\sum_k e^{ikx}\tilde{f}(k)\\
+\tilde{f}(k) &=& a\sum_y e^{-iky} f(y)
+\end{eqnarray}
+Diese beiden Formeln beschreiben die Hin- und Rücktransformation. Im ersten Teil
+dieser Aufgabe waren diese Transformationen in zwei Funktionen zu implementieren,
+um gegebene, diskrete Funktionswerte in diskrete Werte der transformierten 
+Funktion umzuwandeln. Die Quellcodes dafür sind in \lref{trafo} und
+\lref{ruecktrafo} dargestellt.
+
+\lstinputlisting[firstline=1,firstnumber=1,label=lst:trafo,caption={trafo.m}]{../code/trafo.m}
+
+\lstinputlisting[firstline=1,firstnumber=1,label=lst:ruecktrafo,caption={ruecktrafo.m}]{../code/ruecktrafo.m}
+
+Um zu testen, ob die Transformationen wie erwartet funktionieren, wurde mit einfachen
+Vektoren getestet, ob die Vektoren nach einer Hin- und einer Rücktransformation
+invariant bleiben. Der aufrufende Code sieht wie folgt aus:
+
+\lstinputlisting[firstline=1,lastline=13,firstnumber=1,label=lst:fouriertest,caption={fourier.m}]{../code/fourier.m}
+
+Der resultierende Output ist hier dargestellt: 
+
+\begin{lstlisting}[caption=Output des Beispielaufrufs,label=lst:fouriertestoutput]
+Vektor eins: 
+v1 =
+
+   1
+   2
+   3
+   4
+   5
+
+f1 =
+
+   3.00000 + 0.00000i
+  -0.50000 - 0.68819i
+  -0.50000 - 0.16246i
+  -0.50000 + 0.16246i
+  -0.50000 + 0.68819i
+
+ergebnis =
+
+   1.0000 + 0.0000i
+   2.0000 + 0.0000i
+   3.0000 - 0.0000i
+   4.0000 - 0.0000i
+   5.0000 - 0.0000i
+
+Vektor zwei: 
+v2 =
+
+  -0.10000
+   0.75000
+   3.14159
+
+f2 =
+
+   1.26386 + 0.00000i
+  -0.68193 - 0.69039i
+  -0.68193 + 0.69039i
+
+ergebnis =
+
+  -0.10000 + 0.00000i
+   0.75000 + 0.00000i
+   3.14159 + 0.00000i
+\end{lstlisting}
+
+Wie man erkennen kann, stimmen die Ausgangsvektoren mit denen nach der Hin- und
+Rücktransformation überein. Man kann also annehmen, dass die Transformationen wie
+gewünscht funktionieren.
+
+\section*{Aufgabe 4.1b)}
+
+
+\section*{Aufgabe 4.1c)}
