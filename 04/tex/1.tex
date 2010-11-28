@@ -92,12 +92,16 @@ Die entstehende Grafik ist in \fref{sintrafo} dargestellt.
 \end{figure}
 
 Wir hätten erwartet, dass es zwei diskrete Peaks gibt, da dies einer Zerlegung 
-einer Sinusfunktion in $e$-Funktionen entspricht. Hier sind allerdings viele 
+einer Sinusfunktion in $e$-Funktionen entspricht ($\sin(ωt) = 1/(2i)\cdot(e^{iωt}
+- e^{-iωt}) → \pm ω$ sind die entsprechenden Werte). Hier sind allerdings viele 
 Funktionswerte ungleich null, was auf Ungenauigkeiten der Rechnung beruhen wird. 
 Diese Werte sind aber ca. vier bis fünf Größenordnungen kleiner als die der Maxima.
 So könnte beispielsweise die Maschinengenauigkeit von Bedeutung sein, und auch die
 numerische Implementation der Sinus- und Exponentialfunktionen ist nicht exakt. 
 Dies könnte durchaus für die Abweichungen verantwortlich sein.
+
+Für die Symmetrisierung wurde die Periodizität des Sinus ausgenutzt ($\sin(-2π)
+= \sin(0) = …$), um eine Verschiebung der Funktion zu anderen ω-Werte durchzuführen.
 
 \section*{Aufgabe 4.1c)}
 Der letzte Teil der ersten Aufgabe befasst sich mit der Sinusfunktion, bei der 
@@ -122,3 +126,17 @@ veränderten $ω_0$-Wert die in \fref{w0}
   \caption{Transformierte der Sinusfunktion mit verändertem $ω_0$}
   \label{fig:w0}
 \end{figure}
+
+Für die Dämpfung lässt sich erkennen, dass nun ein deutlich größeres Spektrum
+von ω-Werten relevante Funktionswerte beiträgt. Dennoch ist die grobe Struktur der Grafik 
+der aus \fref{sintrafo} ähnlich. Man kann also feststellen, dass der Einfluss der
+Sinusfunktion noch stark vorherrscht.
+
+In \fref{w0} erkennt man ebenfalls noch die Ursprungsfunktion aus \fref{sintrafo},
+doch auch hier tragen mehr ω-Werte zur Verteilung bei. 
+
+Die Tatsache, dass in beiden Fällen die Peaks „verbreitert“ werden, also mehr 
+ω-Werte beitragen, lässt sich dadurch erklären, dass es sich um diskrete
+Funktionen handelt, sodass eine Änderung von $ω_0$ bei konstant gehaltener 
+Schrittweite und Gesamtlänge $T$ eine Änderung der Zerlegung in $e$-Funktionen
+bewirkt.
