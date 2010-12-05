@@ -34,6 +34,14 @@ a = rand(5,1)
 a_fft = fft(a)
 a_2 = ifft(a_fft)
 
+a_fftshift = fftshift(a)
+a_ifftshift = ifftshift(a_fftshift)
+
 A = rand(5)
 A_fft = fft2(A)
 A_2 = ifft2(A_fft)
+
+A_fftshift = fftshift(A,1);
+A_fftshift = fftshift(A,2)
+A_ifftshift = ifftshift(A_fftshift,1);
+A_ifftshift = ifftshift(A_fftshift,2)
