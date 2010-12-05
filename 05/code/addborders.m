@@ -27,3 +27,13 @@ image(rawprint);
 %  map = colormap('Gray');
 print('../tmp/eins_a.png');
 %  imwrite(rawprint,map,'../tmp/eins_a.tif','TIF');
+
+
+% teil b
+a = rand(5,1)
+a_fft = fft(a)
+a_2 = ifft(a_fft)
+
+A = rand(5)
+A_fft = fft2(A)
+A_2 = ifft2(A_fft)
