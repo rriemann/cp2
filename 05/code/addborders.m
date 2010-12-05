@@ -19,8 +19,11 @@ framewidth = round(nrpixels(2)*(1-rho)/2)
 frameheight = round(nrpixels(1)*(1-rho)/2)
 
 rawprint(:,1:framewidth) = 0;				% linker rand
-rawprint(:,(nrpixels(2)-framewidth:nrpixels(2))) = 0;			% rechter rand
+rawprint(:,(nrpixels(2)-framewidth:nrpixels(2))) = 0;	% rechter rand
 rawprint(1:frameheight,:) = 0;				% oberer rand
-rawprint(nrpixels(1)-frameheight:nrpixels(1),:) = 0;		% unterer rand
+rawprint(nrpixels(1)-frameheight:nrpixels(1),:) = 0;	% unterer rand
 
-imwrite(rawprint,'../tmp/eins_a.tif','TIF');
+image(rawprint);
+%  map = colormap('Gray');
+print('../tmp/eins_a.png');
+%  imwrite(rawprint,map,'../tmp/eins_a.tif','TIF');
