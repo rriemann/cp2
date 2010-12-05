@@ -4,7 +4,7 @@ function rawprint = cut_rect(rawprint,rho2)
   nrpixels = size(rawprint);
 
   %  http://programming.itags.org/matlab/11049/
-  r = sqrt((1-rho*(1-rho))/pi);
+  r = sqrt(1/pi)*rho;
   x = linspace(-1,1,nrpixels(2));
   y = linspace(-1,1,nrpixels(1));
   [X,Y] = meshgrid(x,y);
