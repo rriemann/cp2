@@ -5,7 +5,7 @@ colormap('Gray');
 % teil a
 
 image(cut_rect(raw,0.4));
-print('../tmp/eins_a.png');
+print('../tmp/eins_a.pdf');
 
 % teil b
 a = rand(5,1)
