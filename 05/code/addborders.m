@@ -1,5 +1,5 @@
 raw = double(imread('../data/testbild.tif','TIF'));
-whos raw % zeige matrix an
+%  whos raw % zeige matrix an
 
 colormap('Gray');
 image(raw); title('Original');
@@ -41,7 +41,23 @@ A = rand(5)
 A_fft = fft2(A)
 A_2 = ifft2(A_fft)
 
-A_fftshift = fftshift(A,1);
-A_fftshift = fftshift(A,2)
-A_ifftshift = ifftshift(A_fftshift,1);
-A_ifftshift = ifftshift(A_fftshift,2)
+A_fftshift = fftshift(A)
+A_ifftshift = ifftshift(A_fftshift)
+
+
+% teil c
+pic_fft = fftshift(raw);
+
+rho = sqrt(0.5);
+framewidth = round(nrpixels(2)*(1-rho)/2)
+frameheight = round(nrpixels(1)*(1-rho)/2)
+
+pic_fft(:,1:framewidth) = 0;				% linker rand
+pic_fft(:,(nrpixels(2)-framewidth:nrpixels(2))) = 0;	% rechter rand
+pic_fft(1:frameheight,:) = 0;				% oberer rand
+pic_fft(nrpixels(1)-frameheight:nrpixels(1),:) = 0;	% unterer rand
+
+pic = ifftshift(pic_fft);
+
+image(pic);
+print('../tmp/eins_c_0_5.png');
