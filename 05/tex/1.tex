@@ -21,7 +21,7 @@ Bildes in Pixeln ist.
 
 Wird die Funktion aus \lref{cut_rect} unter Verwendung von $ρ^2 = 0.4$ auf das
 Bild in \fref{orig} angewendet, so erhält man die in \fref{1a} gezeigte Abbildung.
-\lstinputlisting[firstline=1,lastline=8,firstnumber=1,label=lst:fft-test,caption={blatt5.m}]{../code/blatt5.m}
+\lstinputlisting[firstline=3,lastline=13,label=lst:fft-test,caption={blatt5.m}]{../code/blatt5.m}
 \lstinputlisting[firstline=1,lastline=10,firstnumber=1,label=lst:cut_rect,caption={cut\_rect.m}]{../code/cut_rect.m}
 
 \begin{figure}[htb]
@@ -39,11 +39,11 @@ hellgrauen Blöcke im transformierten Bild nicht mehr zu finden.
 
 \section*{Aufgabe 5.1b)}
 Für die folgenden Aufgaben wurden die in Matlab zur Verfügung stehenden 
-Fast-Fourier-Transformationsfunktionen \texttt{fft, ifft, fft2, ifft2} benötigt.
+Fast-Fourier-Trans\-formationsfunktionen \texttt{fft, ifft, fft2, ifft2} benötigt.
 Zunächst wurde getestet, wie diese funktionieren, indem mit einfachen Vektoren und
 Matrizen eine Hin- und eine Rücktransformation durchgeführt wurde, wie in 
 \lref{fft-test} gezeigt.
-\lstinputlisting[firstline=10,lastline=23,firstnumber=10,label=lst:fft-test,caption={blatt5.m}]{../code/blatt5.m}
+\lstinputlisting[firstline=15,lastline=28,label=lst:fft-test,caption={blatt5.m}]{../code/blatt5.m}
 
 Der zugehörige Output ist in \lref{fft-test-output} gezeigt.
 \begin{lstlisting}[caption=Output des Beispielaufrufs,label=lst:fft-test-output]
@@ -148,7 +148,7 @@ zu $k=0$ gehörenden Werte in die Mitte gelangen. Dies entspricht einer Symmetri
 Die Funktion \texttt{ifftshift} macht diese Symmetrisierung wieder rückgängig, um
 die ursprüngliche Matrix wiederzubekommen.
 
-Die beiden Funktionen \textcolor{red}{unterscheiden} sich aufgrund der Nichtlinearität der Abhängigkeit
+Die beiden Funktionen \textcolor{red}{unterscheiden} sich auf Grund der Nichtlinearität der Abhängigkeit
 von $x$ und $k$. (oder: octave- help fftshift -> laenge spielt eine rolle)
 
 
@@ -159,7 +159,8 @@ auf $hb\cdot ρ^2$ durch das Abschneiden des Randes reduziert, die Symmetrisieru
 rückgängig gemacht und zuletzt wird das Bild wieder durch die inverse Fourier-Trafo in den
 $x$-Raum überführt.
 
-Das Ergebnis für $ρ=0.5$ ist in \fref{1c5} und für $ρ=0.1$ ist in \fref{1c1} dargestellt.
+Das Ergebnis aus \lref{1c} für $ρ=0.5$ ist in \fref{1c5} und für $ρ=0.1$ in \fref{1c1} dargestellt.
+\lstinputlisting[firstline=30,lastline=37,label=lst:1c,caption={blatt5.m}]{../code/blatt5.m}
 
 \begin{figure}[htb]
 \centering
@@ -176,9 +177,13 @@ Das Ergebnis für $ρ=0.5$ ist in \fref{1c5} und für $ρ=0.1$ ist in \fref{1c1}
 In Aufgabe d) wurde equivalent zur Verfahrensweise in c) vorgegangen.
 Jedoch wurde im transformierten Raum nicht ein rechteckiger Rand abgeschnitten,
 sondern ein Kreisförmiger, siehe \lref{cut_round}. Hierbei wurde darauf geachtet, dass die verbleibende
-Bildinformation nach wie vor $hb\cdot ρ^2$ ist.
+Bildinformation nach wie vor $hb\cdot ρ^2$ ist. Der aufrufende Quelltext ist in \lref{k_kreis} und 
+die aufgerufene Funktion \texttt{cut\_round} dargestellt.
 
-\lstinputlisting[firstline=1,lastline=15,firstnumber=1,label=lst:cut_round,caption={cut\_round.m}]{../code/cut_round.m}
+\lstinputlisting[firstline=1,lastline=15,label=lst:cut_round,caption={cut\_round.m}]{../code/cut_round.m}
+\lstinputlisting[firstline=39,label=lst:k_kreis,caption={blatt5.m}]{../code/blatt5.m}
+
+Im Ergebnis erhalten wir \fref{1d5} mit $ρ=0.5$ und \fref{1d1} mit $ρ=0.1$.
 
 \begin{figure}[htb]
 \centering
@@ -186,20 +191,6 @@ Bildinformation nach wie vor $hb\cdot ρ^2$ ist.
   \caption{komprimiertes Bild mit kreisförmigen Rand im $k$-Raum, $ρ=0.5$}
   \label{fig:1d5}
 \end{figure}
-
-Im Vergleich zu \fref{1a} kann man erkennen, dass, abgesehen davon, dass kein
-Rahmen zum Bild hinzugefügt wurde, das Bild selbst verändert wurde. 
-
-\section*{Aufgabe 5.1d)}
-Hier wurde der Schnitt auf den Betrag von $k$ angewandt und nicht wie bisher
-auf die einzelnen Komponenten. Der aufrufende Quelltext ist in \lref{k_kreis} und 
-die aufgerufene Funktion \texttt{cut\_round} dargestellt.
-
-\lstinputlisting[firstline=32,firstnumber=32,label=lst:k_kreis,caption={blatt5.m}]{../code/blatt5.m}
-\lstinputlisting[label=lst:cut_round,caption={cut\_round.m}]{../code/cut_round.m}
-
-Die hierbei resultierenden Graphiken sind in \fref{kreis_0_1} (für $k = 0.1$) und
-\fref{kreis_0_5} (für $k=0.5$) dargestellt.
 
 \begin{figure}[htb]
 \centering
@@ -225,13 +216,7 @@ der periodischen Natur der Fourier-Transformation im $k$-Raum auch ohne hohe Fre
 gut wiedergegeben werden können.
 
 Wird eine höhere Kompression gewählt, so werden die Substrukturen deutlicher.
+Eine geringere Beschneidung im $k$-Raum führt also zu einer tendenziell größeren
+Erhaltung der Informationen, was auch zu erwarten war.
 
-Die unterschiedlichen Werte für ϱ äußern sich hier in ein wenig anderen Artefakten. 
-Die beiden hellgrauen Blöcke in der rechten Mitte der Bilder sind für $ϱ²=0.5$
-annähernd homogen ausgefüllt, während für $ϱ²=0.1$ eine deutliche Strukturierung
-zu erkennen ist. Im ursprünglichen Bild waren diese Bereiche homogen (oberer Block)
-oder vertikal gestreift (unterer Block). Eine geringere Beschneidung im $k$-Raum
-führt also zu einer tendenziell größeren Erhaltung der Informationen, was auch zu
-erwarten war.
-
-\section*{Aufgabe 5.1e)}
+% \section*{Aufgabe 5.1e)}
