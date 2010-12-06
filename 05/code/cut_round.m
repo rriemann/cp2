@@ -1,4 +1,4 @@
-% setzt einen kreisförmigen schwarzen Rand
+% setzt einen kreisfoermigen schwarzen Rand
 function rawprint = cut_rect(rawprint,rho2)
   rho = sqrt(rho2);
   nrpixels = size(rawprint);

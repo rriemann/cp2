@@ -1,11 +1,16 @@
 % kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
-raw = double(imread('../data/testbild.tif','TIF'));
+%  raw = im2double((imread('../data/testbild','tif')));
+raw = double((imread('../data/testbild','tif')));
+image(raw);
 colormap('Gray');
+axis off;
+pause;
 
 % teil a
 
 image(cut_rect(raw,0.4));
-print('../tmp/eins_a.png');
+axis off;
+pause;
 
 % teil b
 a = rand(5,1)
@@ -24,14 +29,18 @@ A_ifftshift = ifftshift(A_fftshift)
 
 % teil c
 image(ifft2(ifftshift(cut_rect(fftshift(fft2(raw)),0.5))));
-print('../tmp/eins_c_0_5.png');
+axis off;
+pause;
 
 image(ifft2(ifftshift(cut_rect(fftshift(fft2(raw)),0.1))));
-print('../tmp/eins_c_0_1.png');
+axis off;
+pause;
 
 % teil d
 image(ifft2(ifftshift(cut_round(fftshift(fft2(raw)),0.5))));
-print('../tmp/eins_d_0_5.png');
+axis off;
+pause;
 
 image(ifft2(ifftshift(cut_round(fftshift(fft2(raw)),0.1))));
-print('../tmp/eins_d_0_1.png');
+axis off;
+pause;
