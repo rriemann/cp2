@@ -219,4 +219,12 @@ Wird eine höhere Kompression gewählt, so werden die Substrukturen deutlicher.
 Eine geringere Beschneidung im $k$-Raum führt also zu einer tendenziell größeren
 Erhaltung der Informationen, was auch zu erwarten war.
 
-% \section*{Aufgabe 5.1e)}
+\section*{Aufgabe 5.1e)}
+
+Momentan sind die Werte im $k$-Raum komplex. Es müssen also 2 Double-Werte pro Matrixelement
+abgespeichert werden. Nach der Rückkonvertierung sind alle Matrix-Elemente wieder reell.
+
+Es ist vorstellbar, dass die Matrix im $k$-Raum in eine Form gebracht wird, so dass deren Werte
+rein reell sind. Es müsste dann nur noch ein Double-Wert pro Matrixelement abgespeichert werden.
+Bei der Rückkonvertierung würde man per Konvention nur den Realteil der komplexen
+Zahlen anzeigen.
