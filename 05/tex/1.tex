@@ -26,7 +26,7 @@ Bild in \fref{orig} angewendet, so erhält man die in \fref{1a} gezeigte Abbildu
 
 \begin{figure}[htb]
 \centering
-  \includegraphics[width=0.7\textwidth,keepaspectratio]{../tmp/eins_a-crop.pdf}
+  \includegraphics[width=0.7\textwidth,keepaspectratio]{../tmp/eins_a}
   \caption{Bild mit Rand bei $ρ^2 = 0.4$}
   \label{fig:1a}
 \end{figure}
@@ -148,8 +148,12 @@ zu $k=0$ gehörenden Werte in die Mitte gelangen. Dies entspricht einer Symmetri
 Die Funktion \texttt{ifftshift} macht diese Symmetrisierung wieder rückgängig, um
 die ursprüngliche Matrix wiederzubekommen.
 
-Die beiden Funktionen \textcolor{red}{unterscheiden} sich auf Grund der Nichtlinearität der Abhängigkeit
-von $x$ und $k$. (oder: octave- help fftshift -> laenge spielt eine rolle)
+Die beiden Funktionen sollten sich nicht unterscheiden, da nur Blöcke der Matrizen
+vertauscht und bei der Rücktransformation wieder zurückvertauscht werden sollten.
+Wenn aber die Länge der Matrizen in einer oder zwei der Dimensionen ungerade ist,
+dann ist diese einfache Blockvertauschung nicht mehr ohne weiteres durchführbar.
+Daher wird eine etwas kompliziertere Operation durchgeführt, deren Inverses nicht
+mehr sie selbst ist.
 
 
 \section*{Aufgabe 5.1c)}
@@ -171,6 +175,8 @@ Das Ergebnis aus \lref{1c} für $ρ=0.5$ ist in \fref{1c5} und für $ρ=0.1$ in 
   \caption{komprimiertes Bild mit rechteckigem Rand im $k$-Raum, $ρ=0.1$}
   \label{fig:1c1}
 \end{figure}
+
+Die Interpretation wird im nächsten Abschnitt durchgeführt.
 
 \section*{Aufgabe 5.1d)}
 
@@ -201,7 +207,7 @@ Im Ergebnis erhalten wir \fref{1d5} mit $ρ=0.5$ und \fref{1d1} mit $ρ=0.1$.
 
 Durch die Komprimierung, verändert sich das Bild. Das Ausmaß der Veränderung
 hängt von der lokalen Struktur des Bildes ab. So kann man erkennen, dass
-große einfarbige Flächen substrukturen aufweisen, also nicht sehr gut erhalten
+große einfarbige Flächen Substrukturen aufweisen, also nicht sehr gut erhalten
 bleiben. Dagegen bleiben periodische Muster, wie z.\,B. das Gitter, sehr gut
 erhalten. Jedoch verschwimmen auch hier etwas Grenzen.
 
@@ -218,6 +224,9 @@ gut wiedergegeben werden können.
 Wird eine höhere Kompression gewählt, so werden die Substrukturen deutlicher.
 Eine geringere Beschneidung im $k$-Raum führt also zu einer tendenziell größeren
 Erhaltung der Informationen, was auch zu erwarten war.
+
+Bei der eingestellten Auflösung sind keine Unterschiede zwischen den Bildern aus c) und d) zu
+erkennen. Offenbar tragen für diese Auflösung also nur die Beträge wesentlich zur Kompression bei.
 
 \section*{Aufgabe 5.1e)}
 
