@@ -27,6 +27,7 @@ H = H*(0.5/N);                                  % (-1/2) Laplace
 
 %  Potential, Oszillator Teil des Hamilton:
 H=H+0.5*diag(x.^2);
+x = diag(x);
 
 disp(' H.O. Hamilton mit Fourier-diskretisiertem Laplace Operator: ')
 fprintf(' Raumintervall [%g , %g] mit %i Punkten \n',[-L/2 L/2 N]);
