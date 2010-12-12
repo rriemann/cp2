@@ -33,6 +33,8 @@ for z1 = 1:L+1,
   end
 end
 
+mean(mean(Diff))
+
 mesh(Diff);
 axis([0,21,0,21,-2,1]);
 print("../tmp/Diff.pdf");
