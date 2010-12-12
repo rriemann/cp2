@@ -57,7 +57,9 @@ print("../tmp/plot.pdf");
 
 % 6.2a
 
-function [H] = homo_osc(alpha = 2, L = 20, N = 151)
+eigen_values = zeros(3,4);
+
+function [H] = homo_osc(alpha , L = 20, N = 151)
   if ~mod(N,2)
     error('N muss ungerade sein')
   end
@@ -81,8 +83,9 @@ function [H] = homo_osc(alpha = 2, L = 20, N = 151)
   H += 0.5*diag(abs(x).^alpha);
 end
 
-
-eigen_values = zeros(4,3);
 for alpha = [1:4]
-  eigen_values(alpha,:) = eig(homo_osc(alpha))(end-2:end)';
+  eigen_values(:,alpha) = eig(homo_osc(alpha))(1:3);
 end
+eigen_values
+
+% kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
