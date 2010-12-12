@@ -17,7 +17,7 @@ print("../tmp/mesh_c.pdf");
 
 %  6.1d
 L = 20;
-N = 101;
+N = 101;                % oder 201 und 1001
 [a,x,p] = ho_fou(L,N);
 C = i*(p*x-x*p);
 x = sum(x);		% zeilenvektor
