@@ -88,4 +88,20 @@ for alpha = [1:4]
 end
 eigen_values
 
+% 6.2b
+
+N = [21:2:101];
+eigen_values = zeros(3,0);
+for n = N
+  eigen_values(:,end+1) = eig(homo_osc(4, 20, n))(1:3);
+end
+clf;
+hold on;
+for i = [1:3]
+  eigen_values(i,:) = abs(eigen_values(i,end) - abs(eigen_values(i,:)));
+%    plot(N,abs(eigen_values(i,:)));
+  semilogy(N,abs(eigen_values(i,:)-mean(eigen_values(i,end-3:end)))/mean(eigen_values(i,end-3:end)));
+end
+print("../tmp/plot62b.png");
+
 % kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
