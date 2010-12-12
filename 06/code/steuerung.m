@@ -12,6 +12,7 @@ set(fig, "visible", "off");
 mesh(real(x),real(C));
 print("../tmp/mesh_c_over_x.pdf");
 mesh(real(C));
+zlabel("C");
 print("../tmp/mesh_c.pdf");
 
 
@@ -38,6 +39,9 @@ end
 
 mesh(Diff);
 axis([0,21,0,21,-2,1]);
+xlabel("z1");
+ylabel("z2");
+zlabel("<a|C|b> - <a|b>");
 print("../tmp/Diff.pdf");
 
 
