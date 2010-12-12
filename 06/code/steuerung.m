@@ -42,18 +42,16 @@ print("../tmp/Diff.pdf");
 
 
 %  6.1e
-Diff = zeros(20,1);
+Diff = zeros(19,1);
 
 z=5;
-for sigma=0.1:0.1:2;
+for sigma=0.2:0.1:2;
   psi=exp(-0.5*((x-z)/sigma).^2);
   psi=psi/sqrt(psi*psi');
-  Diff(round(sigma*10))=abs(psi*(C-eye(N))*psi');
+  Diff(round(sigma*10-1))=abs(psi*(C-eye(N))*psi');
 end
 
-Diff
-
-semilogy([0.1:0.1:2.0],Diff);
+semilogy([0.2:0.1:2.0],Diff);
 print("../tmp/plot.pdf");
 
 
