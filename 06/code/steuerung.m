@@ -7,7 +7,7 @@ C = i*(p*x-x*p);
 
 figure(1);
 fig = gcf;
-set(fig, 'visible', 'off');
+%  set(fig, 'visible', 'off');
 
 mesh(real(x),real(C));
 print('../tmp/mesh_c_over_x.pdf');
@@ -72,19 +72,37 @@ eigen_values
 % 6.2b
 
 N = [21:2:101];
-eigen_values = zeros(3,0);
-for n = N
-  ee = sort(eig(homo_osc(4, 20, n)));
-  eigen_values(:,end+1) = ee(1:3);
+eigen_values = zeros(3,length(N));
+for n = 1:length(N)
+  H = homo_osc(4.0, 20, N(n));
+  ee = eig(H);
+  ee = sort(ee);
+  eigen_values(:,n) = ee(1:3);
 end
 clf;
+format = ['*','+','.'];
+xlabel('N');
+ylabel('relative Abweichung')
 for i = [1:3]
-  eigen_values(i,:) = sort(eigen_values(i,:));
-  eigen_values(i,:) = abs(eigen_values(i,end) - abs(eigen_values(i,:)));
+  eigen_values(i,:) = abs(eigen_values(i,:)-mean(eigen_values(i,end-3:end)))/mean(eigen_values(i,end-3:end));
+%    eigen_values(i,:) = abs(eigen_values(i,end) - abs(eigen_values(i,:)));
 %    plot(N,abs(eigen_values(i,:)));
-  semilogy(N,abs(eigen_values(i,:)-mean(eigen_values(i,end-3:end)))/mean(eigen_values(i,end-3:end)));
+  semilogy(N,eigen_values(i,:),format(i));
   hold on;
 end
-print('../tmp/plot62b.pdf');
+legend('1. Eigenwert','2. Eigenwert','3. Eigenwert');
+
+%  EW = eigen_values';
+%
+%  clf;figure(2); % grafische Ausgabe
+%  semilogy(N(:),abs(EW(:,1)-mean(EW(end-3:end,1)))/mean(EW(end-3:end,1)),'k.');
+%  hold on;
+%  plot(N(:),abs(EW(:,2)-mean(EW(end-3:end,2)))...
+%      /mean(EW(end-3:end,2)),'bx')
+%  plot(N(:),abs(EW(:,3)-mean(EW(end-3:end,3)))...
+%      /mean(EW(end-3:end,3)),'r+')
+
+
+print('../tmp/plot62b.png');
 
 % kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
