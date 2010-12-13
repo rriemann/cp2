@@ -55,7 +55,7 @@ Das resultierende $C$, wie es mit Hilfe der Rückgabewerte des Aufrufs is Aufgab
 aus den zurückgegebenen Werten von $x$ und $p$ berechnet werden kann, lässt sich,
 wie in \lref{1c} gezeigt, plotten, woraus \fref{mesh_c} resultiert.
 
-\lstinputlisting[firstline=5,lastline=16,label=lst:1c,caption={steuerung.m}]{../code/steuerung.m}
+\lstinputlisting[firstline=5,lastline=16,firstnumber=5,label=lst:1c,caption={steuerung.m}]{../code/steuerung.m}
 
 \begin{figure}[htb]
   \centering
@@ -68,7 +68,47 @@ Wie man erkennen kann, schwanken die Einträge in $C$ in der Größenordnung von
 die Relation als näherungsweise erfüllt gelten kann.
 
 \section*{Aufgabe 1d)}
-Um zu überprüfen, ob die gegebene Relation erfüllt ist, wurden normierte Gaußfunktionen
-erstellt und mit diesen wurden die gesuchten Skalarprodukte berechnet. 
+Um zu überprüfen, ob die gegebene Relation $<a|C-1|b>=0$ erfüllt ist, wurden normierte Gaußfunktionen
+erstellt und mit diesen wurden die gesuchten Skalarprodukte berechnet. Der entsprechende Code
+ist in \lref{1d} dargestellt.
+
+\lstinputlisting[firstline=19,lastline=36,firstnumber=19,label=lst:1d,caption={steuerung.m}]{../code/steuerung.m}
+
+Der Wert von σ wurde frei gewählt.
+
+Um zu überprüfen, inwieweit diese Ergebnisse null ergeben, wurde erneut ein Mesh-Plot der resultierenden
+Matrix erstellt, was in \fref{diff} zu sehen ist.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/Diff-crop}
+  \caption{Mesh-Plot von $C-1$}
+  \label{fig:diff}
+\end{figure}
+
+Wie man erkennen kann, sind fast alle Einträge annähernd null, abgesehen von den vier Randpunkten.
+Doch auch diese sind immernoch in der Größenordnung von $0.1$ verschieden von null, sodass die zu 
+untersuchende Relation als erfüllt gelten kann.
 
 \section*{Aufgabe 1e)}
+Schließlich war ein Plot für den gegebenen Ausdruck mit variablem σ zu erstellen. Dieser ist in 
+\fref{plot1e} dargestellt.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/plot-crop}
+  \caption{Erwartungswert von $C-1$ mit $z=5$ in Abhängigkeit von σ}
+  \label{fig:plot1e}
+\end{figure}
+
+Der Code, der für die Erstellung verwendet wurde, ist in \lref{1e} dargestellt.
+\lstinputlisting[firstline=48,lastline=59,firstnumber=59,label=lst:1e,caption={steuerung.m}]{../code/steuerung.m}
+
+Wie man in \fref{plot1e} erkennen kann, ist für $σ=0.2$ der Erwartungswert von $C-1$ mit ungefähr $10^{-4}$
+relativ groß, während er für $σ=0.3$ schon annähernd in der Größenordnung der Mascheninengenauigkeit liegt.
+Eine Erklärung für den Wert bei $σ=0.2$ könnte sein, dass hier die sehr schmale Gaußfunktion durch eine ungünstige 
+Einteilung der $N_x$ Gitterpunkte schlecht ausgewertet wird. Wenn man beispielsweise den Wert für $N_x$ auf 201 
+setzt, so sinkt für diesen σ-Wert der Erwartungswert auf ca. $10^{-15}$ und liegt somit im selben Bereich wie für die 
+folgenden σ-Werte. Für $σ>0.9$ steigt der Erwartungswert schnell an, was wiederum eine Folge der Diskretisierung 
+durch das Gitter darstellt, wobei für große $N$ der Wert von $C$ gemäß Gl. (3) stark verschieden vom Einheitsoperator
+ist und somit für die große Abweichung verantwortlich ist.
