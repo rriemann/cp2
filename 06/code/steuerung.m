@@ -7,13 +7,13 @@ C = i*(p*x-x*p);
 
 figure(1);
 fig = gcf;
-set(fig, "visible", "off");
+set(fig, 'visible', 'off');
 
 mesh(real(x),real(C));
-print("../tmp/mesh_c_over_x.pdf");
+print('../tmp/mesh_c_over_x.pdf');
 mesh(real(C));
-zlabel("C");
-print("../tmp/mesh_c.pdf");
+zlabel('C');
+print('../tmp/mesh_c.pdf');
 
 
 %  6.1d
@@ -39,10 +39,10 @@ end
 
 mesh(Diff);
 axis([0,21,0,21,-2,1]);
-xlabel("z1");
-ylabel("z2");
-zlabel("<a|C|b> - <a|b>");
-print("../tmp/Diff.pdf");
+xlabel('z1');
+ylabel('z2');
+zlabel('<a|C|b> - <a|b>');
+print('../tmp/Diff.pdf');
 
 
 %  6.1e
@@ -56,39 +56,16 @@ for sigma=0.2:0.1:2;
 end
 
 semilogy([0.2:0.1:2.0],Diff);
-print("../tmp/plot.pdf");
+print('../tmp/plot.pdf');
 
 
 % 6.2a
 
 eigen_values = zeros(3,4);
 
-function [H] = homo_osc(alpha , L = 20, N = 151)
-  if ~mod(N,2)
-    error('N muss ungerade sein')
-  end
-  M=(N-1)/2;
-  a = L/N;
-  x=a*(-M:M);
-  p=(2*pi/L)*(-M:M);
-
-  %  kinetischer Teil des Hamilton:
-  A = H = zeros(N,N);
-  for i=[1:N]
-    A(i,:) = x(i) - x; % Matrix (x_i - x_j)
-  end
-
-  for i=[1:N]
-    H += p(i)^2*cos(p(i)*A); % kein i*sin wg. p<->-p Symm.
-  end
-  H = H*(0.5/N); % (-1/2) Laplace
-
-  %  Potential, Oszillator Teil des Hamilton:
-  H += 0.5*diag(abs(x).^alpha);
-end
-
 for alpha = [1:4]
-  eigen_values(:,alpha) = eig(homo_osc(alpha))(1:3);
+  ee = eig(homo_osc(alpha,20,151));
+  eigen_values(:,alpha) = ee(1:3);
 end
 eigen_values
 
@@ -97,15 +74,17 @@ eigen_values
 N = [21:2:101];
 eigen_values = zeros(3,0);
 for n = N
-  eigen_values(:,end+1) = eig(homo_osc(4, 20, n))(1:3);
+  ee = sort(eig(homo_osc(4, 20, n)));
+  eigen_values(:,end+1) = ee(1:3);
 end
 clf;
-hold on;
 for i = [1:3]
+  eigen_values(i,:) = sort(eigen_values(i,:));
   eigen_values(i,:) = abs(eigen_values(i,end) - abs(eigen_values(i,:)));
 %    plot(N,abs(eigen_values(i,:)));
   semilogy(N,abs(eigen_values(i,:)-mean(eigen_values(i,end-3:end)))/mean(eigen_values(i,end-3:end)));
+  hold on;
 end
-print("../tmp/plot62b.png");
+print('../tmp/plot62b.pdf');
 
 % kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
