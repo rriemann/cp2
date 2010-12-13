@@ -1,8 +1,8 @@
-%  aufgabe 6.1a)
+%  aufgabe 6.1b)
 [a,x,p] = ho_fou(10,11);
 
 
-%  6.2a)
+%  6.1c)
 C = i*(p*x-x*p);
 
 figure(1);
@@ -37,7 +37,7 @@ end
 
 %  mean(mean(Diff))
 
-mesh(Diff);
+mesh(real(Diff));
 axis([0,21,0,21,-2,1]);
 xlabel('z1');
 ylabel('z2');
