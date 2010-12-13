@@ -1,0 +1,53 @@
+\section*{Aufgabe 2a)}
+
+Der Bearbeitung der Aufgabe 2 liegt die Funktion \texttt{homo\_ocs.m} zu Grunde,
+welche den Hamilton-Operator mit Potential in Abhängigkeit von α in Matrix-Darstellung
+zurück gibt. Sie ist in \lref{2funk} abgedruck.
+
+\lstinputlisting[label=lst:2funk,caption={homo\_ocs.m}]{../code/homo_osc.m}
+
+Zunächst sollten für verschiedene α die drei niedrigsten Eigenwerte bestimmt werden.
+Der Quellcode ist hierfür in \lref{2a} zu finden.
+\lstinputlisting[firstline=64,lastline=70,label=lst:2a,caption={steuerung.m}]{../code/steuerung.m}
+
+\begin{lstlisting}[caption=Ausgabe von \lref{2a},label=2aa]
+eigen_values =
+    alpha=1   alpha=2   alpha=3   alpha=4
+    0.5087    0.5000    0.5115    0.5302
+    1.1691    1.5000    1.7253    1.8998
+    1.6239    2.5000    3.1851    3.7278
+\end{lstlisting}
+
+In der Ausgabe \lref{2aa} sind die Ergebnisse dargestellt. Die 3 niedrigsten Eigenwerte
+für ein α befinden sich jeweils in einer Spalte. Man kann sehr gut erkennen, dass man für
+$α = 2$ das analytische Ergebniss erhält. Ein Vergleich mit den Daten aus CP1 ist
+weiterhin nicht sinnvoll, da das Potential anders definiert war. Für den Spezialfall
+$α = 2$ deckt sich zufällig das damals definierte Potential mit dem in für diese
+Übung verwendeten. Das Ergebnis für die Eigenwerte lautete damals:
+\begin{equation*}
+0.500000,\;1.500000,\;2.499999
+\end{equation*}
+Beim Vergleich stellen wir als fest, dass die in dieser Übung verwendete Methode
+zur Bestimmung der Eigenwerte genauer ist. Damals wurde eine Differentialgleichung
+mit dem Runge-Kutta-Verfahren gelöst.
+
+
+
+\section*{Aufgabe 2b)}
+
+Der Quellcode für diese Teilaufgabe ist in \lref{2b} gegeben.
+\lstinputlisting[firstline=74,lastline=93,label=lst:2b,caption={steuerung.m}]{../code/steuerung.m}
+
+Um zu zeigen, dass der Fehler exponentiell abnimmt, wenn $N$ linear vergrößert
+wird, wurde die relative Abweichung vom Mittelwert der 4 Eigenwerte mit den jeweils
+größten $N$ geplottet. Das Ergebnis ist in \fref{62b} dargestellt. Man erkennt,
+dass der Fehler tatsächlich exponentiell abfällt (im Log-Plot linear) und bei
+ $N > 75$ schließlich konstant bleibt. Die untere Grenze für den relativen Fehler
+ergibt sich aus der endlichen Maschinengenauigkeit.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/plot62b.png}
+  \caption{Halblogarthmischer Plot zur Abhängigkeit des Fehlers von der Diskretisierung.}
+  \label{fig:62b}
+\end{figure}
