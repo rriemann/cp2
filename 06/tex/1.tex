@@ -47,9 +47,28 @@ Diese Formel wurde schließlich implementiert. Der Quellcode für die Funktion,
 die den $p$-Operator generiert, ist in \lref{fkt} dargestellt.
 \lstinputlisting[label=lst:fkt,caption={ho\_fou.m}]{../code/ho_fou.m}
 
-Funktionsaufruf...
-
+Diese Funktion wird wie in \lref{1a} aufgerufen:
+\lstinputlisting[lastline=2,label=lst:1a,caption={steuerung.m}]{../code/steuerung.m}
 
 \section*{Aufgabe 1c)}
+Das resultierende $C$, wie es mit Hilfe der Rückgabewerte des Aufrufs is Aufgabe 1b)
+aus den zurückgegebenen Werten von $x$ und $p$ berechnet werden kann, lässt sich,
+wie in \lref{1c} gezeigt, plotten, woraus \fref{mesh_c} resultiert.
+
+\lstinputlisting[firstline=5,lastline=16,label=lst:1c,caption={steuerung.m}]{../code/steuerung.m}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/mesh_c-crop}
+  \caption{Mesh-Plot von $C$}
+  \label{fig:mesh_c}
+\end{figure}
+
+Wie man erkennen kann, schwanken die Einträge in $C$ in der Größenordnung von 1, sodass
+die Relation als näherungsweise erfüllt gelten kann.
+
 \section*{Aufgabe 1d)}
+Um zu überprüfen, ob die gegebene Relation erfüllt ist, wurden normierte Gaußfunktionen
+erstellt und mit diesen wurden die gesuchten Skalarprodukte berechnet. 
+
 \section*{Aufgabe 1e)}
