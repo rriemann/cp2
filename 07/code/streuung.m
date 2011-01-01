@@ -1,7 +1,7 @@
 clear all; hold off; clf;
-L=20; N=101;
+L=30; N=201;
 
-[a,x,H] = ho_fou(L,N);
+[a,x,H] = ho_fou(L,N,1); 	% n = 1,2,10
 
 j = sqrt(-1);
 T0 = 2*pi;

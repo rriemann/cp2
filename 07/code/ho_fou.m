@@ -6,12 +6,11 @@
 %  Hamilton Operator fuer QM Harmonischen Oszillator
 %  mit Fourier Ableitung
 %  Aufruf [a,x,H] = ho_fou(L,N)
-%
-function [a,x,H] = ho_fou(L,N)
+
+function [a,x,H] = ho_fou(L,N,n)
 
 if ~mod(N,2), error('ho_fou.m: N muss ungerade sein');end
 M=(N-1)/2;
-%  Raum:
 a = L/N;               % Diskretisierungslaenge
 x=       a*(-M:M);     % x-Werte
 p=(2*pi/L)*(-M:M);     % Impulse
@@ -23,8 +22,12 @@ H = zeros(N,N);
 for i=1:N, H = H + p(i)^2*cos(p(i)*A); end      % kein i*sin wg. p<->-p Symm. 
 H = H*(0.5/N);                                  % (-1/2) Laplace
 
-%  Potential, Oszillator Teil des Hamilton:
-H=H+0.5*diag(x.^2);
-%
+%  Potential:
+V0 = 3; w = 1;
+dim = size(x,2)
+V = zeros(dim);
+V = V0*heaviside(w-abs(x)).*(1-(abs(x)/w).^n);
+H = H + diag(V);
+
 disp(' H.O. Hamilton mit Fourier-diskretisiertem Laplace Operator: ')
 fprintf(' Raumintervall [%g , %g] mit %i Punkten \n',[-L/2 L/2 N]);
