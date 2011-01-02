@@ -31,7 +31,7 @@ for n = [10 2 1]
   legend('\delta_{-}','\delta_{+}','Wahrscheinlichkeit');
   print(['../tmp/71a_n', int2str(n), '.pdf']);
 
-  hold off;
+%    hold off;
 
   if (n == 1)
     % Aufgabe 7.1 b)
@@ -52,7 +52,7 @@ for n = [10 2 1]
     plot(k, delta_neg_born, 'k--','linewidth',3);
     plot(k, delta_pos_born, 'g--','linewidth',3);
     xlabel('k'); ylabel('\delta');
-    legend('\delta_{-}','\delta_{+}','\delta_{-} Born','\delta_{+} Born');
+    legend('\delta_{-}','\delta_{+}','\delta_{-} exakt','\delta_{+} exakt','\delta_{-} Born','\delta_{+} Born');
     print('../tmp/71c.pdf');
 
     hold off;
