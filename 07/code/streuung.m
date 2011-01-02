@@ -44,15 +44,15 @@ for n = [10 2 1]
   hold off;
 end
 
-disp('PAUSE'); pause;
-hold off;clf;
-
-% Zeitentwicklung des x-Mittelwertes
-for i=1:100
-  xmean(i) = real((psi'.*x)*psi); % psi-kreuz x psi; sowieso reell
-  tplot(i)=t;
-  psi=U*psi; t=t+T;
-end
-
-plot(tplot/T0,xmean); hold; plot(tplot/T0,xmean,'x')
-xlabel('t/T0'); ylabel('<x>');
+%  disp('PAUSE'); pause;
+%  hold off;clf;
+%  
+%  % Zeitentwicklung des x-Mittelwertes
+%  for i=1:100
+%    xmean(i) = real((psi'.*x)*psi); % psi-kreuz x psi; sowieso reell
+%    tplot(i)=t;
+%    psi=U*psi; t=t+T;
+%  end
+%  
+%  plot(tplot/T0,xmean); hold; plot(tplot/T0,xmean,'x')
+%  xlabel('t/T0'); ylabel('<x>');
