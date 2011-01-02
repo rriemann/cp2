@@ -55,6 +55,18 @@ for n = [10 2 1]
     plot(k, phase_step_neg, 'b');
     plot(k, delta_pos_born, 'g--');
     plot(k, delta_neg_born, 'g--');
+    
+    hold off;
+    k_step = sqrt(k.^2 - V0);
+    delta_pos = -0.5*angle(exp(-j*k_pos*L));
+    delta_neg = -0.5*angle(exp(-j*k_neg*L));
+    phase_step_pos = -0.5*angle(exp(-2*j*k*w).*(k+j*k_step.*tan(k_step*w))./(k-j*k_step.*tan(k_step*w)) );
+    phase_step_neg = -0.5*angle(-exp(-2*j*k*w).*(k-j*k_step.*cot(k_step*w))./(k+j*k_step.*cot(k_step*w)) );
+    
+    plot(k_neg, delta_neg, 'rx'); hold on;
+    plot(k_pos, delta_pos, 'b+');
+    plot(k, phase_step_pos, 'r');
+    plot(k, phase_step_neg, 'b');
   end
   
   hold off;
