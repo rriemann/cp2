@@ -45,14 +45,14 @@ for n = [10 2 1]
   if (n == 1)  
     k = 0.001:0.01:max([max(k_pos), max(k_neg), m]);
     k_step = sqrt(k.^2 - 2*V0);
-    step_pos = -0.5*angle(exp(2*j*k*w).*(k+j*k_step.*tan(k_step*w))./(k-j*k_step.*tan(k_step*w)) );
-    step_neg = -0.5*angle(exp(-2*j*k*w).*(k-j*k_step.*cot(k_step*w))./(k+j*k_step.*cot(k_step*w)) );
+    phase_step_pos = -0.5*angle(exp(-2*j*k*w).*(k+j*k_step.*tan(k_step*w))./(k-j*k_step.*tan(k_step*w)) );
+    phase_step_neg = -0.5*angle(-exp(-2*j*k*w).*(k-j*k_step.*cot(k_step*w))./(k+j*k_step.*cot(k_step*w)) );
     
     delta_neg_born = -0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (-1+cos(2*k*w)-2*k.^2*w^2) ));
     delta_pos_born = -0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (1-cos(2*k*w)-2*k.^2*w^2) ));
     
-    plot(k, step_pos, 'r');
-    plot(k, step_neg, 'b');
+    plot(k, phase_step_pos, 'r');
+    plot(k, phase_step_neg, 'b');
     plot(k, delta_pos_born, 'g--');
     plot(k, delta_neg_born, 'g--');
   end
