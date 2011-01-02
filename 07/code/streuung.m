@@ -10,13 +10,24 @@ for n = [10 2 1]
   [a,x,H] = ho_fou(L,N,n);
 
   U = expm(-j*T*H);
+  [eig_vec, eig_val] = eig(H);
+  eig_val = diag(eig_val);
+  
+  k_pos = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) < 10^-10));	% ka, wo das genau herkommt. aus absprache mit anderen entstanden
+  k_neg = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) > 10^-10));	% man sieht halt, dass das was mit der symmetrie zu tun hat. symmetrisch -> kleine differenz mit gespiegeltem vektor, etc
+  
+  delta_pos = -0.5*angle(exp(-j*k_pos*L));
+  delta_neg = -0.5*angle(exp(-j*k_neg*L));
+  
+  plot(k_neg, delta_neg, 'rx'); hold on;
+  plot(k_pos, delta_pos, 'b+');
 
   psi = exp(-(x-x_z).^2/(2*sigma^2)).';
   psi = psi/norm(psi);
   gauss=psi;
   p = psi.*conj(psi);	% Wahrscheinlichkeit
 
-  hold off;
+%    hold off;
   plot(x,p,'-');
   hold on;
 
@@ -25,10 +36,12 @@ for n = [10 2 1]
     psi = U*psi; t=t+T;
     p = psi.*conj(psi);
     plot(x,p,'-');
-    pause(1);
+%      pause(1);
   end
 
   xlabel('x'); ylabel('p');
+%    pause;
+  hold off;
 end
 
 disp('PAUSE'); pause;
