@@ -27,16 +27,6 @@ for n = [10 2 1]
   plot(k_neg, delta_neg, 'rx','markersize',3); hold on;
   plot(k_pos, delta_pos, 'b+','markersize',3);
 
-  psi = exp(-(x-x_z).^2/(2*sigma^2)).';
-  psi = psi/norm(psi);
-  p = psi.*conj(psi); % Wahrscheinlichkeit
-
-  plot(x,p,'-');
-
-  psi = U*psi;
-  p = psi.*conj(psi);
-  plot(x,p,'-','linewidth',3);
-
   xlabel('k'); ylabel('\delta');
   legend('\delta_{-}','\delta_{+}','Wahrscheinlichkeit');
   print(['../tmp/71a_n', int2str(n), '.pdf']);
