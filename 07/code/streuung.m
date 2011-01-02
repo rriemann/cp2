@@ -1,4 +1,9 @@
+#!/usr/bin/env octave
+% kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
 clear all; clf;
+figure(1); fig = gcf; set(fig, 'visible', 'off');
+
+% Aufgabe 7.1 a)
 L=30; N=201; V0 = 3; w = 1; m = 0;
 j = sqrt(-1);
 T0 = 2*pi;
@@ -12,62 +17,69 @@ for n = [10 2 1]
   U = expm(-j*T*H);
   [eig_vec, eig_val] = eig(H);
   eig_val = diag(eig_val);
-  
-  k_pos = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) < 10^-10));	% ka, wo das genau herkommt. aus absprache mit anderen entstanden
-  k_neg = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) > 10^-10));	% man sieht halt, dass das was mit der symmetrie zu tun hat. symmetrisch -> kleine differenz mit gespiegeltem vektor, etc
-  
+
+  k_pos = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) < 10^-10)); % ka, wo das genau herkommt. aus absprache mit anderen entstanden
+  k_neg = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) > 10^-10)); % man sieht halt, dass das was mit der symmetrie zu tun hat. symmetrisch -> kleine differenz mit gespiegeltem vektor, etc
+
   delta_pos = -0.5*angle(exp(-j*k_pos*L));
   delta_neg = -0.5*angle(exp(-j*k_neg*L));
-  
-  plot(k_neg, delta_neg, 'rx'); hold on;
-  plot(k_pos, delta_pos, 'b+');
+
+  plot(k_neg, delta_neg, 'rx','markersize',3); hold on;
+  plot(k_pos, delta_pos, 'b+','markersize',3);
 
   psi = exp(-(x-x_z).^2/(2*sigma^2)).';
   psi = psi/norm(psi);
-  gauss=psi;
-  p = psi.*conj(psi);	% Wahrscheinlichkeit
+  p = psi.*conj(psi); % Wahrscheinlichkeit
 
-%    hold off;
   plot(x,p,'-');
-  hold on;
 
-  t=0;
-  for i=1:5
-    psi = U*psi; t=t+T;
-    p = psi.*conj(psi);
-    plot(x,p,'-');
-%      pause(1);
-  end
+  psi = U*psi;
+  p = psi.*conj(psi);
+  plot(x,p,'-','linewidth',3);
 
-  xlabel('x'); ylabel('p');
-%    pause;
-  
-  if (n == 1)  
+  xlabel('k'); ylabel('\delta');
+  legend('\delta_{-}','\delta_{+}','Wahrscheinlichkeit');
+  print(['../tmp/71a_n', int2str(n), '.pdf']);
+
+  hold off;
+
+  if (n == 1)
+    % Aufgabe 7.1 b)
     k = 0.001:0.01:max([max(k_pos), max(k_neg), m]);
     k_step = sqrt(k.^2 - 2*V0);
     phase_step_pos = -0.5*angle(exp(-2*j*k*w).*(k+j*k_step.*tan(k_step*w))./(k-j*k_step.*tan(k_step*w)) );
     phase_step_neg = -0.5*angle(-exp(-2*j*k*w).*(k-j*k_step.*cot(k_step*w))./(k+j*k_step.*cot(k_step*w)) );
-    
+
     delta_neg_born = -0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (-1+cos(2*k*w)-2*k.^2*w^2) ));
     delta_pos_born = -0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (1-cos(2*k*w)-2*k.^2*w^2) ));
-    
-    plot(k, phase_step_pos, 'r');
-    plot(k, phase_step_neg, 'b');
-    plot(k, delta_pos_born, 'g--');
-    plot(k, delta_neg_born, 'g--');
-    
+
+    % Aufgabe 7.1 c)
+
+    % TODO unser delta_neg_born ist stephens delta_neg_pos und umgekehrt
+    % unsere graphen treffens sich nicht. Ich denke die ersten 2 plots sind falsch.
+    plot(k, phase_step_neg, 'b--','linewidth',3); hold on;
+    plot(k, phase_step_pos, 'r--','linewidth',3);
+    plot(k, delta_neg_born, 'k--','linewidth',3);
+    plot(k, delta_pos_born, 'g--','linewidth',3);
+    xlabel('k'); ylabel('\delta');
+    legend('\delta_{-}','\delta_{+}','\delta_{-} Born','\delta_{+} Born');
+    print('../tmp/71c.pdf');
+
     hold off;
+
+    % Aufgabe 7.1 d)
     k_step = sqrt(k.^2 - V0);
     delta_pos = -0.5*angle(exp(-j*k_pos*L));
     delta_neg = -0.5*angle(exp(-j*k_neg*L));
     phase_step_pos = -0.5*angle(exp(-2*j*k*w).*(k+j*k_step.*tan(k_step*w))./(k-j*k_step.*tan(k_step*w)) );
     phase_step_neg = -0.5*angle(-exp(-2*j*k*w).*(k-j*k_step.*cot(k_step*w))./(k+j*k_step.*cot(k_step*w)) );
-    
-    plot(k_neg, delta_neg, 'rx'); hold on;
-    plot(k_pos, delta_pos, 'b+');
-    plot(k, phase_step_pos, 'r');
-    plot(k, phase_step_neg, 'b');
+
+    plot(k_neg, delta_neg, 'rx','markersize',3); hold on;
+    plot(k_pos, delta_pos, 'b+','markersize',3);
+    plot(k, phase_step_neg, 'k--','linewidth',3);
+    plot(k, phase_step_pos, 'g--','linewidth',3);
+    xlabel('k'); ylabel('\delta');
+    legend('\delta_{-}','\delta_{+}','\delta_{-} exakte Stufe','\delta_{+} exakte Stufe');
+    print('../tmp/71d.pdf');
   end
-  
-  hold off;
 end
