@@ -24,8 +24,6 @@ H = H*(0.5/N);                                  % (-1/2) Laplace
 
 %  Potential:
 V0 = 3; w = 1;
-dim = size(x,2)
-V = zeros(dim);
 V = V0*heaviside(w-abs(x)).*(1-(abs(x)/w).^n);
 H = H + diag(V);
 
