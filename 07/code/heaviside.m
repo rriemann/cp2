@@ -28,12 +28,12 @@
 
 function h = heaviside (x)
 
-  if (nargin ~= 1)
-    print_usage ();
-  endif
+%    if (nargin ~= 1)
+%      print_usage ();
+%    endif
 
   h = zeros (size (x));
   h(x > 0) = 1.0;
   h(x == 0) = 0.5;
 
-endfunction
+end%function
