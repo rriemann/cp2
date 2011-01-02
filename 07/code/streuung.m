@@ -1,5 +1,5 @@
 clear all; clf;
-L=30; N=201;
+L=30; N=201; V0 = 3; w = 1; m = 0;
 j = sqrt(-1);
 T0 = 2*pi;
 T = T0/10;
@@ -41,18 +41,14 @@ for n = [10 2 1]
 
   xlabel('x'); ylabel('p');
 %    pause;
+  
+  if (n == 1)
+    k = 0.001:0.01:max([max(k_pos), max(k_neg), m]);
+    delta_neg_born = -0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (-1+cos(2*k*w)-2*k.^2*w^2) ));
+    delta_pos_born = -0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (1-cos(2*k*w)-2*k.^2*w^2) ));
+    plot(k, delta_pos_born, 'g--');
+    plot(k, delta_neg_born, 'g--');
+  end
+  
   hold off;
 end
-
-%  disp('PAUSE'); pause;
-%  hold off;clf;
-%  
-%  % Zeitentwicklung des x-Mittelwertes
-%  for i=1:100
-%    xmean(i) = real((psi'.*x)*psi); % psi-kreuz x psi; sowieso reell
-%    tplot(i)=t;
-%    psi=U*psi; t=t+T;
-%  end
-%  
-%  plot(tplot/T0,xmean); hold; plot(tplot/T0,xmean,'x')
-%  xlabel('t/T0'); ylabel('<x>');
