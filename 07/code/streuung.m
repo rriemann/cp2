@@ -61,10 +61,10 @@ for n = [10 2 1]
 
     % Aufgabe 7.1 d)
     k_step = sqrt(k.^2 - V0);
-    delta_pos = -0.5*angle(exp(-j*k_pos*L));
-    delta_neg = -0.5*angle(exp(-j*k_neg*L));
-    phase_step_pos = -0.5*angle(exp(-2*j*k*w).*(k+j*k_step.*tan(k_step*w))./(k-j*k_step.*tan(k_step*w)) );
-    phase_step_neg = -0.5*angle(-exp(-2*j*k*w).*(k-j*k_step.*cot(k_step*w))./(k+j*k_step.*cot(k_step*w)) );
+    delta_pos = 0.5*angle(exp(-j*k_pos*L));
+    delta_neg = 0.5*angle(exp(-j*k_neg*L));
+    phase_step_pos = 0.5*angle(exp(-2*j*k*w).*(k+j*k_step.*tan(k_step*w))./(k-j*k_step.*tan(k_step*w)) );
+    phase_step_neg = 0.5*angle(-exp(-2*j*k*w).*(k-j*k_step.*cot(k_step*w))./(k+j*k_step.*cot(k_step*w)) );
 
     plot(k_neg, delta_neg, 'rx','markersize',3); hold on;
     plot(k_pos, delta_pos, 'b+','markersize',3);
