@@ -8,14 +8,11 @@ L=30; N=201; V0 = 3; w = 1; m = 0;
 j = sqrt(-1);
 T0 = 2*pi;
 T = T0/10;
-x_z=3;
-sigma=1/sqrt(3);
 
 for n = [10 2 1]
   hold off;
   [a,x,H] = ho_fou(L,N,n);
 
-  U = expm(-j*T*H);
   [eig_vec, eig_val] = eig(H);
   eig_val = diag(eig_val);
 
