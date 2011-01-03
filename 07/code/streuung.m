@@ -19,8 +19,8 @@ for n = [10 2 1]
   [eig_vec, eig_val] = eig(H);
   eig_val = diag(eig_val);
 
-  k_pos = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) < 10^-10)); % ka, wo das genau herkommt. aus absprache mit anderen entstanden
-  k_neg = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) > 10^-10)); % man sieht halt, dass das was mit der symmetrie zu tun hat. symmetrisch -> kleine differenz mit gespiegeltem vektor, etc
+  k_pos = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) < 10^-10));
+  k_neg = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) > 10^-10));
 
   delta_pos = -0.5*angle(exp(-j*k_pos*L));
   delta_neg = -0.5*angle(exp(-j*k_neg*L));
@@ -48,8 +48,6 @@ for n = [10 2 1]
 
     % Aufgabe 7.1 c)
 
-    % TODO unser delta_neg_born ist stephens delta_neg_pos und umgekehrt
-    % unsere graphen treffens sich nicht. Ich denke die ersten 2 plots sind falsch.
     hold off;
     plot(k_neg, delta_neg, 'rx','markersize',3); hold on;
     plot(k_pos, delta_pos, 'b+','markersize',3);
