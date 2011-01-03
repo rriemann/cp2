@@ -1,4 +1,16 @@
 \section*{Aufgabe 7.1a)}
+In der ersten Teilaufgabe sollte für das Potential
+\begin{eqnarray}
+V(x) = V_0 \Theta(ω-|x|)\left[ 1-\frac{|x|^n}{ω} \right]
+\end{eqnarray}
+die Streuphasen $δ_{\pm}$ berechnet und geplottet werden. Der dafür geschriebene
+Code ist in \lref{streuung} dargestellt, die darin aufgerufene Funktion \texttt{ho\_fou}
+ist in \lref{ho_fou} zu sehen.
+
+\lstinputlisting[label=lst:streuung,caption={streuung.m}]{../code/streuung.m}
+\lstinputlisting[label=lst:ho_fou,caption={ho\_fou.m}]{../code/ho_fou.m}
+
+\section*{Aufgabe 7.1b)}
 \begin{eqnarray}
 δ_+ &=& -\frac{2}{k}\int\limits_0^ω\dd{x}V(x)\cos^2(kx)\\
 &=& -\frac{2 V_0}{k}\int\limits_0^ω\dd{x}(1-\frac{x}{ω})\cos^2(kx)\\
@@ -7,6 +19,6 @@
 &=& \frac{V_0}{4k^3 ω} \left(1 - \cos(2kω) - 2k^2 ω^2\right)
 \end{eqnarray}
 
-\section*{Aufgabe 7.1b)}
 \section*{Aufgabe 7.1c)}
+
 \section*{Aufgabe 7.1d)}
