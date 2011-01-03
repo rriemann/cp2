@@ -10,7 +10,41 @@ ist in \lref{ho_fou} zu sehen.
 \lstinputlisting[label=lst:streuung,caption={streuung.m}]{../code/streuung.m}
 \lstinputlisting[label=lst:ho_fou,caption={ho\_fou.m}]{../code/ho_fou.m}
 
+Es resultieren hierbei Plots für die drei zu verwendenden Werte von $n$, die wie
+folgt dargestellt sind:
+\begin{itemize}
+\item für $n=1$ für \fref{n1}
+\item für $n=2$ für \fref{n2}
+\item für $n=10$ für \fref{n10}.
+\end{itemize}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/71a_n1}
+  \caption{Streuphasen für $n=1$, }
+  \label{fig:n1}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/71a_n2}
+  \caption{Streuphasen für $n=2$, }
+  \label{fig:n2}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/71a_n10}
+  \caption{Streuphasen für $n=10$, }
+  \label{fig:n10}
+\end{figure}
+
+Wie man erkennen kann, stimmen für größer werdende $n$, also für immer rechteckigere
+Potentiale, die exakten Lösungen und die numerische Lösung besser überein.
+
 \section*{Aufgabe 7.1b)}
+In diesem Teil der Aufgabe wird die Born'sche Näherung untersucht. Die Formel, an
+der sich orientiert wurde, stammt aus dem Skript.
 \begin{eqnarray}
 δ_+ &=& -\frac{2}{k}\int\limits_0^ω\dd{x}V(x)\cos^2(kx)\\
 &=& -\frac{2 V_0}{k}\int\limits_0^ω\dd{x}(1-\frac{x}{ω})\cos^2(kx)\\
@@ -18,6 +52,9 @@ ist in \lref{ho_fou} zu sehen.
 δ_- &=& -\frac{2}{k}\int\limits_0^ω\dd{x}V(x)\sin^2(kx)\\
 &=& \frac{V_0}{4k^3 ω} \left(1 - \cos(2kω) - 2k^2 ω^2\right)
 \end{eqnarray}
+Die Integration wurde mit Hilfe des analytisch rechnenden Open-Source-Programms
+\texttt{Maxima} durchgeführt. Die erhaltenen Lösungen wurden in der nächsten
+Teilaufgabe implementiert.
 
 \section*{Aufgabe 7.1c)}
 
