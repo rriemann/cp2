@@ -50,10 +50,13 @@ for n = [10 2 1]
 
     % TODO unser delta_neg_born ist stephens delta_neg_pos und umgekehrt
     % unsere graphen treffens sich nicht. Ich denke die ersten 2 plots sind falsch.
+    hold off;
+    plot(k_neg, delta_neg, 'rx','markersize',3); hold on;
+    plot(k_pos, delta_pos, 'b+','markersize',3);
     plot(k, delta_neg_born, 'k--','linewidth',3);
     plot(k, delta_pos_born, 'g--','linewidth',3);
     xlabel('k'); ylabel('\delta');
-    legend('\delta_{-}','\delta_{+}','\delta_{-} exakt','\delta_{+} exakt','\delta_{-} Born','\delta_{+} Born');
+    legend('\delta_{-}','\delta_{+}','\delta_{-,Born}','\delta_{+,Born}');
     print('../tmp/71c.pdf');
 
     hold off;
@@ -70,7 +73,7 @@ for n = [10 2 1]
     plot(k, phase_step_neg, 'k--','linewidth',3);
     plot(k, phase_step_pos, 'g--','linewidth',3);
     xlabel('k'); ylabel('\delta');
-    legend('\delta_{-}','\delta_{+}','\delta_{-} exakte Stufe','\delta_{+} exakte Stufe');
+    legend('\delta_{-}','\delta_{+}','\delta_{-,exakt}','\delta_{+,exakt}');
     print('../tmp/71d.pdf');
   end
 end

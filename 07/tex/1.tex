@@ -54,8 +54,24 @@ der sich orientiert wurde, stammt aus dem Skript.
 \end{eqnarray}
 Die Integration wurde mit Hilfe des analytisch rechnenden Open-Source-Programms
 \texttt{Maxima} durchgeführt. Die erhaltenen Lösungen wurden in der nächsten
-Teilaufgabe implementiert.
+Aufgabe implementiert.
 
 \section*{Aufgabe 7.1c)}
+Der entsprechende Code für die Implementierung ist im Wesentlichen in \lref{streuung}
+in den Zeilen \textcolor{red}{51 bis 57} zu finden. Daraus resultiert der Plot in \fref{1c}.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/71c}
+  \caption{Vergleich der exakten Lösungen der Streuphasen mit den nummerisch
+  berechneten für $n=1$}
+  \label{fig:1c}
+\end{figure}
+
+Wie man erkennen kann, stimmen die Born'sche Näherung und die in a) berechnete
+nummerische Lösung für etwa $5<k<20$ gut überein, während für kleinere $k$ die
+Born'sche Näherung für gerade Paritäten noch annähernd wie die nummerische Lösung
+verläuft, aber für ungerade Paritäten ein unphysikalisches Verhalten aufweist (starkes
+Schwanken bei geringer $k$-Änderung).
 
 \section*{Aufgabe 7.1d)}
