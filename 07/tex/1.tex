@@ -20,27 +20,32 @@ folgt dargestellt sind:
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/71a_n1-crop}
-  \caption{Streuphasen für $n=1$, }
+  \includegraphics[width=0.75\columnwidth,keepaspectratio]{../tmp/71a_n1-crop}
+  \caption{Streuphasen für $n=1$ für exaktes Stufenpotential und nummerische Lösung}
   \label{fig:n1}
 \end{figure}
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/71a_n2-crop}
-  \caption{Streuphasen für $n=2$, }
+  \includegraphics[width=0.75\columnwidth,keepaspectratio]{../tmp/71a_n2-crop}
+  \caption{Streuphasen für $n=2$ für exaktes Stufenpotential und nummerische Lösung}
   \label{fig:n2}
 \end{figure}
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/71a_n10-crop}
-  \caption{Streuphasen für $n=10$, }
+  \includegraphics[width=0.75\columnwidth,keepaspectratio]{../tmp/71a_n10-crop}
+  \caption{Streuphasen für $n=10$ für exaktes Stufenpotential und nummerische Lösung}
   \label{fig:n10}
 \end{figure}
 
 Wie man erkennen kann, stimmen für größer werdende $n$, also für immer rechteckigere
-Potentiale, die exakten Lösungen und die numerische Lösung besser überein.
+Potentiale, die exakten Lösungen und die nummerische Lösung besser überein, da
+das Potential für die nummerische Lösung sich dem der exakten Lösung immer weiter angleicht.
+
+Für $k>20$ wird die Abweichung der Lösungen unabhängig von $n$ wieder größer, wobei
+davon ausgegangen wird, dass dies dadurch bewirkt wird, dass die verwendete
+Näherung für große Wellenzahlen nicht mehr gültig ist.
 
 \section*{Aufgabe 7.1b)}
 In diesem Teil der Aufgabe wird die Born'sche Näherung untersucht. Die Formel, an
@@ -58,11 +63,11 @@ Aufgabe implementiert.
 
 \section*{Aufgabe 7.1c)}
 Der entsprechende Code für die Implementierung ist im Wesentlichen in \lref{streuung}
-in den Zeilen \textcolor{red}{51 bis 57} zu finden. Daraus resultiert der Plot in \fref{1c}.
+in den Zeilen 54 bis 61 zu finden. Daraus resultiert der Plot in \fref{1c}.
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/71c-crop}
+  \includegraphics[width=0.75\columnwidth,keepaspectratio]{../tmp/71c-crop}
   \caption{Vergleich der exakten Lösungen der Streuphasen mit den nummerisch
   berechneten für $n=1$}
   \label{fig:1c}
@@ -70,9 +75,10 @@ in den Zeilen \textcolor{red}{51 bis 57} zu finden. Daraus resultiert der Plot i
 
 Wie man erkennen kann, stimmen die Born'sche Näherung und die in a) berechnete
 nummerische Lösung für etwa $5<k<20$ gut überein, während für kleinere $k$ die
-Born'sche Näherung für gerade Paritäten noch annähernd wie die nummerische Lösung
-verläuft, aber für ungerade Paritäten ein unphysikalisches Verhalten aufweist (starkes
-Schwanken bei geringer $k$-Änderung).
+Born'sche Näherung für ungerade Paritäten noch annähernd wie die nummerische Lösung
+verläuft, aber für gerade Paritäten ein unphysikalisches Verhalten aufweist (starkes
+Schwanken bei geringer $k$-Änderung), was durch eine Betrachtung der Reihenentwicklung
+des Kosinus' erklärt werden kann.
 
 \section*{Aufgabe 7.1d)}
 In der letzten Teilaufgabe sollte die numerische Lösung für das Dreieckspotential
@@ -84,9 +90,11 @@ dargestellte Plot.
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/71d-crop}
+  \includegraphics[width=0.75\columnwidth,keepaspectratio]{../tmp/71d-crop}
   \caption{Vergleich der nummerischen Lösungen der Streuphasen für $n=1$ mit denen für eine
   exakte Potentialstufe}
   \label{fig:1d}
 \end{figure}
-Integral 
+
+Auch hier verlaufen die beiden betrachteten Kurven ähnlich, und für $5<k<20$ verlaufen
+die Kurven sogar annähernd gleich.
