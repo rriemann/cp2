@@ -43,8 +43,8 @@ for n = [10 2 1]
   if (n == 1)
     % Aufgabe 7.1 b)
 
-    delta_neg_born = 0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (-1+cos(2*k*w)-2*k.^2*w^2) ));
-    delta_pos_born = 0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (1-cos(2*k*w)-2*k.^2*w^2) ));
+    delta_pos_born = 0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (-1+cos(2*k*w)-2*k.^2*w^2) ));
+    delta_neg_born = 0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (1-cos(2*k*w)-2*k.^2*w^2) ));
 
     % Aufgabe 7.1 c)
 
