@@ -37,7 +37,7 @@ for n = [10 2 1]
   plot(k, phase_exakt_neg, 'b--','linewidth',3);
 
   xlabel('k'); ylabel('\delta');
-  legend('\delta_{-}','\delta_{+}','\delta_{+, exakt}','\delta_{-, exakt}');
+  legend('\delta_{-}','\delta_{+}','\delta_{+, exakte Stufe}','\delta_{-, exakte Stufe}');
   print(['../tmp/71a_n', int2str(n), '.pdf']);
 
   if (n == 1)
@@ -73,7 +73,7 @@ for n = [10 2 1]
     plot(k, phase_step_neg, 'k--','linewidth',3);
     plot(k, phase_step_pos, 'g--','linewidth',3);
     xlabel('k'); ylabel('\delta');
-    legend('\delta_{-}','\delta_{+}','\delta_{-,exakt}','\delta_{+,exakt}');
+    legend('\delta_{-}','\delta_{+}','\delta_{-,exakte Stufe}','\delta_{+,exakte Stufe}');
     print('../tmp/71d.pdf');
   end
 end
