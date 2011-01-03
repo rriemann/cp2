@@ -16,17 +16,22 @@ for n = [10 2 1]
   [eig_vec, eig_val] = eig(H);
   eig_val = diag(eig_val);
 
+  % symmetrische Loesung -> Differenz gegenueberliegender Vektoren ist klein,
+  % antisymmetrische Loesung -> grosse Differenz
   k_pos = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) < 10^-10));
   k_neg = sqrt(2*eig_val(mean(abs(eig_vec(:,:) - eig_vec(end:-1:1,:))) > 10^-10));
 
+  % Phase nach Formel aus Skript
   delta_pos = 0.5*angle(exp(-j*k_pos*L));
   delta_neg = 0.5*angle(exp(-j*k_neg*L));
 
   plot(k_neg, delta_neg, 'rx','markersize',3); hold on;
   plot(k_pos, delta_pos, 'b+','markersize',3);
 
+  % maximale Wellenzahl und Wellenzahl (Impuls) fuer Stufe
   k = 0.001:0.01:max([max(k_pos), max(k_neg), m]);
   k_step = sqrt(k.^2 - 2*V0);
+  % exakte Stufe nach Gl. (5.18-19) im Skript
   phase_exakt_pos = 0.5*angle(exp(-2*j*k*w).*(k+j*k_step.*tan(k_step*w))./(k-j*k_step.*tan(k_step*w)) );
   phase_exakt_neg = 0.5*angle(-exp(-2*j*k*w).*(k-j*k_step.*cot(k_step*w))./(k+j*k_step.*cot(k_step*w)) );
 
@@ -40,6 +45,7 @@ for n = [10 2 1]
   if (n == 1)
     % Aufgabe 7.1 b)
 
+    % Born'sche Naeherung, siehe Herleitung
     delta_pos_born = 0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (-1+cos(2*k*w)-2*k.^2*w^2) ));
     delta_neg_born = 0.5*angle(exp(2*j*V0./(4*k.^3*w) .* (1-cos(2*k*w)-2*k.^2*w^2) ));
 
@@ -57,6 +63,7 @@ for n = [10 2 1]
     hold off;
 
     % Aufgabe 7.1 d)
+    % Potentialhoehe halbiert -> neues Potential
     k_step = sqrt(k.^2 - V0);
     delta_pos = 0.5*angle(exp(-j*k_pos*L));
     delta_neg = 0.5*angle(exp(-j*k_neg*L));
