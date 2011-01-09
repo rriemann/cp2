@@ -31,3 +31,13 @@ flipud(feld.')
 disp('Ergebnis, Hoshen-Kopelman:');
 [feld] = hoshen_kopelman(feld); 
 flipud(feld.')
+
+%  bondperkolation - alle nachbarn immer verbunden, aber nur
+%  einige der verbindungen sind aktiv
+
+%  wenn nur horiz. aktive verbindung: wert = -2, nur vertikale verbindung: -1; passiv: 0
+%  dann immer fallunterscheidung zwischen diesen faellen
+%  die matrix hat demnach auch nur (Lx-1)x(Ly-1) als dimension
+%  von jedem punkt aus werden nur die rechten bzw. unteren nachbarn ueberprueft
+%  hab mal versucht, den code in baum_analyse ab zeile 58 so aufzubauen; der aufruf
+%  in dieser datei hier fehlt noch; und in der anderen datei wird noch einiges falsch sein ;)
