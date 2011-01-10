@@ -33,14 +33,10 @@ axis off;
 
 %  pause
 
-disp('Ergebnis, Baumsuche:');
-[feld] = baum_analyse(feld);
-feld
-
-%
 %  disp('Ergebnis, Baumsuche:');
-%  [feld] = baum_analyse(feld);
-%  flipud(feld.')
-%  disp('Ergebnis, Hoshen-Kopelman:');
-%  [feld] = hoshen_kopelman(feld);
-%  flipud(feld.')
+%  [baum_feld] = baum_analyse(feld);
+%  baum_feld
+
+disp('Ergebnis, Hoshen-Kopelman:');
+[hs_feld] = hoshen_kopelman(feld);
+hs_feld

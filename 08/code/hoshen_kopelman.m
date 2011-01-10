@@ -1,45 +1,62 @@
-function [bond_feld] = hoshen_kopelman(bond_feld)
+function [cluster_feld] = hoshen_kopelman(bond_feld)
 % Clusteranalyse a la Hoshen Kopelman 
-[Lx,Ly]=size(bond_feld);
+[Lx,Ly] = size(bond_feld);
+cluster_feld = bond_feld;
 
-label=zeros(Lx*Ly+1,1); % Arbeitsliste
-LEER=Lx*Ly+1;           % groesser als der maximale Clusterindex
-label(LEER)=LEER;       % auf sich selbst zeigend
-neu=1;
+label = zeros(Lx*Ly+1,1); % Arbeitsliste
+LEER = Lx*Ly+1;           % groesser als der maximale Clusterindex
+label(LEER) = LEER;       % auf sich selbst zeigend
+neu = 1;
 
-for y=1:Ly
-for x=1:Lx
-    if bond_feld(x,y) == -1 
-        bond_feld(x,y)=LEER; % leerer Punkt, umbenannt
-    else                 % besetzter Punkt::
-        links=LEER;
-        if x > 1, links=bond_feld(x-1,y); end
-        unten=LEER;
-        if y > 1, unten=bond_feld(x,y-1);
-            while label(unten) < unten, unten=label(unten);end
+for x = Lx:-1:1
+  for y = Ly:-1:1
+    if bond_feld(x,y) == 0 % keine Verbindung nach unten/rechts
+      cluster_feld(x,y) = LEER;
+    else % es gibt Verbindungen
+      rechts = LEER+1;
+      if bond_feld(x,y) < -1
+        rechts = LEER;
+        rechts = cluster_feld(x,y+1);
+      end
+      unten = LEER+1;
+      if rem(bond_feld(x,y),2) == -1
+        unten = LEER;
+        unten = cluster_feld(x+1,y);
+        while label(unten) < unten
+          unten = label(unten);
         end
-        if links==LEER && unten==LEER % neuen Index vergeben
-            bond_feld(x,y)=neu;
-            label(neu)=neu;          % auf sich selbst zeigend
-            neu=neu+1;
-        elseif links < unten
-            bond_feld(x,y)=links;
-            if unten < LEER, label(unten)=links; end % Cluster verbinden
-        else   % unten <= links
-            bond_feld(x,y)=unten;
-            if links < LEER, label(links)=unten; end % Cluster verbinden
+      end
+      if rechts >= LEER && unten >= LEER % neuen Index vergeben
+        cluster_feld(x,y) = neu;
+        if unten == LEER
+          cluster_feld(x+1,y) = neu;
         end
+        if rechts == LEER
+          cluster_feld(x,y+1) = neu;
+        end
+        label(neu) = neu; % auf sich selbst zeigend
+        neu += 1;
+      else
+        v = sort([unten rechts]);
+        cluster_feld(x,y) = v(1);
+        if v(2) < LEER
+          label(v(2)) = v(1);
+        end
+      end
     end
-end % loop x
-end % loop y
-% vorlaeufige Nummerierung fertig
-
-% alle auf gute label setzen, Leerstellen wieder -1 ::
-for y=1:Ly
-for x=1:Lx
-    n=bond_feld(x,y);
-    while label(n) < n, n=label(n);end % gutes label finden
-    bond_feld(x,y)=n;
-    if n == LEER, bond_feld(x,y)=-1;end % Leerstellen -> -1
+  end
 end
+
+%  alle auf gute label setzen, Leerstellen wieder -1 ::
+for y=1:Ly
+  for x=1:Lx
+    n = cluster_feld(x,y);
+    while label(n) < n  % gutes label finden
+      n = label(n);
+    end
+    if n == LEER
+      n = 0; % Leerstellen sind 0
+    end
+    cluster_feld(x,y) = n;
+  end
 end
