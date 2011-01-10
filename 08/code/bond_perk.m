@@ -8,7 +8,7 @@ disp('Bondbesetzung:');
 %  nach oben und rechts: wert = -3, wenn nur rechts: wert = -2, nur unten: -1; passiv: 0
 function feld = feld_generator(L,p)
   feld_rechts = (rand(L,L-1) < p); % 1 = verbindung nach rechts
-  feld_unten = (rand(L-1,L) < p); % 1 = verbindung nach links
+  feld_unten = (rand(L-1,L) < p); % 1 = verbindung nach unten
   feld = zeros(L,L);
   for i=1:L-1
     feld(:,i) -= 2*feld_rechts(:,i);
@@ -46,7 +46,7 @@ hs_feld
 
 
 % Zeitenmessung
-feld = feld_generator(300,0.5);
-tic; baum_analyse(feld); toc;
-tic; hoshen_kopelman(feld); toc;
+feld = feld_generator(1000,0.5);
+tic; baum_analyse(feld); toc;    % Elapsed time is 171 seconds.
+tic; hoshen_kopelman(feld); toc; % Elapsed time is 117 seconds.
 
