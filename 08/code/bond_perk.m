@@ -13,9 +13,7 @@ for i=1:L-1
   feld(:,i) -= 2*feld_rechts(:,i);
   feld(i,:) -= feld_oben(i,:);
 end
-flipud(feld.')  % druck-plot gegen (x,y)
-% Bedeutung feld-Werte: -1=leer, 0=besetzt, andere:
-% Cluster Indizes
+flipud(feld)  % druck-plot gegen (x,y), (0,0) unten links.
 
 % Plot
 figure();axis([0 L+1 0 L+1]);hold on;
@@ -24,11 +22,11 @@ for y=1:L
   plot(1:L,y,'*r');
 end
 % Linien
-for x=1:L-1, for y=1:L
-    if rem(feld(x,y),2) == -1 % verbindung nach oben
+for x=1:L, for y=1:L
+    if rem(feld(y,x),2) == -1 % verbindung nach oben
       plot([x x],[y y+1],'-b');
     end
-    if feld(x,y) < -1 % verbindung nach rechts
+    if feld(y,x) < -1 % verbindung nach rechts
       plot([x x+1],[y y],'-b');
     end
 end,end
