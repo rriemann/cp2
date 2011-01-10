@@ -50,7 +50,7 @@ hs_feld
 %  % Zeitenmessung
 %  feld = feld_generator(1000,0.5);
 %  tic; baum_analyse(feld); toc;    % Elapsed time is 171 seconds.
-%  tic; hoshen_kopelman(feld); toc; % Elapsed time is 117 seconds.
+%  tic; hoshen_kopelman(feld); toc; % Elapsed time is 124 seconds.
 
 
 % Aufgabe 8.2
