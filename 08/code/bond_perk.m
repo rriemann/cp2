@@ -6,8 +6,8 @@ rand('state',0); % Standard initialisierung der Zufallszahlen
 
 disp('Bondbesetzung:');
 %  nach oben und rechts: wert = -3, wenn nur rechts: wert = -2, nur oben: -1; passiv: 0
-feld_rechts = (rand(L,L-1) > p); % 1 = verbindung nach rechts
-feld_oben = (rand(L-1,L) > p); % 1 = verbindung nach links
+feld_rechts = (rand(L,L-1) < p); % 1 = verbindung nach rechts
+feld_oben = (rand(L-1,L) < p); % 1 = verbindung nach links
 feld = zeros(L,L);
 for i=1:L-1
   feld(:,i) -= 2*feld_rechts(:,i);
