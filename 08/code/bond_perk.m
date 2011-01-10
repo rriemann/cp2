@@ -55,7 +55,8 @@ hs_feld
 
 % Aufgabe 8.2
 function [m] = max_cluster(L,p)
-  feld = feld_generator(L,p)
+  feld = feld_generator(L,p);
+  feld = hoshen_kopelman(feld);
   feld = sort(reshape(feld,numel(feld),1));
   L = size(feld);
   cluster = feld(1);
@@ -100,3 +101,4 @@ xlabel('Wahrscheinlichkeit p');
 ylabel('P_L');
 h=legend('L=20','L=40','L=80','L=160','L=320');
 set(h,'Location','SouthEast');
+print('../tmp/zweitens.png');
