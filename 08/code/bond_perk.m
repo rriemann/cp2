@@ -17,12 +17,9 @@ flipud(feld)  % druck-plot gegen (x,y), (0,0) unten links.
 
 % Plot
 figure();axis([0 L+1 0 L+1]);hold on;
-% besetzt/leer:
-for y=1:L
-  plot(1:L,y,'*r');
-end
-% Linien
+% Plot von Punkten und Linien
 for x=1:L, for y=1:L
+    plot(x,y,'*r');
     if rem(feld(y,x),2) == -1 % verbindung nach oben
       plot([x x],[y y+1],'-b');
     end
