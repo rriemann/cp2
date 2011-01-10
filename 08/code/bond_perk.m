@@ -91,11 +91,11 @@ end
 toc
 
 figure(2)
-plot(p,Wert(:,1),'*r',p,Wert(:,2),'+b',p,Wert(:,3),'xg');
+plot(p,Wert(:,1),'*r',p,Wert(:,2),'+b',p,Wert(:,3),'x');
 title('Darstellung der Dichte in Abhängigkeit von L und p');
 xlim([0.4 0.6]);
 xlabel('Wahrscheinlichkeit p');
 ylabel('P_L');
-h=legend('L=20','L=40','L=80');
-set(h,'Location','SouthEast');
+legend('L=20','L=40','L=80');
+%  set(h,'Location','SouthEast');
 print('../tmp/zweitens.png');
