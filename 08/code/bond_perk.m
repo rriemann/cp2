@@ -33,6 +33,11 @@ end,end
 axis off;
 
 pause
+
+disp('Ergebnis, Baumsuche:');
+[feld] = baum_analyse(feld);
+flipud(feld.')
+
 %
 %  disp('Ergebnis, Baumsuche:');
 %  [feld] = baum_analyse(feld);
