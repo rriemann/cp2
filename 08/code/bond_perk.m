@@ -34,8 +34,8 @@ axis off;
 %  pause
 
 disp('Ergebnis, Baumsuche:');
-  [feld] = baum_analyse(feld);
-  feld
+[feld] = baum_analyse(feld);
+feld
 
 %
 %  disp('Ergebnis, Baumsuche:');
