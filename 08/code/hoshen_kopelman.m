@@ -13,27 +13,19 @@ for x = Lx:-1:1
     if bond_feld(x,y) == 0 % keine Verbindung nach unten/rechts
       cluster_feld(x,y) = LEER;
     else % es gibt Verbindungen
-      rechts = LEER+1;
+      rechts = LEER;
       if bond_feld(x,y) < -1
-        rechts = LEER;
         rechts = cluster_feld(x,y+1);
       end
-      unten = LEER+1;
+      unten = LEER;
       if rem(bond_feld(x,y),2) == -1
-        unten = LEER;
         unten = cluster_feld(x+1,y);
         while label(unten) < unten
           unten = label(unten);
         end
       end
-      if rechts >= LEER && unten >= LEER % neuen Index vergeben
+      if rechts == LEER && unten == LEER % neuen Index vergeben
         cluster_feld(x,y) = neu;
-        if unten == LEER
-          cluster_feld(x+1,y) = neu;
-        end
-        if rechts == LEER
-          cluster_feld(x,y+1) = neu;
-        end
         label(neu) = neu; % auf sich selbst zeigend
         neu += 1;
       else
