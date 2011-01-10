@@ -47,10 +47,10 @@ disp('Ergebnis, Hoshen-Kopelman:');
 hs_feld
 
 
-% Zeitenmessung
-feld = feld_generator(1000,0.5);
-tic; baum_analyse(feld); toc;    % Elapsed time is 171 seconds.
-tic; hoshen_kopelman(feld); toc; % Elapsed time is 117 seconds.
+%  % Zeitenmessung
+%  feld = feld_generator(1000,0.5);
+%  tic; baum_analyse(feld); toc;    % Elapsed time is 171 seconds.
+%  tic; hoshen_kopelman(feld); toc; % Elapsed time is 117 seconds.
 
 
 % Aufgabe 8.2
@@ -73,3 +73,30 @@ function [m] = max_cluster(L,p)
   end
   m = max(n); % Finde maximalen Cluster
 end
+
+
+M=100;
+p=(0.4:0.002:0.6);
+tic
+for i=1:3
+  L=10*(2^i);
+  for j=1:size(p,2)
+    for k=1:M
+      nL(k)=max_cluster(L,p(j));
+    end
+    disp(size(nL))
+    Wert(j,i)=mean(nL)/(L^2);
+    j
+  end
+end
+toc
+
+figure(2)
+plot(p,Wert(:,1),'*r',p,Wert(:,2),'+b',p,Wert(:,3),'xg',p,Wert(:,4),'
+k',p,Wert(:,5),'om');
+title('Darstellung der Dichte in Abhängigkeit von L und p');
+xlim([0.4 0.6]);
+xlabel('Wahrscheinlichkeit p');
+ylabel('P_L');
+h=legend('L=20','L=40','L=80','L=160','L=320');
+set(h,'Location','SouthEast');
