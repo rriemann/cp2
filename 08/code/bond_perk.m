@@ -5,35 +5,37 @@ p=0.4;  % Besetzungswahrscheinlichkeit
 rand('state',0); % Standard initialisierung der Zufallszahlen
 
 disp('Bondbesetzung:');
-%  nach oben und rechts: wert = -3, wenn nur rechts: wert = -2, nur oben: -1; passiv: 0
+%  nach oben und rechts: wert = -3, wenn nur rechts: wert = -2, nur unten: -1; passiv: 0
 feld_rechts = (rand(L,L-1) < p); % 1 = verbindung nach rechts
-feld_oben = (rand(L-1,L) < p); % 1 = verbindung nach links
+feld_unten = (rand(L-1,L) < p); % 1 = verbindung nach links
 feld = zeros(L,L);
 for i=1:L-1
   feld(:,i) -= 2*feld_rechts(:,i);
-  feld(i,:) -= feld_oben(i,:);
+  feld(i,:) -= feld_unten(i,:);
 end
-flipud(feld)  % druck-plot gegen (x,y), (0,0) unten links.
+feld
 
 % Plot
 figure();axis([0 L+1 0 L+1]);hold on;
 % Plot von Punkten und Linien
+%  feld_flip = flipud(feld);
 for x=1:L, for y=1:L
     plot(x,y,'*r');
-    if rem(feld(y,x),2) == -1 % verbindung nach oben
-      plot([x x],[y y+1],'-b');
+    if rem(feld(x,y),2) == -1 % verbindung nach unten
+      plot([y y],[L+1-x L-x],'-b');
     end
-    if feld(y,x) < -1 % verbindung nach rechts
-      plot([x x+1],[y y],'-b');
+    if feld(x,y) < -1 % verbindung nach rechts
+      plot([y y+1],[L+1-x L+1-x],'-b');
     end
 end,end
+%  plot([1 1],[L+1-1 L+1-1-1],'-b');
 axis off;
 
-pause
+%  pause
 
 disp('Ergebnis, Baumsuche:');
-[feld] = baum_analyse(feld);
-flipud(feld.')
+  [feld] = baum_analyse(feld);
+  feld
 
 %
 %  disp('Ergebnis, Baumsuche:');
