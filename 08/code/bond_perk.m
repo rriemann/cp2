@@ -76,8 +76,8 @@ function [m] = max_cluster(L,p)
 end
 
 
-M=100;
-p=(0.4:0.002:0.6);
+M=1;
+p=(0.4:0.1:0.6);
 tic
 for i=1:3
   L=10*(2^i);
@@ -85,20 +85,17 @@ for i=1:3
     for k=1:M
       nL(k)=max_cluster(L,p(j));
     end
-    disp(size(nL))
     Wert(j,i)=mean(nL)/(L^2);
-    j
   end
 end
 toc
 
 figure(2)
-plot(p,Wert(:,1),'*r',p,Wert(:,2),'+b',p,Wert(:,3),'xg',p,Wert(:,4),'
-k',p,Wert(:,5),'om');
+plot(p,Wert(:,1),'*r',p,Wert(:,2),'+b',p,Wert(:,3),'xg');
 title('Darstellung der Dichte in Abhängigkeit von L und p');
 xlim([0.4 0.6]);
 xlabel('Wahrscheinlichkeit p');
 ylabel('P_L');
-h=legend('L=20','L=40','L=80','L=160','L=320');
+h=legend('L=20','L=40','L=80');
 set(h,'Location','SouthEast');
 print('../tmp/zweitens.png');
