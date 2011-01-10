@@ -50,3 +50,25 @@ feld = feld_generator(1000,0.5);
 tic; baum_analyse(feld); toc;    % Elapsed time is 171 seconds.
 tic; hoshen_kopelman(feld); toc; % Elapsed time is 117 seconds.
 
+
+% Aufgabe 8.2
+function [C] = clustersort(feld)
+  feld = sort(reshape(feld,numel(feld),1));
+  L = size(feld);
+  cluster = feld(1);
+  n = zeros(round(L(1)/2),1);
+  j = 1;
+  n(j) = 1;
+  for i = 2:L
+      if cluster == feld(i);
+          % Addiere Feld zu Clustergroesse
+          n(j) = n(j)+1;
+      else
+          % neuer Cluster
+          cluster = feld(i);
+          j = j+1;
+          n(j) = 1;
+      end
+  end
+  C = max(n); % Finde maximalen Cluster
+end
