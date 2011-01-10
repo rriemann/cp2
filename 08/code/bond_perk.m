@@ -54,7 +54,8 @@ tic; hoshen_kopelman(feld); toc; % Elapsed time is 117 seconds.
 
 
 % Aufgabe 8.2
-function [C] = clustersort(feld)
+function [m] = max_cluster(L,p)
+  feld = feld_generator(L,p)
   feld = sort(reshape(feld,numel(feld),1));
   L = size(feld);
   cluster = feld(1);
@@ -62,15 +63,13 @@ function [C] = clustersort(feld)
   j = 1;
   n(j) = 1;
   for i = 2:L
-      if cluster == feld(i);
-          % Addiere Feld zu Clustergroesse
-          n(j) = n(j)+1;
-      else
-          % neuer Cluster
-          cluster = feld(i);
-          j = j+1;
-          n(j) = 1;
-      end
+    if cluster == feld(i);
+      n(j) += 1;
+    else
+      cluster = feld(i);
+      j += 1;
+      n(j) = 1;
+    end
   end
-  C = max(n); % Finde maximalen Cluster
+  m = max(n); % Finde maximalen Cluster
 end
