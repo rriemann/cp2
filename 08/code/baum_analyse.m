@@ -1,12 +1,12 @@
-function [bond_feld] = baum_analyse(bond_feld)
+function [bond_feldr] = baum_analyse(bond_feld)
 % kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
 % Clusteranalyse mit Baumsuche
-%  feldr=feld;
+bond_feldr=bond_feld;
 [Lx,Ly]=size(bond_feld);
 
 %  liste=zeros(Lx*Ly,2); % Arbeitsliste fuer Clustersuche
 %  cluster=0;
-%  
+%
 %  for ya=1:Ly
 %  for xa=1:Lx
 %     if feldr(xa,ya)==0
@@ -62,9 +62,9 @@ cluster=0;
 
 for ya=1:Ly
 for xa=1:Lx
-   if bond_feld(xa,ya) <= 0
+   if bond_feldr(xa,ya) <= 0
        cluster=cluster+1; % neuer Index vergeben
-%         bond_feld(xa,ya) = cluster;
+       bond_feldr(xa,ya) = cluster;
        bond_liste(1,:)=[xa ya];
        n=1; % letzter benutzter Listenplatz
        i=0;
@@ -74,8 +74,8 @@ for xa=1:Lx
            % rechten Nachbarn pruefen
            if x < Lx,
 %  	      bond_feld(x,y)
-               if ((bond_feld(x,y) == -2 || bond_feld(x,y) == -3) && bond_feld(x+1,y) <= 0)
-                   bond_feld(x+1,y)=cluster;
+               if ((bond_feld(x,y) == -2 || bond_feld(x,y) == -3) && bond_feldr(x+1,y) <= 0)
+                   bond_feldr(x+1,y)=cluster;
                    n=n+1;
                    bond_liste(n,:)=[x+1 y];
                end
@@ -83,15 +83,15 @@ for xa=1:Lx
            % linken Nachbarn pruefen
             if x > 1
                 if (bond_feld(x-1,y) == -2 || bond_feld(x-1,y) == -3)
-                    bond_feld(x-1,y)=cluster;
+                    bond_feldr(x-1,y)=cluster;
                     n=n+1;
                     bond_liste(n,:)=[x-1 y];
                 end
             end
            % oberen Nachbarn pruefen
            if y < Ly
-               if ((bond_feld(x,y) == -1 || bond_feld(x,y) == -3) && bond_feld(x,y+1) <= 0)
-                   bond_feld(x,y+1)=cluster;
+               if ((bond_feld(x,y) == -1 || bond_feld(x,y) == -3) && bond_feldr(x,y+1) <= 0)
+                   bond_feldr(x,y+1)=cluster;
                    n=n+1;
                    bond_liste(n,:)=[x y+1];
                end
@@ -99,14 +99,15 @@ for xa=1:Lx
             % unteren Nachbarn pruefen
             if y > 1
                 if (bond_feld(x,y-1) == -1 || bond_feld(x,y-1) == -3)
-                    bond_feld(x,y-1)=cluster;
+                    bond_feldr(x,y-1)=cluster;
                     n=n+1;
                     bond_liste(n,:)=[x y-1];
                 end
             end
+%         bond_feld(xa,ya) = cluster;
        end % while loop: Cluster komplett
 %       fprintf('\n Cluster % i aus %i  Punkten \n',cluster,n)
-       bond_feld(xa,ya) = cluster;
+%         bond_feld(xa,ya) = cluster;
    end
 end
 end
