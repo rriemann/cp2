@@ -1,4 +1,5 @@
 function [bond_feld] = baum_analyse(bond_feld)
+% kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
 % Clusteranalyse mit Baumsuche
 %  feldr=feld;
 [Lx,Ly]=size(bond_feld);
@@ -80,13 +81,13 @@ for xa=1:Lx
                end
            end
            % linken Nachbarn pruefen
-           if x > 1
-               if ((bond_feld(x-1,y) == -2 || bond_feld(x-1,y) == -3) && bond_feld(x,y) <= 0)
-                   bond_feld(x-1,y)=cluster;
-                   n=n+1;
-                   bond_liste(n,:)=[x-1 y];
-               end
-           end
+            if x > 1
+                if (bond_feld(x-1,y) == -2 || bond_feld(x-1,y) == -3)
+                    bond_feld(x-1,y)=cluster;
+                    n=n+1;
+                    bond_liste(n,:)=[x-1 y];
+                end
+            end
            % oberen Nachbarn pruefen
            if y < Ly
                if ((bond_feld(x,y) == -1 || bond_feld(x,y) == -3) && bond_feld(x,y+1) <= 0)
@@ -95,14 +96,14 @@ for xa=1:Lx
                    bond_liste(n,:)=[x y+1];
                end
            end
-           % unteren Nachbarn pruefen
-           if y > 1
-               if ((bond_feld(x,y-1) == -1 || bond_feld(x,y-1) == -3) && bond_feld(x,y) <= 0)
-                   bond_feld(x,y-1)=cluster;
-                   n=n+1;
-                   bond_liste(n,:)=[x y-1];
-               end
-           end
+            % unteren Nachbarn pruefen
+            if y > 1
+                if (bond_feld(x,y-1) == -1 || bond_feld(x,y-1) == -3)
+                    bond_feld(x,y-1)=cluster;
+                    n=n+1;
+                    bond_liste(n,:)=[x y-1];
+                end
+            end
        end % while loop: Cluster komplett
 %       fprintf('\n Cluster % i aus %i  Punkten \n',cluster,n)
        bond_feld(xa,ya) = cluster;
