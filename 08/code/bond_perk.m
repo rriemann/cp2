@@ -34,6 +34,8 @@ end
 %  plot([1 1],[L+1-1 L+1-1-1],'-b');
 axis off;
 
+print('../tmp/bonds.png');
+
 %  pause
 
 disp('Ergebnis, Baumsuche:');
