@@ -14,11 +14,15 @@ for x = Lx:-1:1
       cluster_feld(x,y) = LEER;
     else % es gibt Verbindungen
       rechts = LEER;
+      r = false;
       if bond_feld(x,y) < -1
+        r = true;
         rechts = cluster_feld(x,y+1);
       end
       unten = LEER;
+      u = false;
       if rem(bond_feld(x,y),2) == -1
+        u = true;
         unten = cluster_feld(x+1,y);
         while label(unten) < unten
           unten = label(unten);
@@ -26,6 +30,12 @@ for x = Lx:-1:1
       end
       if rechts == LEER && unten == LEER % neuen Index vergeben
         cluster_feld(x,y) = neu;
+        if u
+          cluster_feld(x+1,y) = neu;
+        end
+        if r
+          cluster_feld(x,y+1) = neu;
+        end
         label(neu) = neu; % auf sich selbst zeigend
         neu += 1;
       else
@@ -39,7 +49,7 @@ for x = Lx:-1:1
   end
 end
 
-%  alle auf gute label setzen, Leerstellen wieder -1 ::
+% alle auf gute label setzen
 for y=1:Ly
   for x=1:Lx
     n = cluster_feld(x,y);
