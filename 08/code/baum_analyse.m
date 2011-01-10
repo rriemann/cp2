@@ -61,7 +61,7 @@ cluster=0;
 
 for ya=1:Ly
 for xa=1:Lx
-   if bond_feld(xa,ya) ~= 0
+   if bond_feld(xa,ya) <= 0
        cluster=cluster+1; % neuer Index vergeben
        bond_feld(xa,ya) = cluster;
        bond_liste(1,:)=[xa ya];
