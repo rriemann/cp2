@@ -1,0 +1,34 @@
+\section*{Aufgabe 8.1)}
+In der ersten Teilaufgabe war eine Bondperkolation zu implementieren. Dafür wurde
+ein Feld eingeführt, dass jedem Punkt des Gitters eine Zahl zuweist, deren Bedeutung
+wie folgt festgelegt wurde:
+\begin{itemize}
+\item $0$: passive Verbindungen zu diesem Punkt
+\item $-1$: eine einzige aktive Verbindung zu diesem Punkt, zum darunter liegenden Punkt
+\item $-2$: eine einzige aktive Verbindung zu diesem Punkt, zum rechts daneben liegenden Punkt
+\item $-3$: zwei Verbindungen, eine zum darunter und eine zum rechts daneben liegenden Punkt
+\end{itemize}
+
+Der Code, der für diese Aufgabe geschrieben wurde, ist in \lref{bond_perk} dargestellt.
+
+\lstinputlisting[label=lst:bond_perk,caption={bond\_perk.m}]{../code/bond_perk.m}
+
+Die hierin aufgerufenen Funktionen \texttt{baum\_analyse.m} und \texttt{kopelman} sind in \lref{baumana} bzw. \lref{kopelman} dargestellt.
+
+\lstinputlisting[label=lst:baumana,caption={baum\_analyse.m}]{../code/baum_analyse.m}
+\lstinputlisting[label=lst:kopelman,caption={hoshen\_kopelman.m}]{../code/hoshen_kopelman.m}
+
+Aus dem Aufruf des Hauptprogramms resultiert zum einen eine Darstellung des Gitters
+inklusive aktiver Bonds (s. \fref{bonds}) und zum anderen eine Ausgabe der von den
+Cluster-Algorithmen rekonstruierten Bonds, wie sie in \lref{output} dargestellt ist.
+
+% \begin{figure}[htb]
+%   \centering
+%   \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/plot62b.png}
+%   \caption{Halblogarthmischer Plot zur Abhängigkeit des Fehlers von der Diskretisierung.}
+%   \label{fig:62b}
+% \end{figure}
+
+\begin{lstlisting}[caption=Ausgabe von \lref{bond_perk},label=lst:output]
+bla
+\end{lstlisting}
