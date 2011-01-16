@@ -1,9 +1,6 @@
 /*    file punkt_perk.c
       main zu Punktperkolation */
 
-// #define  Lp 10          /* Gittergroesse: Lp x Lp */
-#define  pc 0.5927	// kritischer Wert fuer p
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -11,46 +8,35 @@
 #include "cluster_analyse.h"
 
 void print_field(int** feld, int L);
+typedef int **field;
+field malloc_field(int L);
 
 int main(void){
 
     int x;
 
-    int **feld, **feld1; /* Status der Gitterpunkte:
+    field feld1, feld; /* Status der Gitterpunkte:
 			    feld = -1 : unbesetzt
 			    =  0 : besetzt
 			    >  0 : Clusternummer
 			    */
     int *fp;
 
-    double p  = pc;   /* Aktivierungswahrscheinlichkeit */
+    double p  = 0.5927; /* Aktivierungswahrscheinlichkeit */
 
-    int  seed = 137;   /* Seed fuer R250 */
+    int seed = 137; /* Seed fuer R250 */
     int L;
     int i;
 
 
     for (i = 0; i < 100; i++){
-      for (L = 40; L <= 100; L += 20){	// stride gross -> hier egal, arbeiten nicht mit vektoren
-	initR250(seed);    /* Initialisierung von R250 */
+        for (L = 40; L <= 100; L += 20){ // stride gross -> hier egal, arbeiten nicht mit vektoren
+            initR250(seed);    /* Initialisierung von R250 */
 
 	/* Allokation der Felder */
-	feld=malloc(L*sizeof(int*));
-	feld[0]=malloc(L*L*sizeof(int));
-	if (feld[0]==NULL ) {
-	    fprintf(stderr,"Not enough memory for feld\n");
-	    exit(1);
-	}
-	for (x=1;x<L;x++) feld[x]=feld[0]+L*x; 
+	feld=malloc_field(L);
 
-	feld1=malloc(L*sizeof(int*));
-	feld1[0]=malloc(L*L*sizeof(int));
-	if (feld1[0]==NULL ) {
-	    fprintf(stderr,"Not enough memory for feld1\n");
-	    exit(1);
-	}
-
-	for (x=1;x<L;x++) feld1[x]=feld1[0]+L*x; 
+	feld1=malloc_field(L);
 
 	/* Belegung des Feldes mit Zufallseintraegen*/
 	fp =feld[0];
@@ -83,6 +69,19 @@ int main(void){
 
     return 0;
 }     /* main */
+
+field malloc_field(int L)
+{
+    field feld;
+    feld=malloc(L*sizeof(int*));
+    feld[0]=malloc(L*L*sizeof(int));
+    if (feld[0]==NULL ) {
+        fprintf(stderr,"Not enough memory for allocating field\n");
+        exit(1);
+    }
+    for (int x = 1; x<L;x++)
+        feld[x]=feld[0]+L*x;
+}
 
 /*Ausgabe des Feldes auf dem Bildschirm */
 void print_field(int **feld, int L)
