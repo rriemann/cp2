@@ -61,6 +61,10 @@ int main(void){
             // 	printf("\n Ergebnis Hoshen Kopelmann:");
             // 	print_field(feld1,L);
 
+            int *cs;
+            cs = cluster_sizes(feld1,L);
+            free(cs);
+
             double S;				// hier kommt die S-berechnung rein.
         }
     }
