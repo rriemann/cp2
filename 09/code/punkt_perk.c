@@ -108,14 +108,15 @@ int perkolation(field feld, int L){
     int j, k, clusternummer;
     for (j = 0; j < L; j++) {
 	for (k = 0; k < L; k++) {
-	    if ( feld[j][0] == feld[k][L-1] ) {
+	    if ( feld[j][0] == feld[k][L-1] && feld[j][0] != -1 ) {
 	        clusternummer = feld[j][0];
 	    }
-	    if ( feld[0][j] == feld[L-1][k] ) {
+	    if ( feld[0][j] == feld[L-1][k]  && feld[0][j] != -1 ) {
 	        clusternummer = feld[0][j];
 	    }
 	}
     }
+//     printf("cluster %d\n", clusternummer);
     return clusternummer;
 }
 
