@@ -7,13 +7,11 @@
 #include "R250.h"
 #include "cluster_analyse.h"
 
-void print_field(int** feld, int L);
 typedef int **field;
+void print_field(field feld, int L);
 field malloc_field(int L);
 
 int main(void){
-
-    int x;
 
     field feld1, feld; /* Status der Gitterpunkte:
 			    feld = -1 : unbesetzt
@@ -40,7 +38,7 @@ int main(void){
 
 	/* Belegung des Feldes mit Zufallseintraegen*/
 	fp =feld[0];
-	for (x = 0; x < L*L; x++){
+	for (int x = 0; x < L*L; x++){
 	    if (R250() < p) *fp = 0; 
 	    else            *fp = -1;
 	    fp++;
@@ -81,10 +79,11 @@ field malloc_field(int L)
     }
     for (int x = 1; x<L;x++)
         feld[x]=feld[0]+L*x;
+    return feld;
 }
 
 /*Ausgabe des Feldes auf dem Bildschirm */
-void print_field(int **feld, int L)
+void print_field(field feld, int L)
 {
     int x,y;
     for (y = L-1; y >= 0; y--){
