@@ -10,6 +10,7 @@
 typedef int **field;
 void print_field(field feld, int L);
 field malloc_field(int L);
+int* ns(field feld, int L);
 
 int main(void){
 
@@ -32,16 +33,14 @@ int main(void){
             initR250(seed);    /* Initialisierung von R250 */
 
 	/* Allokation der Felder */
-	feld=malloc_field(L);
-
-	feld1=malloc_field(L);
+    feld=malloc_field(L);
+    feld1=malloc_field(L);
 
 	/* Belegung des Feldes mit Zufallseintraegen*/
 	fp =feld[0];
 	for (int x = 0; x < L*L; x++){
 	    if (R250() < p) *fp = 0; 
 	    else            *fp = -1;
-	    fp++;
 	}
 	memcpy(feld1[0],feld[0],L*L*sizeof(int)); /* Kopie fuer Vergleich der Algorithmen */
 
@@ -92,6 +91,9 @@ void print_field(field feld, int L)
 	    printf("%4i",feld[y][x]);     /* Clusterzerlegung ausdrucken */
     }
     printf("\n");
+}
+
+int* ns(field feld, int L) {
 }
 
 
