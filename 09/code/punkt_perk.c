@@ -21,6 +21,7 @@ int main(void){
 			    =  0 : besetzt
 			    >  0 : Clusternummer
 			    */
+    FILE *datafile = fopen("../tmp/data.dat", "w");
     int *fp;
 
     double p  = 0.5927; /* Aktivierungswahrscheinlichkeit */
@@ -33,7 +34,7 @@ int main(void){
     for (i = 0; i < 100; i++){
         for (L = 40; L <= 100; L += 20){ // stride gross -> hier egal, arbeiten nicht mit vektoren
             initR250(seed*i);    /* Initialisierung von R250 */
-            double norm = 1/(L*L);
+//             double norm = 1/(L*L);
             /* Allokation der Felder */
             feld=malloc_field(L);
 
@@ -68,11 +69,12 @@ int main(void){
 	    
 	    if ( perk_cluster != -1) {
 		double P_inf = P(feld, L, perk_cluster);
-		printf("P_inf = %f", P_inf);
+		printf("P_inf = %f\n", P_inf);
 	    }
 
         }
     }
+    fclose(datafile);
 
     return 0;
 }     /* main */
