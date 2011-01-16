@@ -62,6 +62,17 @@ int main(void){
             // 	print_field(feld1,L);
 
             double S;				// hier kommt die S-berechnung rein.
+            
+            
+//             perkolierender cluster?
+	    int j, k;
+	    for (j = 0; j < L; j++) {
+		for (k = 0; k < L; k++) {
+		    if (*(feld[j]) == *(feld[(L-1)*L + k]) or *(feld[j*L]) == *(feld[j*L + L-1]) ) {
+		        printf("perkolation!");
+		    }
+		}
+	    }
         }
     }
 
