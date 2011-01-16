@@ -10,7 +10,7 @@
 typedef int **field;
 void print_field(field feld, int L);
 field malloc_field(int L);
-int* ns(field feld, int L);
+int* cluster_sizes(field feld, int L);
 
 int main(void){
 
@@ -94,8 +94,29 @@ void print_field(field feld, int L)
     printf("\n");
 }
 
-int* ns(field feld, int L) {
+int dsc_sorter(const void *i1, const void *i2) {
+    return *(int *)i2 - *(int *)i1; /* absteigend sortiert */
 }
 
-
-// #undef  Lp
+int* cluster_sizes(field feld, int L) {
+    int *n;
+    n = malloc(L*L*sizeof(int));
+    for (int i = 0; i < L*L; ++i) {
+        n[i] = 0;
+    }
+    qsort(feld[0],L*L, sizeof(field), dsc_sorter);
+    int current_cluster = feld[0][0];
+    int j = 1;
+    n[j] = 1;
+    for (int i = 2; i < L*L; ++i) {
+        if (feld[0][i] == -1) {
+            break;
+        } else if (feld[0][i] != current_cluster) {
+            ++j;
+            current_cluster = feld[0][i];
+        }
+        n[j] += 1;
+    }
+    qsort(n, L*L, sizeof(int), dsc_sorter);
+    return n;
+}
