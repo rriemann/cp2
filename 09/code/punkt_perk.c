@@ -30,39 +30,40 @@ int main(void){
     for (i = 0; i < 100; i++){
         for (L = 40; L <= 100; L += 20){ // stride gross -> hier egal, arbeiten nicht mit vektoren
             initR250(seed);    /* Initialisierung von R250 */
+	    double norm = 1/(L*L);
 
-	/* Allokation der Felder */
-	feld=malloc_field(L);
+	    /* Allokation der Felder */
+	    feld=malloc_field(L);
 
-	feld1=malloc_field(L);
+	    feld1=malloc_field(L);
 
-	/* Belegung des Feldes mit Zufallseintraegen*/
-	fp =feld[0];
-	for (int x = 0; x < L*L; x++){
-	    if (R250() < p) *fp = 0; 
-	    else            *fp = -1;
-	    fp++;
+	    /* Belegung des Feldes mit Zufallseintraegen*/
+	    fp =feld[0];
+	    for (int x = 0; x < L*L; x++){
+		if (R250() < p) *fp = 0; 
+		else            *fp = -1;
+		fp++;
+	    }
+	    memcpy(feld1[0],feld[0],L*L*sizeof(int)); /* Kopie fuer Vergleich der Algorithmen */
+
+
+	    // 	printf("\n Punktbesetzung:");
+	    // 	print_field(feld,L);
+
+	    /* Cluster identifizieren: Baumsuche*/
+	    baum_analyse(feld,L);         
+	    // 	printf("\n Ergebnis Baumsuche:");
+	    // 	print_field(feld,L);
+
+
+	    /* Cluster identifizieren: Hoshen&Kopelman */
+	    hoshen_kopelman(feld1,L);         
+	    // 	printf("\n Ergebnis Hoshen Kopelmann:");
+	    // 	print_field(feld1,L);
+	    
+	    double S;				// hier kommt die S-berechnung rein.
+	    
 	}
-	memcpy(feld1[0],feld[0],L*L*sizeof(int)); /* Kopie fuer Vergleich der Algorithmen */
-
-
-// 	printf("\n Punktbesetzung:");
-// 	print_field(feld,L);
-
-	/* Cluster identifizieren: Baumsuche*/
-	baum_analyse(feld,L);         
-// 	printf("\n Ergebnis Baumsuche:");
-// 	print_field(feld,L);
-
-
-	/* Cluster identifizieren: Hoshen&Kopelman */
-	hoshen_kopelman(feld1,L);         
-// 	printf("\n Ergebnis Hoshen Kopelmann:");
-// 	print_field(feld1,L);
-	
-	double S;				// hier kommt die S-berechnung rein.
-	
-      }
     }
 
     return 0;
