@@ -10,7 +10,8 @@
 typedef int **field;
 void print_field(field feld, int L);
 field malloc_field(int L);
-int* cluster_sizes(int *array, int size);
+int* ns(field feld, int L);
+int perkolation(field feld, int L);
 
 int main(void){
 
@@ -61,23 +62,12 @@ int main(void){
             // 	printf("\n Ergebnis Hoshen Kopelmann:");
             // 	print_field(feld1,L);
 
-            int L2 = L*L;
-            int *cs;
-            cs = cluster_sizes(feld1[0],L2); // cluster_sizes verändert feld1
-            free(cs);
-
             double S;				// hier kommt die S-berechnung rein.
             
             
 //             perkolierender cluster?
-	    int j, k;
-	    for (j = 0; j < L; j++) {
-		for (k = 0; k < L; k++) {
-		    if (*(feld[j]) == *(feld[(L-1)*L + k]) or *(feld[j*L]) == *(feld[j*L + L-1]) ) {
-		        printf("perkolation!");
-		    }
-		}
-	    }
+	    int perk_cluster = perkolation(feld, L);
+
         }
     }
 
@@ -110,29 +100,23 @@ void print_field(field feld, int L)
     printf("\n");
 }
 
-int dsc_sorter(const void *i1, const void *i2) {
-    return *(int *)i2 - *(int *)i1; /* absteigend sortiert */
+int* ns(field feld, int L) {
+    return NULL;
 }
 
-int* cluster_sizes(int *array, int size) {
-    int *n;
-    n = malloc(size*sizeof(int));
-    for (int i = 0; i < size; ++i) {
-        n[i] = 0;
+int perkolation(field feld, int L){
+    int j, k, clusternummer;
+    for (j = 0; j < L; j++) {
+	for (k = 0; k < L; k++) {
+	    if ( feld[j][0] == feld[k][L-1] ) {
+	        clusternummer = feld[j][0];
+	    }
+	    if ( feld[0][j] == feld[L-1][k] ) {
+	        clusternummer = feld[0][j];
+	    }
+	}
     }
-    qsort(array, size, sizeof(array), dsc_sorter);
-    int current_cluster = array[0];
-    int j = 1;
-    n[j] = 1;
-    for (int i = 2; i < size; ++i) {
-        if (array[i] == -1) {
-            break;
-        } else if (array[i] != current_cluster) {
-            ++j;
-            current_cluster = array[i];
-        }
-        n[j] += 1;
-    }
-    qsort(n, size, sizeof(int), dsc_sorter);
-    return n;
+    return clusternummer;
 }
+
+// #undef  Lp
