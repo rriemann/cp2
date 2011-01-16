@@ -10,7 +10,7 @@
 typedef int **field;
 void print_field(field feld, int L);
 field malloc_field(int L);
-int* cluster_sizes(field feld, int L);
+int* cluster_sizes(int *array, int size);
 
 int main(void){
 
@@ -61,8 +61,9 @@ int main(void){
             // 	printf("\n Ergebnis Hoshen Kopelmann:");
             // 	print_field(feld1,L);
 
+            int L2 = L*L;
             int *cs;
-            cs = cluster_sizes(feld1,L);
+            cs = cluster_sizes(feld1[0],L2); // cluster_sizes verändert feld1
             free(cs);
 
             double S;				// hier kommt die S-berechnung rein.
@@ -102,25 +103,25 @@ int dsc_sorter(const void *i1, const void *i2) {
     return *(int *)i2 - *(int *)i1; /* absteigend sortiert */
 }
 
-int* cluster_sizes(field feld, int L) {
+int* cluster_sizes(int *array, int size) {
     int *n;
-    n = malloc(L*L*sizeof(int));
-    for (int i = 0; i < L*L; ++i) {
+    n = malloc(size*sizeof(int));
+    for (int i = 0; i < size; ++i) {
         n[i] = 0;
     }
-    qsort(feld[0],L*L, sizeof(field), dsc_sorter);
-    int current_cluster = feld[0][0];
+    qsort(array, size, sizeof(array), dsc_sorter);
+    int current_cluster = array[0];
     int j = 1;
     n[j] = 1;
-    for (int i = 2; i < L*L; ++i) {
-        if (feld[0][i] == -1) {
+    for (int i = 2; i < size; ++i) {
+        if (array[i] == -1) {
             break;
-        } else if (feld[0][i] != current_cluster) {
+        } else if (array[i] != current_cluster) {
             ++j;
-            current_cluster = feld[0][i];
+            current_cluster = array[i];
         }
         n[j] += 1;
     }
-    qsort(n, L*L, sizeof(int), dsc_sorter);
+    qsort(n, size, sizeof(int), dsc_sorter);
     return n;
 }
