@@ -12,6 +12,7 @@ void print_field(field feld, int L);
 field malloc_field(int L);
 int* ns(field feld, int L);
 int perkolation(field feld, int L);
+double P(field feld, int L, int perk_cluster);
 
 int main(void){
 
@@ -31,7 +32,7 @@ int main(void){
 
     for (i = 0; i < 100; i++){
         for (L = 40; L <= 100; L += 20){ // stride gross -> hier egal, arbeiten nicht mit vektoren
-            initR250(seed);    /* Initialisierung von R250 */
+            initR250(seed*i);    /* Initialisierung von R250 */
             double norm = 1/(L*L);
             /* Allokation der Felder */
             feld=malloc_field(L);
@@ -61,12 +62,14 @@ int main(void){
             hoshen_kopelman(feld1,L);
             // 	printf("\n Ergebnis Hoshen Kopelmann:");
             // 	print_field(feld1,L);
-
-            double S;				// hier kommt die S-berechnung rein.
-            
             
 //             perkolierender cluster?
 	    int perk_cluster = perkolation(feld, L);
+	    
+	    if ( perk_cluster != -1) {
+		double P_inf = P(feld, L, perk_cluster);
+		printf("P_inf = %f", P_inf);
+	    }
 
         }
     }
@@ -105,7 +108,7 @@ int* ns(field feld, int L) {
 }
 
 int perkolation(field feld, int L){
-    int j, k, clusternummer;
+    int j, k, clusternummer = -1;
     for (j = 0; j < L; j++) {
 	for (k = 0; k < L; k++) {
 	    if ( feld[j][0] == feld[k][L-1] && feld[j][0] != -1 ) {
@@ -118,6 +121,26 @@ int perkolation(field feld, int L){
     }
 //     printf("cluster %d\n", clusternummer);
     return clusternummer;
+}
+
+double P(field feld, int L, int perk_cluster) {
+    int count_active = 0;
+    int count_perk = 0;
+    int j, k;
+    
+    for (j = 0; j < L; j++) {
+	for (k = 0; k < L; k++) {
+	    if ( feld[j][k] == perk_cluster ) {
+	        count_perk++;
+		count_active++;
+	    }
+	    else if ( feld[j][k] != -1) {
+	        count_active++;
+	    }
+	}
+    }
+    double erg = (float)count_perk/count_active;
+    return erg;
 }
 
 // #undef  Lp
