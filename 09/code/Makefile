@@ -1,7 +1,7 @@
 # CXXFLAGS=`root-config --cflags`
 # LDLIBS=`root-config --libs` -lMinuit2
 
-CFLAGS=-ggdb -g -Wall
+CFLAGS=-ggdb -g -Wall -O3
 
 all:		punkt_perk
 
