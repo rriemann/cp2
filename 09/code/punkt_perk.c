@@ -141,11 +141,16 @@ int dsc_sorter(const void *i1, const void *i2) {
 
 int* cluster_sizes(int *array, int size, int perk_cluster) {
     int *n;
-    n = malloc(size*sizeof(int));
+    n = malloc(size*sizeof(*n));
+    if( n == NULL ) {
+        fprintf(stderr,"Not enough memory for allocating field\n");
+        exit(1);
+    }
     for (int i = 0; i < size; ++i) {
         n[i] = 0;
     }
-    qsort(array, size, sizeof(array), dsc_sorter);
+    qsort(array, size, sizeof(*array), dsc_sorter);
+
     int current_cluster = 0;
     int j = -1;
     for (int i = 0; i < size; ++i) {
@@ -159,6 +164,10 @@ int* cluster_sizes(int *array, int size, int perk_cluster) {
             n[j] += 1;
         }
     }
-    qsort(n, size, sizeof(int), dsc_sorter);
+    qsort(n, size, sizeof(*n), dsc_sorter);
+    for(int i = 0; i < size; ++i) {
+        printf("%d\n",n[i]);
+    }
+    exit(0);
     return n;
 }
