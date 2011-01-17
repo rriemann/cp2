@@ -58,9 +58,9 @@ int main(void){
 	    
             if ( perk_cluster != -1) {
                 P_inf_sum += P(feld, L, perk_cluster);
-            } else {
-                P_inf_sum += -1;
-            }
+            } //else {
+//                 P_inf_sum += -1;
+//             }
 
             int *ns = cluster_sizes(feld[0],L2);
             int s2 = 0;
