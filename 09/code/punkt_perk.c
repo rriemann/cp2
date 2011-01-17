@@ -60,7 +60,7 @@ int main(void){
 		P_inf = P(feld, L, perk_cluster);
 	    }
 	    
-	    printf("%d %f %f\n", L, S, P_inf);
+// 	    printf("%d %f %f\n", L, S, P_inf);
         }
     }
     return 0;
@@ -127,6 +127,5 @@ double P(field feld, int L, int perk_cluster) {
 	    }
 	}
     }
-    double erg = (float)count_perk/count_active;
-    return erg;
+    return (float)count_perk/count_active;
 }
