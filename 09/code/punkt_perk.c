@@ -49,20 +49,8 @@ int main(void){
             }
             memcpy(feld1[0],feld[0],L*L*sizeof(int)); /* Kopie fuer Vergleich der Algorithmen */
 
-
-            // 	printf("\n Punktbesetzung:");
-            // 	print_field(feld,L);
-
-            /* Cluster identifizieren: Baumsuche*/
-            baum_analyse(feld,L);
-            // 	printf("\n Ergebnis Baumsuche:");
-            // 	print_field(feld,L);
-
-
             /* Cluster identifizieren: Hoshen&Kopelman */
             hoshen_kopelman(feld1,L);
-            // 	printf("\n Ergebnis Hoshen Kopelmann:");
-            // 	print_field(feld1,L);
             
 //             perkolierender cluster?
 	    int perk_cluster = perkolation(feld, L);
