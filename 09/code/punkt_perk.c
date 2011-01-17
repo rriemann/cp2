@@ -25,7 +25,7 @@ int main(void){
 			    */
     int *fp;
 
-    double p  = 0.5927; /* Aktivierungswahrscheinlichkeit */
+    double p = 0.5927; /* Aktivierungswahrscheinlichkeit */
 
     int seed = 137; /* Seed fuer R250 */
     int L;
@@ -39,12 +39,9 @@ int main(void){
         for (i = 0; i < 100; i++){
 
             initR250(seed*i);    /* Initialisierung von R250 */
-//             double norm = 1/(L*L);
             /* Allokation der Felder */
             feld=malloc_field(L);
-
-//             feld1=malloc_field(L);
-
+	    
             /* Belegung des Feldes mit Zufallseintraegen*/
             fp =feld[0];
             for (int x = 0; x < L*L; x++){
@@ -79,7 +76,6 @@ int main(void){
               s1 -= perk_cluster;
             }
             S_sum += (double) s1/s2;
-            free(ns);
         }
     printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);
     }
@@ -123,7 +119,7 @@ int perkolation(field feld, int L){
 	    if ( feld[j][0] == feld[k][L-1] && feld[j][0] != -1 ) {
 	        clusternummer = feld[j][0];
 	    }
-	    if ( feld[0][j] == feld[L-1][k]  && feld[0][j] != -1 ) {
+	    if ( feld[0][j] == feld[L-1][k] && feld[0][j] != -1 ) {
 	        clusternummer = feld[0][j];
 	    }
 	}
