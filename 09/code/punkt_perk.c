@@ -131,5 +131,3 @@ double P(field feld, int L, int perk_cluster) {
     double erg = (float)count_perk/count_active;
     return erg;
 }
-
-// #undef  Lp
