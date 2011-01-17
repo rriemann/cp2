@@ -45,16 +45,24 @@ mit Hilfe eines Fits bestimmt, so ergeben sich die beiden Plots in \fref{P} und
   \label{fig:S}
 \end{figure}
 
-\begin{table}[htbp]
-\centering
-\begin{tabular*}{ccc}{\columnwidth}
-% \hline
-{ } & {$β/ν$} & {$γ/ν$}\\
-% \hline
-{\textit{Sollwert}} & 0.104 & 1.792 \\
-{\textit{Fitergebnisse}} & 0.180 & 1.772 \\
-% \hline
-\end{tabular*}
-\label{tab:ergebnisse}
-\caption{Vergleich unserer Fitergebnisse mit den Sollwerten für die Exponenten}
-\end{table}
+% \begin{table}[htbp]
+% \centering
+% \begin{tabular*}{ccc}{\columnwidth}
+% % \hline
+% { } & {$β/ν$} & {$γ/ν$}\\
+% % \hline
+% {\textit{Sollwert}} & 0.104 & 1.792 \\
+% {\textit{Fitergebnisse}} & 0.180 & 1.772 \\
+% % \hline
+% \end{tabular*}
+% \label{tab:ergebnisse}
+% \caption{Vergleich unserer Fitergebnisse mit den Sollwerten für die Exponenten}
+% \end{table}
+
+Wie man erkennen kann, stimmen speziell die Ergebnisse des Fits für die mittlere Clustergröße $S$
+sehr gut mit den gegebenen Werten überein. Auch für den Fit an $P_{\infty}$ in Abhängigkeit von
+$L$ resultieren Ergebnisse, die in der gleichen Größenordnung liegen wie der gewünschte Wert, aber hier
+tritt eine Abweichung von ca. 58\% auf, wobei uns nicht klar ist, woran dies liegen könnte. Wir haben
+festgestellt, dass der Zufallszahlengenerator starke Abhängigkeiten von der konkreten Wahl des Seeds
+zeigt. In einem späteren Versuch könnte man diesen durch einen in der Programmiersprache selbst implementierten
+bzw. standardisierten Generator verwenden.
