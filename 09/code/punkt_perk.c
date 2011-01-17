@@ -54,7 +54,7 @@ int main(void){
             }
 
             /* Cluster identifizieren: Hoshen&Kopelman */
-            hoshen_kopelman(feld1,L);
+            hoshen_kopelman(feld,L);
             
 //             perkolierender cluster?
             int perk_cluster = perkolation(feld, L);
