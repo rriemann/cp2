@@ -1,4 +1,4 @@
-CFLAGS=-ggdb -g -Wall -O3 -std=gnu99
+CFLAGS=-ggdb -g -Wall -O0 -std=gnu99
 
 all:		punkt_perk
 
