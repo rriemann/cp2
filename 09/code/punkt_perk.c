@@ -18,7 +18,7 @@ int* cluster_sizes(int *array, int size);
 
 int main(void){
 
-    field feld1, feld; /* Status der Gitterpunkte:
+    field feld; /* Status der Gitterpunkte:
 			    feld = -1 : unbesetzt
 			    =  0 : besetzt
 			    >  0 : Clusternummer
@@ -43,7 +43,7 @@ int main(void){
             /* Allokation der Felder */
             feld=malloc_field(L);
 
-            feld1=malloc_field(L);
+//             feld1=malloc_field(L);
 
             /* Belegung des Feldes mit Zufallseintraegen*/
             fp =feld[0];
