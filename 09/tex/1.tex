@@ -1,0 +1,25 @@
+\section*{Aufgabe 1}
+In dieser Übung sollte untersucht werden, welche Werte die kritischen Exponenten
+haben, wofür Punktgitter verschiedener Größe zufällig punktweise aktiviert wurden
+und anschließend in mehrere Hinsicht analysiert wurden. Zunächst wurden die Cluster
+mit Hilfe des Hoshen-Kopelman-Algorithmus rekonstruiert, die Existenz
+von perkolierenden Clustern überprüft und anschließend die Wahrscheinlichkeit, dass
+ein aktiver Punkt zu diesem speziellen Cluster gehört, berechnet. Des Weiteren
+wurde die mittlere Clustergröße berechnet.
+
+Der C-Code, der dies bewerkstelligt, ist in \lref{code}, die aufgerufene
+Funktion zur Anwendung des Hoshen-Kopelman-Verfahrens in \lref{hk}, der Zufallszahlen
+generierende Code in \lref{rand} dargestellt, wobei die zugehörigen Headerdateien 
+direkt nach der jeweiligen Datei selbst dargestellt sind.
+
+\lstinputlisting[label=lst:code,caption={punkt\_perk.c}]{../code/punkt_perk.c}
+\lstinputlisting[label=lst:hk,caption={cluster\_analyse.c}]{../code/cluster_analyse.c}
+\lstinputlisting[caption={cluster\_analyse.h}]{../code/cluster_analyse.h}
+\lstinputlisting[label=lst:rand,caption={R250.c}]{../code/R250.c}
+\lstinputlisting[caption={R250.h}]{../code/R250.h}
+
+Schließlich wurde der Code mit Hilfe des in \lref{makefile} dargestellten Makefiles
+kompiliert und die Ergebnisse in eine Datei geschrieben, um später mit Gnuplot
+visualisiert werden zu können.
+
+\lstinputlisting[label=lst:makefile,caption={Makefile}]{../code/Makefile}
