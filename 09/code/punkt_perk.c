@@ -78,7 +78,7 @@ int main(void){
 field malloc_field(int L)
 {
     field feld;
-    feld=malloc(L*sizeof(int));
+    feld=malloc(L*sizeof(int*));
     feld[0]=malloc(L*L*sizeof(int));
     if (feld[0]==NULL ) {
         fprintf(stderr,"Not enough memory for allocating field\n");
