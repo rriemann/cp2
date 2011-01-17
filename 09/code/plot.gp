@@ -19,13 +19,15 @@ set xlabel "Gittergröße L"
 
 set ylabel "P_{∞}"
 set output "../tmp/p_inf.pdf"
-f(x) = m*x**a
-fit f(x) '../tmp/plot.dat' using 1:3 via m,a
+f(x) = m1*x**a1
+fit f(x) '../tmp/plot.dat' using 1:3 via m1,a1
 plot '../tmp/plot.dat' using 1:3 pt 2 t "P_{∞}", f(x)
 
 set ylabel "S"
 set output "../tmp/s.pdf"
-f(x) = m*x**a
-fit f(x) '../tmp/plot.dat' using 1:2 via m,a
-#a = -1; m = -1;
+f(x) = m2*x**a2
+fit f(x) '../tmp/plot.dat' using 1:2 via m2,a2
 plot '../tmp/plot.dat' using 1:2 pt 2 t "S", f(x)
+
+print "\nP_{inf}-Fitergebnisse: f(x) = ", m1, "*x^" , a1
+print "\nS-Fitergebnisse: f(x) = ", m2, "*x^", a2, "\n"
