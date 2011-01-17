@@ -23,5 +23,8 @@ plot '../tmp/plot.dat' using 1:3 pt 2 t "P_inf"
 
 set ylabel "S"
 set output "../tmp/s.pdf"
-plot '../tmp/plot.dat' using 1:2 pt 2 t "S"
+f(x) = m*exp(a*x)
+fit f(x) '../tmp/plot.dat' using 1:2 via m,a
+a = -1; m = 1;
+plot '../tmp/plot.dat' using 1:2 pt 2 t "S", f(x)
 
