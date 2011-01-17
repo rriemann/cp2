@@ -1,6 +1,3 @@
-# CXXFLAGS=`root-config --cflags`
-# LDLIBS=`root-config --libs` -lMinuit2
-
 CFLAGS=-ggdb -g -Wall -O3 -std=gnu99
 
 all:		punkt_perk
