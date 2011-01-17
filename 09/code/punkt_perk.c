@@ -18,7 +18,7 @@ int* cluster_sizes(int *array, int size);
 
 int main(void){
 
-    field feld1, feld; /* Status der Gitterpunkte:
+    field feld; /* Status der Gitterpunkte:
 			    feld = -1 : unbesetzt
 			    =  0 : besetzt
 			    >  0 : Clusternummer
@@ -42,8 +42,6 @@ int main(void){
 //             double norm = 1/(L*L);
             /* Allokation der Felder */
             feld=malloc_field(L);
-
-            feld1=malloc_field(L);
 
             /* Belegung des Feldes mit Zufallseintraegen*/
             fp =feld[0];
@@ -79,7 +77,6 @@ int main(void){
               s1 -= perk_cluster;
             }
             S_sum += (double) s1/s2;
-            free(ns);
         }
     printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);
     }

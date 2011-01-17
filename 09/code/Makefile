@@ -1,7 +1,7 @@
 # CXXFLAGS=`root-config --cflags`
 # LDLIBS=`root-config --libs` -lMinuit2
 
-CFLAGS=-ggdb -g -Wall -O0 -std=gnu99
+CFLAGS=-ggdb -g -Wall -O3 -std=gnu99
 
 all:		punkt_perk
 
@@ -13,7 +13,7 @@ clean:
 	@echo "clean-up done"
 
 run: 		all
-	mkdir ../tmp
+	-mkdir ../tmp
 	./punkt_perk > ../tmp/plot.dat
 	./plot.gp
 
