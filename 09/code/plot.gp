@@ -29,6 +29,3 @@ set output "../tmp/s.pdf"
 f(x) = m2*x**a2
 fit f(x) '../tmp/plot.dat' using 1:2 via m2,a2
 plot '../tmp/plot.dat' using 1:2 pt 2 t "S", f(x) lt -1
-
-print "\nP_{inf}-Fitergebnisse: f(x) = ", m1, "*x^" , a1
-print "\nS-Fitergebnisse: f(x) = ", m2, "*x^", a2, "\n"
