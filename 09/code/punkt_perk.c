@@ -32,10 +32,9 @@ int main(void){
     for (int L = 40; L <= 100; L += 20){
         double P_inf_sum = 0;
         double S_sum = 0;
-	int L2 = L*L;
-	
-        for (int i = 0; i < 100; i++){
 
+        int L2 = L*L;
+        for (int i = 0; i < 10000; i++){
             initR250(seed+i+L);    /* Initialisierung von R250 */
             /* Allokation der Felder */
             feld=malloc_field(L);
@@ -71,7 +70,7 @@ int main(void){
             S_sum += (double) s1/s2;
             free(ns);
         }
-        printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);
+        printf("%d %f %f\n", L, S_sum/10000, P_inf_sum/10000);
     }
     return 0;
 }     /* main */
@@ -161,7 +160,7 @@ int* cluster_sizes(int *array, int size, int perk_cluster) {
             break;
         } else if (array[i] == current_cluster) {
             n[j] += 1;
-        } else if (array[i] != perk_cluster) {
+        } else {//if (array[i] != perk_cluster) {
             ++j;
             current_cluster = array[i];
             n[j] += 1;
