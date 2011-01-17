@@ -58,9 +58,7 @@ int main(void){
 	    
             if ( perk_cluster != -1) {
                 P_inf_sum += P(feld, L, perk_cluster);
-            } //else {
-//                 P_inf_sum += -1;
-//             }
+            }
 
             int *ns = cluster_sizes(feld[0],L2);
             int s2 = 0;
@@ -76,7 +74,7 @@ int main(void){
             }
             S_sum += (double) s1/s2;
         }
-        printf("%d %f %f\n", L, S_sum/L2, P_inf_sum/L2);	//richtig so?
+        printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);	//richtig so?
     }
     return 0;
 }     /* main */
