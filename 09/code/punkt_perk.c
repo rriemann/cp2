@@ -34,7 +34,7 @@ int main(void){
         double S_sum = 0;
 	int L2 = L*L;
 	
-        for (i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++){
 
             initR250(seed+i+L);    /* Initialisierung von R250 */
             /* Allokation der Felder */
