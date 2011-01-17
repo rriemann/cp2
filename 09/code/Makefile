@@ -9,10 +9,13 @@ punkt_perk:	punkt_perk.o cluster_analyse.o R250.o
 
 clean:
 	-rm -f punkt_perk punkt_perk.o cluster_analyse.o R250.o *~
+	-rm -rf ../tmp
 	@echo "clean-up done"
 
 run: 		all
-	./punkt_perk
+	mkdir ../tmp
+	./punkt_perk > ../tmp/plot.dat
+	./plot.gp
 
 .PHONY: 	run clean all
 
