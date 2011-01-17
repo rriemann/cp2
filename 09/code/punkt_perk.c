@@ -25,6 +25,7 @@ int main(void){
     int *fp;
 
     double p = 0.5927; /* Aktivierungswahrscheinlichkeit */
+    int repititions = 10000;
 
     int seed = 137; /* Seed fuer R250 */
 
@@ -33,7 +34,7 @@ int main(void){
         double P_inf_sum = 0;
         double S_sum = 0;
         int L2 = L*L;
-        for (int i = 0; i < 100; i++){
+        for (int i = 0; i < repititions; i++){
             initR250(seed+i+L);    /* Initialisierung von R250 */
             /* Allokation der Felder */
             feld=malloc_field(L);
@@ -66,10 +67,10 @@ int main(void){
                 s2 += ns[i]*ns[i];
                 s1 += ns[i];
             }
-            S_sum += (double) s1/s2;
+            S_sum += (double) s2/s1;
             free(ns);
         }
-        printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);
+        printf("%d %f %f\n", L, S_sum/repititions, P_inf_sum/repititions);
     }
     return 0;
 }     /* main */
@@ -158,7 +159,7 @@ int* cluster_sizes(int *array, int size, int perk_cluster) {
             break;
         } else if (array[i] == current_cluster) {
             n[j] += 1;
-        } else {//if (array[i] != perk_cluster) {
+        } else if (array[i] != perk_cluster) {
             ++j;
             current_cluster = array[i];
             n[j] += 1;
