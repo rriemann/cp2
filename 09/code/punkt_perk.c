@@ -38,7 +38,7 @@ int main(void){
 	int L2 = L*L;
         for (i = 0; i < 100; i++){
 
-            initR250(seed*i);    /* Initialisierung von R250 */
+            initR250(seed+i+L);    /* Initialisierung von R250 */
             /* Allokation der Felder */
             feld=malloc_field(L);
 	    
@@ -70,7 +70,7 @@ int main(void){
             }
             S_sum += (double) s1/s2;
         }
-        printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);	//richtig so?
+        printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);
     }
     return 0;
 }     /* main */
@@ -78,7 +78,7 @@ int main(void){
 field malloc_field(int L)
 {
     field feld;
-    feld=malloc(L*sizeof(int*));
+    feld=malloc(L*sizeof(int));
     feld[0]=malloc(L*L*sizeof(int));
     if (feld[0]==NULL ) {
         fprintf(stderr,"Not enough memory for allocating field\n");
@@ -111,6 +111,7 @@ int perkolation(field feld, int L){
 	    if ( feld[0][j] == feld[L-1][k] && feld[0][j] != -1 ) {
 	        clusternummer = feld[0][j];
 	    }
+// 	    printf("%d %d %d %d %d %d\n", j, k, feld[0][j], feld[k][L-1], feld[j][0], feld[L-1][k]); 
 	}
     }
     return clusternummer;
@@ -125,7 +126,7 @@ double P(field feld, int L, int perk_cluster) {
         for (k = 0; k < L; k++) {
             if ( feld[j][k] == perk_cluster ) {
                 count_perk++;
-            count_active++;
+                count_active++;
             }
             else if ( feld[j][k] != -1) {
                 count_active++;
@@ -140,12 +141,11 @@ int dsc_sorter(const void *i1, const void *i2) {
 }
 
 int* cluster_sizes(int *array, int size, int perk_cluster) {
-    int *n;
-    n = malloc(size*sizeof(int));
+    int *n = malloc(size*sizeof(int));			// array, das die größen der cluster beinhaltet
     for (int i = 0; i < size; ++i) {
         n[i] = 0;
     }
-    qsort(array, size, sizeof(array), dsc_sorter);
+    qsort(array, size, sizeof(int), dsc_sorter);
     int current_cluster = 0;
     int j = -1;
     for (int i = 0; i < size; ++i) {
