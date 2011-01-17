@@ -11,7 +11,7 @@ clean:
 
 run: 		all
 	./punkt_perk > ../tmp/plot.dat
-	./plot.gp
+	./plot.gp 2>&1 | grep -A 6 "Final set of parameters"
 
 .PHONY: 	run clean all
 

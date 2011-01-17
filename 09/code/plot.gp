@@ -12,11 +12,10 @@ set logscale x
 set logscale y
 set pointsize 1
 set xlabel "Gittergröße L"
-#set yrange [0:1400]
 set xrange [20:100]
 
-#L S P
-#1 2 3
+#L S P (column names)
+#1 2 3 (column indexes)
 
 set ylabel "P_{∞}"
 set output "../tmp/p_inf.pdf"
@@ -29,6 +28,3 @@ set output "../tmp/s.pdf"
 f(x) = m2*x**a2
 fit f(x) '../tmp/plot.dat' using 1:2 via m2,a2
 plot '../tmp/plot.dat' using 1:2 pt 2 t "S", f(x) lt -1
-
-print "\nP_{inf}-Fitergebnisse: f(x) = ", m1, "*x^" , a1
-print "\nS-Fitergebnisse: f(x) = ", m2, "*x^", a2, "\n"
