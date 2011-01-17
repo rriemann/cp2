@@ -27,15 +27,13 @@ int main(void){
     double p = 0.5927; /* Aktivierungswahrscheinlichkeit */
 
     int seed = 137; /* Seed fuer R250 */
-    int L;
-    int i;
-
 
     printf("#L S P_inf\n");
-    for (L = 40; L <= 100; L += 20){
+    for (int L = 40; L <= 100; L += 20){
         double P_inf_sum = 0;
         double S_sum = 0;
 	int L2 = L*L;
+	
         for (i = 0; i < 100; i++){
 
             initR250(seed+i+L);    /* Initialisierung von R250 */
@@ -51,11 +49,13 @@ int main(void){
             }
 
             /* Cluster identifizieren: Hoshen&Kopelman */
+//             print_field(feld,L);
             hoshen_kopelman(feld,L);
             
 //             perkolierender cluster?
             int perk_cluster = perkolation(feld, L);
-	    
+//             printf("perk_cluster: %d\n\n",perk_cluster);
+//             exit(0);
             if ( perk_cluster != 0) {
                 P_inf_sum += P(feld, L, perk_cluster);
             }
@@ -69,6 +69,7 @@ int main(void){
                 s1 += ns[i];
             }
             S_sum += (double) s1/s2;
+            free(ns);
         }
         printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);
     }
@@ -102,9 +103,10 @@ void print_field(field feld, int L)
 }
 
 int perkolation(field feld, int L){
-    int j, k, clusternummer = 0;
-    for (j = 0; j < L; j++) {
-	for (k = 0; k < L; k++) {
+//     print_field(feld,L);
+    int clusternummer = 0;
+    for (int j = 0; j < L; j++) {
+	for (int k = 0; k < L; k++) {
 	    if ( feld[j][0] == feld[k][L-1] && feld[j][0] != -1 ) {
 	        clusternummer = feld[j][0];
 	    }
@@ -121,7 +123,7 @@ double P(field feld, int L, int perk_cluster) {
     int count_active = 0;
     int count_perk = 0;
     int j, k;
-    
+
     for (j = 0; j < L; j++) {
         for (k = 0; k < L; k++) {
             if ( feld[j][k] == perk_cluster ) {
@@ -141,11 +143,17 @@ int dsc_sorter(const void *i1, const void *i2) {
 }
 
 int* cluster_sizes(int *array, int size, int perk_cluster) {
-    int *n = malloc(size*sizeof(int));			// array, das die größen der cluster beinhaltet
+    int *n;
+    n = malloc(size*sizeof(*n));
+    if( n == NULL ) {
+        fprintf(stderr,"Not enough memory for allocating n in cluster_sizes\n");
+        exit(1);
+    }
     for (int i = 0; i < size; ++i) {
         n[i] = 0;
     }
-    qsort(array, size, sizeof(int), dsc_sorter);
+    qsort(array, size, sizeof(*array), dsc_sorter);
+
     int current_cluster = 0;
     int j = -1;
     for (int i = 0; i < size; ++i) {
@@ -159,6 +167,10 @@ int* cluster_sizes(int *array, int size, int perk_cluster) {
             n[j] += 1;
         }
     }
-    qsort(n, size, sizeof(int), dsc_sorter);
+    qsort(n, size, sizeof(*n), dsc_sorter);
+//     for(int i = 0; i < size; ++i) {
+//         printf("%d\n",n[i]);
+//     }
+//     exit(0);
     return n;
 }
