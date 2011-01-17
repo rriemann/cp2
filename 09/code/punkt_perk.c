@@ -161,7 +161,7 @@ int* cluster_sizes(int *array, int size, int perk_cluster) {
             break;
         } else if (array[i] == current_cluster) {
             n[j] += 1;
-        } else if (array[i] != perk_cluster) {
+        } else {//if (array[i] != perk_cluster) {
             ++j;
             current_cluster = array[i];
             n[j] += 1;
