@@ -24,3 +24,22 @@ kompiliert und die Ergebnisse in eine Datei geschrieben, um später mit Gnuplot
 visualisiert werden zu können.
 
 \lstinputlisting[label=lst:makefile,caption={Makefile}]{../code/Makefile}
+
+Wenn man die Ergebnisse unseres Codes wie gefordert doppelt-logarithmisch darstellt
+und außerdem die jeweiligen Exponenten des vermuteten zugrundeliegenden Potenzgesetzes
+mit Hilfe eines Fits bestimmt, so ergeben sich die beiden Plots in \fref{P} und
+\fref{S} sowie folgende Werte für die Exponenten:
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/}
+  \caption{Wahrscheinlichkeit $P$ der Zugehörigkeit eines aktiven Punktes zum perkolierenden Cluster in Abhängigkeit von der Größe des Gitters}
+  \label{fig:P}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/}
+  \caption{Mittlere Clustergröße $S$ in Abhängigkeit von der Größe des Gitters}
+  \label{fig:S}
+\end{figure}
