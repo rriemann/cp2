@@ -12,11 +12,10 @@ set logscale x
 set logscale y
 set pointsize 1
 set xlabel "Gittergröße L"
-#set yrange [0:1400]
 set xrange [20:100]
 
-#L S P
-#1 2 3
+#L S P (column names)
+#1 2 3 (column indexes)
 
 set ylabel "P_{∞}"
 set output "../tmp/p_inf.pdf"
