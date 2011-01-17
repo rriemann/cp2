@@ -10,7 +10,6 @@
 typedef int **field;
 void print_field(field feld, int L);
 field malloc_field(int L);
-int* ns(field feld, int L);
 int perkolation(field feld, int L);
 double P(field feld, int L, int perk_cluster);
 int dsc_sorter(const void *i1, const void *i2);
@@ -33,9 +32,10 @@ int main(void){
 
 
     printf("#L S P_inf\n");
-    for (L = 40; L <= 100; L += 20){ // stride gross -> hier egal, arbeiten nicht mit vektoren
+    for (L = 40; L <= 100; L += 20){
         double P_inf_sum = 0;
         double S_sum = 0;
+	int L2 = L*L;
         for (i = 0; i < 100; i++){
 
             initR250(seed*i);    /* Initialisierung von R250 */
@@ -61,8 +61,7 @@ int main(void){
             } else {
                 P_inf_sum += -1;
             }
-//             memcpy(feld1[0],feld[0],L*L*sizeof(int));
-            int L2 = L*L;
+
             int *ns = cluster_sizes(feld[0],L2);
             int s2 = 0;
             int s1 = 0;
@@ -77,7 +76,7 @@ int main(void){
             }
             S_sum += (double) s1/s2;
         }
-    printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);
+        printf("%d %f %f\n", L, S_sum/L2, P_inf_sum/L2);	//richtig so?
     }
     return 0;
 }     /* main */
@@ -106,10 +105,6 @@ void print_field(field feld, int L)
 	    printf("%4i",feld[y][x]);     /* Clusterzerlegung ausdrucken */
     }
     printf("\n");
-}
-
-int* ns(field feld, int L) {
-    return NULL;
 }
 
 int perkolation(field feld, int L){

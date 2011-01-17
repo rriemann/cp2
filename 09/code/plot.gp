@@ -17,14 +17,13 @@ set xlabel "Gittergröße L"
 #L S P
 #1 2 3
 
-set ylabel "P_inf"
+set ylabel "P_{∞}"
 set output "../tmp/p_inf.pdf"
-plot '../tmp/plot.dat' using 1:3 pt 2 t "P_{inf}"
+plot '../tmp/plot.dat' using 1:3 pt 2 t "P_{∞}"
 
 set ylabel "S"
 set output "../tmp/s.pdf"
-f(x) = m*exp(a*x)
+f(x) = m*x**a
 fit f(x) '../tmp/plot.dat' using 1:2 via m,a
-a = -1; m = 1;
+#a = -1; m = -1;
 plot '../tmp/plot.dat' using 1:2 pt 2 t "S", f(x)
-
