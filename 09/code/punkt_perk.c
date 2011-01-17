@@ -58,7 +58,6 @@ int main(void){
 	    
 	    if ( perk_cluster != -1) {
 		P_inf = P(feld, L, perk_cluster);
-		printf("P_inf = %f\n", P_inf);
 	    }
 	    
 	    printf("%d %f %f\n", L, S, P_inf);
