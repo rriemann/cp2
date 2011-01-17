@@ -8,16 +8,15 @@ ein aktiver Punkt zu diesem speziellen Cluster gehört, berechnet. Des Weiteren
 wurde die mittlere Clustergröße berechnet. Bei der Berechnung dieser Größen wurde
 sich an die Formeln aus dem Skript gehalten.
 
-Der C-Code, der dies bewerkstelligt, ist in \lref{code}, die aufgerufene
-Funktion zur Anwendung des Hoshen-Kopelman-Verfahrens in \lref{hk}, der Zufallszahlen
-generierende Code in \lref{rand} dargestellt, wobei die zugehörigen Headerdateien 
+Der C-Code, der dies bewerkstelligt, ist in \lref{code} und die aufgerufene
+Funktion zur Anwendung des Hoshen-Kopelman-Verfahrens in \lref{hk}, wobei die zugehörigen Headerdateien 
 direkt nach der jeweiligen Datei selbst dargestellt sind.
 
 \lstinputlisting[label=lst:code,caption={punkt\_perk.c}]{../code/punkt_perk.c}
 \lstinputlisting[label=lst:hk,caption={cluster\_analyse.c}]{../code/cluster_analyse.c}
 \lstinputlisting[caption={cluster\_analyse.h}]{../code/cluster_analyse.h}
 % \lstinputlisting[label=lst:rand,caption={R250.c}]{../code/R250.c}
-\lstinputlisting[caption={R250.h}]{../code/R250.h}
+% \lstinputlisting[caption={R250.h}]{../code/R250.h}
 
 Schließlich wurde der Code mit Hilfe des in \lref{makefile} dargestellten Makefiles
 kompiliert und die Ergebnisse in eine Datei geschrieben, um später mit Gnuplot
@@ -63,7 +62,8 @@ mit Hilfe eines Fits bestimmt, so ergeben sich die beiden Plots in \fref{P} und
 Wie man erkennen kann, stimmen speziell die Ergebnisse des Fits für die mittlere Clustergröße $S$
 sehr gut mit den gegebenen Werten überein. Auch für den Fit an $P_{\infty}$ in Abhängigkeit von
 $L$ resultieren Ergebnisse, die in der gleichen Größenordnung liegen wie der gewünschte Wert, aber hier
-tritt eine Abweichung von ca. 58\% auf, wobei uns nicht klar ist, woran dies liegen könnte. Wir haben
+tritt eine Abweichung von ca. 58\% auf und diese Abweichung kann nicht durch die Fitunsicherheiten begründet werden,
+wobei uns nicht klar ist, woran dies liegen könnte. Wir haben
 festgestellt, dass der Zufallszahlengenerator starke Abhängigkeiten von der konkreten Wahl des Seeds
 zeigt. In einem späteren Versuch könnte man diesen durch einen in der Programmiersprache selbst implementierten
 bzw. standardisierten Generator verwenden.
