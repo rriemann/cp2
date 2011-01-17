@@ -13,6 +13,8 @@ field malloc_field(int L);
 int* ns(field feld, int L);
 int perkolation(field feld, int L);
 double P(field feld, int L, int perk_cluster);
+int dsc_sorter(const void *i1, const void *i2);
+int* cluster_sizes(int *array, int size);
 
 int main(void){
 
@@ -30,8 +32,11 @@ int main(void){
     int i;
 
 
-    for (i = 0; i < 100; i++){
-        for (L = 40; L <= 100; L += 20){ // stride gross -> hier egal, arbeiten nicht mit vektoren
+    printf("#L S P_inf\n");
+    for (L = 40; L <= 100; L += 20){ // stride gross -> hier egal, arbeiten nicht mit vektoren
+        double P_inf_sum = 0;
+        double S_sum = 0;
+        for (i = 0; i < 100; i++){
 
             initR250(seed*i);    /* Initialisierung von R250 */
 //             double norm = 1/(L*L);
@@ -47,21 +52,36 @@ int main(void){
             else            *fp = -1;
             fp++;
             }
-            memcpy(feld1[0],feld[0],L*L*sizeof(int)); /* Kopie fuer Vergleich der Algorithmen */
 
             /* Cluster identifizieren: Hoshen&Kopelman */
             hoshen_kopelman(feld1,L);
             
 //             perkolierender cluster?
-	    int perk_cluster = perkolation(feld, L);
-	    double P_inf = -1;
+            int perk_cluster = perkolation(feld, L);
 	    
-	    if ( perk_cluster != -1) {
-		P_inf = P(feld, L, perk_cluster);
-	    }
-	    
-	    printf("%d %f %f\n", L, S, P_inf);
+            if ( perk_cluster != -1) {
+                P_inf_sum += P(feld, L, perk_cluster);
+            } else {
+                P_inf_sum += -1;
+            }
+//             memcpy(feld1[0],feld[0],L*L*sizeof(int));
+            int L2 = L*L;
+            int *ns = cluster_sizes(feld[0],L2);
+            int s2 = 0;
+            int s1 = 0;
+            for(int i = 0; i < L2; ++i) {
+                if (ns[i] == 0) break;
+                s2 += ns[i]*ns[i];
+                s1 += ns[i];
+            }
+            if (perk_cluster != -1) {
+              s2 -= perk_cluster*perk_cluster;
+              s1 -= perk_cluster;
+            }
+            S_sum += (double) s1/s2;
+            free(ns);
         }
+    printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);
     }
     return 0;
 }     /* main */
@@ -127,6 +147,33 @@ double P(field feld, int L, int perk_cluster) {
 	    }
 	}
     }
-    double erg = (float)count_perk/count_active;
+    double erg = (double) count_perk/count_active;
     return erg;
+}
+
+int dsc_sorter(const void *i1, const void *i2) {
+    return *(int *)i2 - *(int *)i1; /* absteigend sortiert */
+}
+
+int* cluster_sizes(int *array, int size) {
+    int *n;
+    n = malloc(size*sizeof(int));
+    for (int i = 0; i < size; ++i) {
+        n[i] = 0;
+    }
+    qsort(array, size, sizeof(array), dsc_sorter);
+    int current_cluster = array[0];
+    int j = 1;
+    n[j] = 1;
+    for (int i = 2; i < size; ++i) {
+        if (array[i] == -1) {
+            break;
+        } else if (array[i] != current_cluster) {
+            ++j;
+            current_cluster = array[i];
+        }
+        n[j] += 1;
+    }
+    qsort(n, size, sizeof(int), dsc_sorter);
+    return n;
 }
