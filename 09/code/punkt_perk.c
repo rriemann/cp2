@@ -137,18 +137,17 @@ double P(field feld, int L, int perk_cluster) {
     int j, k;
     
     for (j = 0; j < L; j++) {
-	for (k = 0; k < L; k++) {
-	    if ( feld[j][k] == perk_cluster ) {
-	        count_perk++;
-		count_active++;
-	    }
-	    else if ( feld[j][k] != -1) {
-	        count_active++;
-	    }
-	}
+        for (k = 0; k < L; k++) {
+            if ( feld[j][k] == perk_cluster ) {
+                count_perk++;
+            count_active++;
+            }
+            else if ( feld[j][k] != -1) {
+                count_active++;
+            }
+        }
     }
-    double erg = (double) count_perk/count_active;
-    return erg;
+    return (double) count_perk/count_active;
 }
 
 int dsc_sorter(const void *i1, const void *i2) {
