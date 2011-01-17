@@ -8,7 +8,6 @@
 #include "cluster_analyse.h"
 
 typedef int **field;
-void print_field(field feld, int L);
 field malloc_field(int L);
 int perkolation(field feld, int L);
 double P(field feld, int L, int perk_cluster);
@@ -49,13 +48,10 @@ int main(void)
             }
 
             /* Cluster identifizieren: Hoshen&Kopelman */
-//             print_field(feld,L);
             hoshen_kopelman(feld, L);
 
-//             perkolierender cluster?
+            /* perkolierenden Cluster finden */
             int perk_cluster = perkolation(feld, L);
-//             printf("perk_cluster: %d\n\n",perk_cluster);
-//             exit(0);
             if(perk_cluster != 0) {
                 P_inf_sum += P(feld, L, perk_cluster);
             }
@@ -74,7 +70,7 @@ int main(void)
         printf("%d %f %f\n", L, S_sum / repititions, P_inf_sum / repititions);
     }
     return 0;
-}     /* main */
+}
 
 field malloc_field(int L)
 {
@@ -90,21 +86,8 @@ field malloc_field(int L)
     return feld;
 }
 
-/*Ausgabe des Feldes auf dem Bildschirm */
-void print_field(field feld, int L)
-{
-    int x, y;
-    for(y = L - 1; y >= 0; y--) {
-        printf("\n");
-        for(x = 0; x < L; x++)
-            printf("%4i", feld[y][x]);    /* Clusterzerlegung ausdrucken */
-    }
-    printf("\n");
-}
-
 int perkolation(field feld, int L)
 {
-//     print_field(feld,L);
     int clusternummer = 0;
     for(int j = 0; j < L; j++) {
         for(int k = 0; k < L; k++) {
@@ -114,7 +97,6 @@ int perkolation(field feld, int L)
             if(feld[0][j] == feld[L-1][k] && feld[0][j] != -1) {
                 clusternummer = feld[0][j];
             }
-//      printf("%d %d %d %d %d %d\n", j, k, feld[0][j], feld[k][L-1], feld[j][0], feld[L-1][k]);
         }
     }
     return clusternummer;
@@ -171,9 +153,5 @@ int* cluster_sizes(int *array, int size, int perk_cluster)
         }
     }
     qsort(n, size, sizeof(*n), dsc_sorter);
-//     for(int i = 0; i < size; ++i) {
-//         printf("%d\n",n[i]);
-//     }
-//     exit(0);
     return n;
 }
