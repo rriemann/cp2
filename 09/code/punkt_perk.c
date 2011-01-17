@@ -27,17 +27,14 @@ int main(void){
     double p = 0.5927; /* Aktivierungswahrscheinlichkeit */
 
     int seed = 137; /* Seed fuer R250 */
-    int L;
-    int i;
-
 
     printf("#L S P_inf\n");
-    for (L = 20; L <= 100; L += 10){
+    for (int L = 40; L <= 100; L += 20){
         double P_inf_sum = 0;
         double S_sum = 0;
         int L2 = L*L;
-        for (i = 0; i < 100; i++){
-            initR250(seed*i);    /* Initialisierung von R250 */
+        for (int i = 0; i < 100; i++){
+            initR250(seed+i);    /* Initialisierung von R250 */
             /* Allokation der Felder */
             feld=malloc_field(L);
 	    
@@ -50,13 +47,13 @@ int main(void){
             }
 
             /* Cluster identifizieren: Hoshen&Kopelman */
+//             print_field(feld,L);
             hoshen_kopelman(feld,L);
             
 //             perkolierender cluster?
-            print_field(feld,L);
             int perk_cluster = perkolation(feld, L);
-            printf("perk_cluster: %d\n\n",perk_cluster);
-            exit(0);
+//             printf("perk_cluster: %d\n\n",perk_cluster);
+//             exit(0);
             if ( perk_cluster != 0) {
                 P_inf_sum += P(feld, L, perk_cluster);
             }
@@ -70,6 +67,7 @@ int main(void){
                 s1 += ns[i];
             }
             S_sum += (double) s1/s2;
+            free(ns);
         }
         printf("%d %f %f\n", L, S_sum/100, P_inf_sum/100);	//richtig so?
     }
@@ -103,6 +101,7 @@ void print_field(field feld, int L)
 }
 
 int perkolation(field feld, int L){
+//     print_field(feld,L);
     int clusternummer = 0;
     for (int j = 0; j < L; j++) {
 	for (int k = 0; k < L; k++) {
