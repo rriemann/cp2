@@ -109,7 +109,6 @@ int perkolation(field feld, int L){
 	    }
 	}
     }
-//     printf("cluster %d\n", clusternummer);
     return clusternummer;
 }
 
