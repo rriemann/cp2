@@ -13,7 +13,7 @@ function sphere(R,a)
   V = J = zeros(1,M);
   norm = 1/N*R2*a*8;
   for j=[1:M]
-    x2 = R2*rand(1,N).^2;   % nur positive achsen, da sowieso quadriert wird
+    x2 = a2*rand(1,N).^2;   % nur positive achsen, da sowieso quadriert wird
     y2 = R2*rand(1,N).^2;
     z2 = R2*rand(1,N).^2;
     hit_kugel = 0;
