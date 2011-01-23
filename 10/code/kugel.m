@@ -4,18 +4,26 @@ R = 2;
 a = R;			% a = 1;
 N = 1e4;
 M = 5;
-sum_f = 0;
+hit_kugel = 0;
+J = 0;
 
 x = R*rand(1,N);	% nur positive achsen
 y = R*rand(1,N);
 z = R*rand(1,N);
 
-for i=[1:N]
-  if x(i) <= a && x(i)*x(i) + y(i)*y(i) + z(i)*z(i) <= R*R
-    sum_f += 1;
+for j=[1:M]
+  for i=[1:N]
+    if x(i) <= a && x(i)*x(i) + y(i)*y(i) + z(i)*z(i) <= R*R
+      hit_kugel += 1;
+      J += x(i)*x(i) + y(i)*y(i);
+    end
   end
 end
 
-sum_f
+V = hit_kugel/N*R^2*a*8/M
+J = J/N*V/M
 
-V = sum_f/N*R^2*a*8
+
+%  exakte Ergebnisse fuer a=R
+V_ex = 4/3*pi*R^3
+J_ex = 2/5*V_ex*R^2
