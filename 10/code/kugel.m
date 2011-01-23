@@ -15,7 +15,7 @@ for j=[1:M]
   for i=[1:N]
     if x(i) <= a && x(i)*x(i) + y(i)*y(i) + z(i)*z(i) <= R*R
       hit_kugel += 1;
-      J += x(i)*x(i) + y(i)*y(i);
+      J += x(i)*x(i) + y(i)*y(i);		%produziert 5mal das gleiche
     end
   end
 end
