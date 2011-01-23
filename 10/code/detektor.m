@@ -43,7 +43,7 @@ p_int = 0
 for i=[1:N]
   p_int += 1-exp(-length(theta(i),phi(i))/lamda);
 end
-A = p_int/N/(4*pi)
+A = p_int/N
 
 
 
