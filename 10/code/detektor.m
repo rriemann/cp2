@@ -8,6 +8,8 @@ global L = 5;
 global R = 0.1;
 global theta_c = atan(R/L); % falls theta < theta_c: l = 0
 lamda = 1.5;
+mean_p  = 0;
+mean_p2 = 0;
 
 function l = length(theta,phi)
   global B L R theta_c;
@@ -41,9 +43,13 @@ end
 
 p_int = 0
 for i=[1:N]
-  p_int += 1-exp(-length(theta(i),phi(i))/lamda);
+  p = 1-exp(-length(theta(i),phi(i))/lamda);
+  p_int   += p;
+  mean_p  += p;
+  mean_p2 += p^2;
 end
-A = p_int/N
+A  = p_int/N
+dA = sqrt(abs(mean_p2/N - (mean_p/N)^2)/N)
 
 
 
