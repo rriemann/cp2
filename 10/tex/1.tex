@@ -9,6 +9,7 @@ für $a=R$ berechnet, um eine Schätzung für die Standardabweichungen zu erhalt
 Diese wurde nach der Formel
 \begin{eqnarray}
 σ = \sqrt{\langle x²\rangle - \overline{x}²}
+\label{eqn:sigma}
 \end{eqnarray}
 berechnet. Für den Fall $a\ne R$ wurde statt der exakten Werte $\overline{x}$ der numerisch
 gebildete Mittelwert $\langle x \rangle$ verwendet.
@@ -41,3 +42,17 @@ $a = 1$ & {$V$} & {$J_p$}\\
 
 Wie man erkennen kann, stimmen die numerisch ermittelten Werte mit den exakt bekannten
 im Rahmen der gemessenen Fehler gut überein.
+
+\section*{Aufgabe 2}
+In dieser Aufgabe war die Akzeptanz eines Detektors zu berechnen. Der entsprechende
+Code ist in \lref{detektor} dargestellt.
+
+\lstinputlisting[label=lst:detektor,caption={detektor.m}]{../code/detektor.m}
+
+Das resultierende Ergebnis für die Akzeptanz $A$ lautet dabei:
+\begin{eqnarray}
+A = (83.04 \pm 0.08)\%
+\end{eqnarray}
+
+Der Fehler wurde gemäß \eref{sigma} berechnet, wobei auch hier mit numerisch
+berechneten Mittelwerten statt exakten Werten gerechnet wurde.

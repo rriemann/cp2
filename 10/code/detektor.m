@@ -1,4 +1,5 @@
 %  Berechnung des Kugelvolumens
+clear all;
 
 N = 1e4;
 phi = pi*rand(1,N)/2; % nur [0,90] grad
