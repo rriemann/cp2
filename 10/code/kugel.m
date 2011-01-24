@@ -1,5 +1,5 @@
-%  Berechnung des Kugelvolumens
-
+%  Berechnung des Kugelvolumens und des Traegheitsmoments
+clear all;
 a = R = 2;
 
 function sphere(R,a)
