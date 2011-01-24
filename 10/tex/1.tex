@@ -1,0 +1,61 @@
+\section*{Aufgabe 1}
+In dieser Aufgabe sollte das Volumen und das Trägheitsmoment einer (abgeflachten)
+Kugel mit Hilfe einer Monte-Carlo-Simulation näherungsweise bestimmt werden. Im Fall
+der abgeflachten Kugel wurde die $x$-Koordinate so eingeschränkt, dass sie nur Werte 
+zwischen $-a$ und $+a$ annehmen kann, mit $a\le R$.
+
+Zunächst wurde das exakte Kugelvolumen für beide $a$-Werte und das Trägheitsmoment
+für $a=R$ berechnet, um eine Schätzung für die Standardabweichungen zu erhalten.
+Diese wurde nach der Formel
+\begin{eqnarray}
+σ = \sqrt{\langle x²\rangle - \overline{x}²}
+\label{eqn:sigma}
+\end{eqnarray}
+berechnet. Für den Fall $a\ne R$ wurde statt der exakten Werte $\overline{x}$ der numerisch
+gebildete Mittelwert $\langle x \rangle$ verwendet.
+
+Der Code, der die Aufgabenstellung bearbeitet, ist in \lref{kugel} dargestellt.
+
+\lstinputlisting[label=lst:kugel,caption={kugel.m}]{../code/kugel.m}
+
+Der resultierende Output ist hier in Form einer Tabelle in \tref{erg} dargestellt.
+
+\begin{table}[htbp]
+\centering
+\setlength{\tabcolsep}{14pt}
+\begin{tabular*}{0.5\columnwidth}{lll}
+\toprule
+$a = 2$ & {$V$} & {$J_p$}\\
+\midrule
+\textit{MC} & $ 33.3\pm0.2 $ & $ 53.8\pm0.3 $ \\
+\textit{exakt} & $ 33.5 $ & $ 53.6 $ \\
+\midrule
+$a = 1$ & {$V$} & {$J_p$}\\
+\midrule
+\textit{MC} & $ 23.1\pm0.2 $ & $ 28.7\pm0.3 $ \\
+\textit{exakt} & $ 23.0 $ & - \\
+\bottomrule
+\end{tabular*}
+\caption{Vergleich von numerisch ermittelten (MC) und exakten Werten}
+\label{tab:erg}
+\end{table}
+
+Wie man erkennen kann, stimmen die numerisch ermittelten Werte mit den exakt bekannten
+im Rahmen der gemessenen Fehler gut überein.
+
+\section*{Aufgabe 2}
+In dieser Aufgabe war die Akzeptanz eines Detektors zu berechnen. Der entsprechende
+Code ist in \lref{detektor} dargestellt.
+
+\lstinputlisting[label=lst:detektor,caption={detektor.m}]{../code/detektor.m}
+
+Das resultierende Ergebnis für die Akzeptanz $A$ lautet dabei:
+\begin{eqnarray}
+A = (83.04 \pm 0.08)\%
+\end{eqnarray}
+
+Der Fehler wurde gemäß \eref{sigma} berechnet, wobei auch hier mit numerisch
+berechneten Mittelwerten statt exakten Werten gerechnet wurde.
+
+Eine kurze Erläuterung der verwendeten Größen sowie zugehörige Skizzen sind als
+Anhang beigefügt.
