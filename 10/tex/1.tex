@@ -6,13 +6,28 @@ zwischen $-a$ und $+a$ annehmen kann, mit $a\le R$.
 
 Zunächst wurde das exakte Kugelvolumen für beide $a$-Werte und das Trägheitsmoment
 für $a=R$ berechnet, um eine Schätzung für die Standardabweichungen zu erhalten.
-Diese wurde nach der Formel
+Diese wurden nach der Formel
 \begin{eqnarray}
 σ = \sqrt{\langle x²\rangle - \overline{x}²}
 \label{eqn:sigma}
 \end{eqnarray}
-berechnet. Für den Fall $a\ne R$ wurde statt der exakten Werte $\overline{x}$ der numerisch
+oder nach Gl. (7.6) und (7.7) im Skript berechnet (beide äquivalent). Für den Fall $a\ne R$ wurde statt der exakten Werte $\overline{x}$ der numerisch
 gebildete Mittelwert $\langle x \rangle$ verwendet.
+
+Das Kugelvolumen wurde wie folgt bestimmt:
+\begin{eqnarray}
+p &=& \frac{V_{Kugel}}{V_{G}} = \frac{N_{Kugel}}{N_G}\\
+V_{Kugel} &=& pV_G = \frac{N_{Kugel}}{N_G}\cdot (2R)^2\cdot 2a\\
+&=& 8R^2a\frac{N_{Kugel}}{N_G}
+\end{eqnarray}
+Hierbei sind $V_G$ das Volumen des Gebiets $G$ und $N_G$ die Anzahl der simulierten
+Punkte in diesem Gebiet.
+
+Das Trägheitsmoment wurde nach der Formel
+\begin{eqnarray}
+J_z &=& \intρ(\vec{r})r^2\dd{\vec{r}}
+\end{eqnarray}
+numerisch berechnet. Der Wert für die Kugel wurde der Literatur entnommen.
 
 Der Code, der die Aufgabenstellung bearbeitet, ist in \lref{kugel} dargestellt.
 

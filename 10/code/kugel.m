@@ -56,5 +56,3 @@ end
 
 sphere(2,2); % R = 2, a = 2
 sphere(2,1); % R = 2, a = 1
-
-% kate: remove-trailing-space on; replace-trailing-space-save on; indent-width 2; indent-mode normal; syntax matlab; space-indent on;
