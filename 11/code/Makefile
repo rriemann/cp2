@@ -3,7 +3,7 @@ LDLIBS=`root-config --libs` -lMinuit2
 
 all:	main
 
-main: 	main.o
+main: 	main.o torus_hopping.o
 
 run: 	main
 	./main
