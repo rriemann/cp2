@@ -1,14 +1,14 @@
-CXXFLAGS=`root-config --cflags`
+CXXFLAGS=`root-config --cflags` -Wall -g
 LDLIBS=`root-config --libs`
 
 all:	main
 
-main: 	main.o torus_hopping.o
+main: 	main.o
 
 run: 	main
 	./main
 
 clean:
-	rm -f main main.o torus_hopping.o
+	rm -f main main.o
 
 .PHONY:	run clean
