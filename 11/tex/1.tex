@@ -53,9 +53,9 @@ E &=& \langle H \rangle = -\frac{∂\ln Z}{∂β}\\
 Für die Magnetisierung $M$ ergibt sich folgendes:
 \begin{eqnarray}
 \langle M \rangle &=& \frac{1}{β}\frac{∂\ln Z}{∂B}\\
-&=& {L\left({{βe^{2β}\cosh \left(βB\right)\sinh \left(βB\right)}\over{\sqrt{e^{2β}\cosh^2
- \left(βB\right)-2\sinh \left(2β\right)}}}+βe^{β} \sinh \left(βB\right)\right)}
- \over{β\left(\sqrt{e^{2β}\cosh ^2\left(βB\right)-2\sinh \left(2β\right)}+e^{β}\cosh \left(βB\right)\right)}
+&=& {L\left({{e^{2β}\cosh \left(βB\right)\sinh \left(βB\right)}\over{\sqrt{e^{2β}\cosh^2
+ \left(βB\right)-2\sinh \left(2β\right)}}}+e^β \sinh \left(βB\right)\right)}
+ \over{\sqrt{e^{2β}\cosh ^2\left(βB\right)-2\sinh \left(2β\right)}+e^{β}\cosh \left(βB\right)}
 \end{eqnarray}
 
 \subsection*{1c}
@@ -64,3 +64,21 @@ Schließlich war die Magnetisierung in Abhängigkeit von β und $B$ zu plotten.
 Dafür wurde das in \lref{plot_mag} dargestellte Skript geschrieben.
 
 \lstinputlisting[label=lst:plot_mag,caption={magnetisierung.m}]{../code/magnetisierung.m}
+
+Die daraus erstellte Graphik ist in \fref{magnetisierung} dargestellt.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.8\columnwidth,keepaspectratio]{../tmp/magnetisierung-crop}
+  \caption{Magnetisierung in Abhängigkeit von β und $B$, jeweils in natürlichen Einheiten}
+  \label{fig:magnetisierung}
+\end{figure}
+
+Das Ergebnis entspricht den Erwartungen, da zum Einen bei großen Magnetfeldern die Magnetisierung
+ihren positiven oder negativen Grenzwert anstrebt, je nach Ausrichtung des Magnetfelds.
+Weiterhin ist zu beobachten, dass bei kleinen Temperaturen, also großen β-Werten,
+die Magnetisierung fast sofort ihren Grenzwert erreicht, während bei großen Temperaturen,
+also kleinen β-Werten, auch große äußere Magnetfelder die Magnetisierung nicht 
+wesentlich vom Wert $M=0$ abweichen lassen. Dies entspricht der Vorstellung, dass
+eine hohe Temperatur die einzelnen Spins stärker aus der Ausrichtung in eine
+Richtung ablenkt als eine geringe Temperatur.
