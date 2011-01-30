@@ -1,0 +1,36 @@
+\section*{Aufgabe 1}
+\subsection*{1a)}
+Zunächst soll der Ausdruck für die eindimensionale Zustandssumme $Z$ für das
+Ising-Modell mit nicht verschwindendem Magnetfeld hergeleitet werden. Diese ist
+nach dem Skript, Gl. (8.14), zu bestimmen als
+\begin{eqnarray}
+Z &=& \mathrm{Tr}\left[T^L\right]\\
+\mathrm{mit\quad} T_{σσ'} &=& \exp[βσσ' + βB(σ+σ')/2]
+\end{eqnarray}
+σ und $σ'$ können hierbei $\pm 1$ sein. Damit ergibt sich die folgende Matrix $T$:
+\begin{eqnarray}
+T = \begin{pmatrix} e^{β(1+B)} & e^{-β} \\ e^{-β} & e^{β(1-B)} \end{pmatrix}
+\end{eqnarray}
+
+Nun sind die Eigenwerte dieser Matrix zu berechnen. Dies wird in den folgenden
+Zeilen getan.
+
+\begin{eqnarray}
+0 &=& \det[T-λ] = (e^{β(1+B)}-λ)(e^{β(1-B)}-λ) - e^{-2β}\\
+&=& λ^2 - λe^β\underbrace{\left(e^{βB} + e^{-βB}\right)}_{2\cosh(βB)} + \underbrace{e^{2β} - e^{-2β}}_{2\sinh(2β)}\\
+→ λ_{\pm} &=& e^β\cosh(βB) \pm \sqrt{e^{2β}\cosh^2(βB) - 2\sinh(2β)}
+\end{eqnarray}
+
+Damit lässt sich die Potenzierung und anschließende Spurbildung der Matrix leicht
+analytisch durchführen:
+\begin{eqnarray}
+\mathrm{Tr}[T^L] = λ_+^L + λ_-^L
+\end{eqnarray}
+
+$Z$ ist somit exakt bekannt. Um nun den Grenzwert $L→∞$ durchzuführen, wird ausgenutzt,
+dass $λ_-$ kleiner als $λ_+$ ist. Daher ist der Beitrag von $λ_-$ im Grenzfall
+vernachlässigbar.
+
+\begin{eqnarray}
+Z \approx λ_+^L = \left(e^β\cosh(βB) + \sqrt{e^{2β}\cosh^2(βB) - 2\sinh(2β)}\right)^L
+\end{eqnarray}
