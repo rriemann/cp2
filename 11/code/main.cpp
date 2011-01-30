@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <math.h>
+#include <omp.h>
 
 using std::vector;
 using std::string;
@@ -16,15 +17,20 @@ typedef int spin;
 const spin up = 1;
 const spin down = 0;
 
+double magnetization(int feld[], int length);
 void torus_hopping(int* hop, int length, int dimension, int volume);
+double energy(int feld[], int** neighbours, int volume, double coupling, double b, int dimension2);
 
 // arguments: L (lenght), D (dimension), i (r = 0 (random spin) or anything else (all spin up)
 int main(int argc, char *argv[]) {
     // argv[0] is app name
 
+    const double coupling = 1;
+    const double b = 2;
     assert(argc == 4);
     const int length = atoi(argv[1]);
     const int dimension = atoi(argv[2]); // read dimension from first cmd option
+    const int dimension2 = 2*dimension;
     const int rand_mode = atoi(argv[3]); // read random mode
     const int volume = pow(length,dimension);
     TRandom3 ran(0);
@@ -37,15 +43,48 @@ int main(int argc, char *argv[]) {
     }
 
     // get hopping array
-    int *hop = (int*)malloc(volume*2*dimension*sizeof(spin));
+    int **neighbours = (int**)malloc(volume*sizeof(int*));
+    neighbours[0] = (int*)malloc(volume*dimension2*sizeof(int));
+    #pragma omp parallel for
+    for(int i = 1; i < volume; ++i) {
+        neighbours[i] = neighbours[0] + i*dimension2;
+    }
 
 
-    torus_hopping(hop, length, dimension, volume);
+    torus_hopping(neighbours[0], length, dimension, volume);
 
-    free(hop);
+    cout << "magnetization: " << magnetization(feld, volume) << endl;
+    cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
+
+    free(neighbours);
     free(feld);
 
     return 0;
+}
+
+double magnetization(int feld[], int volume) {
+    int sum = 0;
+    #pragma omp parallel for reduction(+:sum)
+    for(int i = 0; i < volume; ++i) {
+        sum += feld[i];
+    }
+    return (double)sum/volume;
+}
+
+double energy(int feld[], int **neighbours, int volume, double coupling, double b, int dimension2) {
+    int energy_c = 0;
+    int energy_b = 0;
+    int energy_n = 0;
+    #pragma omp parallel for shared(neighbours,feld) private(energy_n) reduction(+:energy_c,energy_b)
+    for(int i = 0; i < volume; ++i) {
+        energy_n = 0;
+        for(int j = 0; j < dimension2; ++j) {
+            energy_n += feld[neighbours[i][j]];
+        }
+        energy_c += energy_n*feld[i];
+        energy_b += feld[i];
+    }
+    return energy_c*coupling+energy_b*b;
 }
 
 
