@@ -34,3 +34,33 @@ vernachlässigbar.
 \begin{eqnarray}
 Z \approx λ_+^L = \left(e^β\cosh(βB) + \sqrt{e^{2β}\cosh^2(βB) - 2\sinh(2β)}\right)^L
 \end{eqnarray}
+
+\subsection*{1b)}
+Hier soll aus der bekannten, kanonischen Zustandssumme die mittlere Energie und
+Magnetisierung berechnet werden. Dafür wird die Relation aus Skript, Gl. (8.9) (mittlere
+Energie) und Gl. (8.10) (mittlere Magnetisierung) verwendet. Die Relation für die mittlere
+Energie $E$ lautet wie folgt:
+\begin{eqnarray}
+E &=& \langle H \rangle = -\frac{∂\ln Z}{∂β}\\
+&=& {{\left({{2e^{2β}B\cosh \left(βB\right)\sinh \left(βB\right)+2e^{2β}\cosh^2
+ \left(βB\right)-4\cosh \left(2β\right)}\over{2\sqrt{
+ e^{2β}\cosh ^2\left(βB\right)-2\sinh \left(2β\right)}}}+e^β(B\sinh \left(βB\right)+
+ \cosh \left(βB\right))\right)L}
+ \over{\sqrt{e^{2β} \cosh^2\left(βB\right)-2\sinh \left(2β\right)}+e^{
+ β}\cosh \left(βB\right)}}
+\end{eqnarray}
+
+Für die Magnetisierung $M$ ergibt sich folgendes:
+\begin{eqnarray}
+\langle M \rangle &=& \frac{1}{β}\frac{∂\ln Z}{∂B}\\
+&=& {L\left({{βe^{2β}\cosh \left(βB\right)\sinh \left(βB\right)}\over{\sqrt{e^{2β}\cosh^2
+ \left(βB\right)-2\sinh \left(2β\right)}}}+βe^{β} \sinh \left(βB\right)\right)}
+ \over{β\left(\sqrt{e^{2β}\cosh ^2\left(βB\right)-2\sinh \left(2β\right)}+e^{β}\cosh \left(βB\right)\right)}
+\end{eqnarray}
+
+\subsection*{1c}
+
+Schließlich war die Magnetisierung in Abhängigkeit von β und $B$ zu plotten.
+Dafür wurde das in \lref{plot_mag} dargestellte Skript geschrieben.
+
+\lstinputlisting[label=lst:plot_mag,caption={magnetisierung.m}]{../code/magnetisierung.m}
