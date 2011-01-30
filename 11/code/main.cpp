@@ -38,8 +38,15 @@ int main(int argc, char *argv[]) {
     // build field L^D with lengh L and dimension D
     field feld = (spin*)malloc(volume*sizeof(spin));
 
-    for (int i = 0; i < volume; ++i) {
-        feld[i] = (rand_mode == 0) ? (ran.Uniform() > 0.5) : 1;
+    if (rand_mode == 0) {
+        for (int i = 0; i < volume; ++i) {
+            feld[i] = (ran.Uniform() > 0.5);
+        }
+    } else {
+        #pragma omp parallel for
+        for (int i = 0; i < volume; ++i) {
+            feld[i] = 1;
+        }
     }
 
     // get hopping array
