@@ -82,3 +82,58 @@ also kleinen β-Werten, auch große äußere Magnetfelder die Magnetisierung nic
 wesentlich vom Wert $M=0$ abweichen lassen. Dies entspricht der Vorstellung, dass
 eine hohe Temperatur die einzelnen Spins stärker aus der Ausrichtung in eine
 Richtung ablenkt als eine geringe Temperatur.
+
+\section*{Aufgabe 2)}
+
+In der zweiten Aufgabe wurde ein ein- und ein zweidimensionales Spin-Gitter untersucht.
+Dabei sollten diese Gitter jeweils einmal geordnet und einmal ungeordnet, also
+zufällig belegt sein. Für alle Fälle war die Magnetisierung und die Energie zu messen.
+Die Randbedingungen waren periodisch.
+
+Der Code, der diese Aufgabenstellung bearbeitet, ist in \lref{main} dargestellt.
+
+\lstinputlisting[label=lst:main,caption={main.cpp}]{../code/main.cpp}
+
+Als Zufallszahlengenerator wurde die in der ROOT-Klasse \texttt{TRandom3} zur
+Verfügung gestellte Funktion \texttt{Uniform} verwendet, die gleichverteilte Zufallszahlen
+generiert.
+
+Weiterhin wurde immer überprüft, welche Indizes die Nachbarn des Koordinatenursprungs haben,
+um die korrekte Implementierung der Randbedingungen zu testen.
+
+Das Programm wurde mit verschiedenen Parametern aufgerufen, um die einzelnen
+Konfigurationen zu testen, wobei der folgende Output resultierte:
+
+\begin{lstlisting}[caption=Aufruf und Output von \lref{main},label=lst:output]
+$> ./main 10 1 0
+magnetization: 0.4
+energy: 10
+neighbours of (0,0,...):
+  1
+  9
+$> ./main 10 1 1
+magnetization: 1
+energy: 40
+neighbours of (0,0,...):
+  1
+  9
+$> ./main 10 2 0
+magnetization: 0.46
+energy: 176
+neighbours of (0,0,...):
+  1
+  10
+  9
+  90
+$> ./main 10 2 1
+magnetization: 1
+energy: 600
+neighbours of (0,0,...):
+  1
+  10
+  9
+  90
+\end{lstlisting}
+Unabhängig von der Dimension ist demnach die Energie und die Magnetisierung für
+geordnete Systeme deutlich größer als für ungeordnete Systeme, was zu erwarten
+war. Auch die Überprüfung der Nachbarn stimmt mit den Erwartungen überein. 
