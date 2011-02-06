@@ -20,18 +20,20 @@ const spin down = 0;
 double magnetization(int feld[], int length);
 void torus_hopping(int* hop, int length, int dimension, int volume);
 double energy(int feld[], int** neighbours, int volume, double coupling, double b, int dimension2);
+void swap(field feld, TRandom3 ran, int** neighbours, int dimension2, double beta, int volume, double b);
 
-// arguments: L (lenght), D (dimension), i (r = 0 (random spin) or anything else (all spin up)
+// arguments: L (lenght), D (dimension), i (r = 0 (random spin) or anything else (all spin up), b B field, beta
 int main(int argc, char *argv[]) {
     // argv[0] is app name
 
     const double coupling = 1;
-    const double b = 2;
-    assert(argc == 4);
+    assert(argc == 6);
     const int length = atoi(argv[1]);
     const int dimension = atoi(argv[2]); // read dimension from first cmd option
     const int dimension2 = 2*dimension;
     const int rand_mode = atoi(argv[3]); // read random mode
+    const double b = atof(argv[4]);
+    const double beta = atof(argv[5]);
     const int volume = pow(length,dimension);
     TRandom3 ran(0);
 
@@ -60,18 +62,32 @@ int main(int argc, char *argv[]) {
 
     torus_hopping(neighbours[0], length, dimension, volume);
 
+    swap(feld,ran,neighbours,dimension2,beta,volume,b);
+    
     cout << "magnetization: " << magnetization(feld, volume) << endl;
     cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
 
-    cout << "neighbours of (0,0,...):" << endl;
-    for(int i = 0; i < dimension2; ++i) {
-        cout << "  " << neighbours[0][i] << endl;
-    }
+//     cout << "neighbours of (0,0,...):" << endl;
+//     for(int i = 0; i < dimension2; ++i) {
+//         cout << "  " << neighbours[0][i] << endl;
+//     }
 
     free(neighbours);
     free(feld);
 
     return 0;
+}
+
+void swap(field feld, TRandom3 ran, int **neighbours, int dimension2, double beta, int volume, double b) {
+    double bb, bbb;
+    for(int i = 0; i < volume; ++i) {
+        bb = b;
+        for(int j = 0; j < dimension2; ++j) {
+            bb += neighbours[i][j];
+        }
+        bbb = beta*bb;
+        feld[i] = (ran.Uniform() < exp(bbb)/(exp(bbb)+exp(-bbb)));
+    }
 }
 
 double magnetization(int feld[], int volume) {

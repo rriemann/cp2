@@ -5,8 +5,17 @@ all:	main
 
 main: 	main.o
 
-run: 	main
-	./main
+#  L (lenght), D (dimension), i (r = 0 (random spin) or anything else (all spin up), b B field, beta
+# run: 	main
+# 	./main
+run11:	main
+	./main 4  1 0 0.2 0.5
+run12:	main
+	./main 20 1 0 0.2 0.5
+run13:	main
+	./main 4  2 0 0.2 0.5
+run14:	main
+	./main 20 2 0 0.2 0.5
 
 clean:
 	rm -f main main.o
