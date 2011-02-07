@@ -67,14 +67,24 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < 10; ++i) {
         for(int j = 0; j < 1e4; ++j) {
             if(j % 10 == 0) {
-//                 m_array
+                m_array[j/10] = magnetization(feld, volume);
+                e_array[j/10] = energy(feld, neighbours, volume, coupling, b, dimension2);
             }
             sweep(feld,ran,neighbours,dimension2,beta,volume,b);
         }
     }
+    double m_sum = 0;
+    double e_sum = 0;
+    #pragma omp parallel for reduction(+:m_sum,e_sum)
+    for (int i = 0; i < 1000; ++i) {
+        m_sum += m_array[i];
+        e_sum += m_array[i];
+    }
     cout << std::setprecision(5) << std::fixed;
     cout << "magnetization: " << magnetization(feld, volume) << endl;
     cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
+//     cout << "magnetization: " << magnetization(feld, volume) << endl;
+//     cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
 
 //     cout << "neighbours of (0,0,...):" << endl;
 //     for(int i = 0; i < dimension2; ++i) {
