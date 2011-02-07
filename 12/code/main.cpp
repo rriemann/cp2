@@ -20,7 +20,7 @@ const spin down = 0;
 double magnetization(int feld[], int length);
 void torus_hopping(int* hop, int length, int dimension, int volume);
 double energy(int feld[], int** neighbours, int volume, double coupling, double b, int dimension2);
-void swap(field feld, TRandom3 ran, int** neighbours, int dimension2, double beta, int volume, double b);
+void sweep(field feld, TRandom3 ran, int** neighbours, int dimension2, double beta, int volume, double b);
 
 // arguments: L (lenght), D (dimension), i (r = 0 (random spin) or anything else (all spin up), b B field, beta
 int main(int argc, char *argv[]) {
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
 
     if (rand_mode == 0) {
         for (int i = 0; i < volume; ++i) {
-            feld[i] = (ran.Uniform() > 0.5);
+            feld[i] = 2*(ran.Uniform() > 0.5) - 1;
         }
     } else {
         #pragma omp parallel for
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 
     torus_hopping(neighbours[0], length, dimension, volume);
 
-    swap(feld,ran,neighbours,dimension2,beta,volume,b);
+    for (int i = 0; i < 1000; ++i) sweep(feld,ran,neighbours,dimension2,beta,volume,b);
     
     cout << "magnetization: " << magnetization(feld, volume) << endl;
     cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
@@ -78,15 +78,15 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-void swap(field feld, TRandom3 ran, int **neighbours, int dimension2, double beta, int volume, double b) {
+void sweep(field feld, TRandom3 ran, int **neighbours, int dimension2, double beta, int volume, double b) {
     double bb, bbb;
     for(int i = 0; i < volume; ++i) {
         bb = b;
         for(int j = 0; j < dimension2; ++j) {
-            bb += neighbours[i][j];
+            bb += feld[neighbours[i][j]];
         }
         bbb = beta*bb;
-        feld[i] = (ran.Uniform() < exp(bbb)/(exp(bbb)+exp(-bbb)));
+        feld[i] = 2*(ran.Uniform() < exp(bbb)/(exp(bbb)+exp(-bbb)))-1;
     }
 }
 
@@ -112,7 +112,7 @@ double energy(int feld[], int **neighbours, int volume, double coupling, double 
         energy_c += energy_n*feld[i];
         energy_b += feld[i];
     }
-    return energy_c*coupling+energy_b*b;
+    return (energy_c*coupling+energy_b*b)*1./volume;
 }
 
 
