@@ -9,13 +9,19 @@ main: 	main.o
 # run: 	main
 # 	./main
 run11:	main
-	./main 4  1 0 0.2 0.5
+	./main 4  1 0 0.2 0.5 0
 run12:	main
-	./main 20 1 0 0.2 0.5
+	./main 20 1 0 0.2 0.5 0
 run13:	main
-	./main 4  2 0 0.2 0.4
+	./main 4  2 0 0.2 0.4 0
 run14:	main
-	./main 10 2 0 0.2 0.4
+	./main 10 2 0 0.2 0.4 0
+
+runc1:	main
+	./main 10 2 0 0.1 0.4 1 0.02 10000
+
+runc2:	main
+	./main 10 2 0 0.15 0.5 1 0.01 1000
 
 clean:
 	rm -f main main.o
