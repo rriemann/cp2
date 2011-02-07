@@ -1,7 +1,7 @@
 \section*{Aufgabe 1}
 \subsection*{1a)}
 Zunächst soll der Ausdruck für die eindimensionale Zustandssumme $Z$ für das
-Ising-Modell mit nicht verschwindendem Magnetfeld hergeleitet werden. Diese ist
+Ising-Modell (Hamiltonian s. Skript) mit nicht verschwindendem Magnetfeld hergeleitet werden. Diese ist
 nach dem Skript, Gl. (8.14), zu bestimmen als
 \begin{eqnarray}
 Z &=& \mathrm{Tr}\left[T^L\right]\\
@@ -12,7 +12,8 @@ Z &=& \mathrm{Tr}\left[T^L\right]\\
 T = \begin{pmatrix} e^{β(1+B)} & e^{-β} \\ e^{-β} & e^{β(1-B)} \end{pmatrix}
 \end{eqnarray}
 
-Nun sind die Eigenwerte dieser Matrix zu berechnen. Dies wird in den folgenden
+Nun sind die Eigenwerte dieser Matrix zu berechnen, um eine Diagonalform herstellen zu können,
+mit dem Ziel, die Potenzierung der Matrix möglichst einfach werden zu lassen. Dies wird in den folgenden
 Zeilen getan.
 
 \begin{eqnarray}
@@ -74,7 +75,7 @@ Die daraus erstellte Graphik ist in \fref{magnetisierung} dargestellt.
   \label{fig:magnetisierung}
 \end{figure}
 
-Das Ergebnis entspricht den Erwartungen, da zum Einen bei großen Magnetfeldern die Magnetisierung
+Das Ergebnis entspricht den Erwartungen, da bei großen Magnetfeldern die Magnetisierung
 ihren positiven oder negativen Grenzwert anstrebt, je nach Ausrichtung des Magnetfelds.
 Weiterhin ist zu beobachten, dass bei kleinen Temperaturen, also großen β-Werten,
 die Magnetisierung fast sofort ihren Grenzwert erreicht, während bei großen Temperaturen,

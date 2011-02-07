@@ -12,7 +12,7 @@ lamda = 1.5;
 mean_p  = 0;
 mean_p2 = 0;
 
-function l = length(theta,phi)
+function l = length222222(theta,phi)
   global B L R theta_c;
 
   if theta <= theta_c % teilchen verlaueft nur im Rohr
@@ -44,7 +44,7 @@ end
 
 p_int = 0
 for i=[1:N]
-  p = 1-exp(-length(theta(i),phi(i))/lamda);
+  p = 1-exp(-length222222(theta(i),phi(i))/lamda);
   p_int   += p;
   mean_p  += p;
   mean_p2 += p^2;

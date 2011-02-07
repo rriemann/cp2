@@ -16,7 +16,7 @@ using std::endl;
 typedef int *field;
 typedef int spin;
 const spin up = 1;
-const spin down = 0;
+const spin down = -1;
 
 double magnetization(int feld[], int length);
 void torus_hopping(int* hop, int length, int dimension, int volume);
@@ -71,6 +71,7 @@ int main(int argc, char *argv[]) {
                 e_array[j/10] = energy(feld, neighbours, volume, coupling, b, dimension2);
             }
             sweep(feld,ran,neighbours,dimension2,beta,volume,b);
+//             cout << "magnetization: " << magnetization(feld, volume) << endl;
         }
     }
     double m_sum = 0;
@@ -78,13 +79,13 @@ int main(int argc, char *argv[]) {
     #pragma omp parallel for reduction(+:m_sum,e_sum)
     for (int i = 0; i < 1000; ++i) {
         m_sum += m_array[i];
-        e_sum += m_array[i];
+        e_sum += e_array[i];
     }
     cout << std::setprecision(5) << std::fixed;
     cout << "magnetization: " << m_sum/1000.0 << endl;
     cout << "energy: " << e_sum/1000.0 << endl;
-//     cout << "magnetization: " << magnetization(feld, volume) << endl;
-//     cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
+    cout << "magnetization fct: " << magnetization(feld, volume) << endl;
+    cout << "energy fct: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
 
 //     cout << "neighbours of (0,0,...):" << endl;
 //     for(int i = 0; i < dimension2; ++i) {
@@ -100,12 +101,14 @@ int main(int argc, char *argv[]) {
 void sweep(field feld, TRandom3 ran, int **neighbours, int dimension2, double beta, int volume, double b) {
     double bb, bbb;
     for(int i = 0; i < volume; ++i) {
+        ran.SetSeed();
         bb = 0;
         #pragma omp parallel for reduction(+:bb) private(bbb)
         for(int j = 0; j < dimension2; ++j) {
             bb += feld[neighbours[i][j]];
         }
         bbb = beta*(bb+b);
+//         cout << i << ran.Uniform() << endl;
         feld[i] = 2*(ran.Uniform() < exp(bbb)/(exp(bbb)+exp(-bbb)))-1;
     }
 }
@@ -116,7 +119,7 @@ double magnetization(int feld[], int volume) {
     for(int i = 0; i < volume; ++i) {
         sum += feld[i];
     }
-    return (double)sum/volume;
+    return sum*1./volume;
 }
 
 double energy(int feld[], int **neighbours, int volume, double coupling, double b, int dimension2) {

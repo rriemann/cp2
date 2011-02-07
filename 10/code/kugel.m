@@ -43,7 +43,8 @@ function sphere(R,a)
     end
 
   end
-
+  V
+  J
   mean(V)
   sqrt(mean(var_V))
   mean(J)
