@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     // argv[0] is app name
 
     const double coupling = 0.5;
-    assert(argc => 7);
+    assert(argc >= 7);
     const int length = atoi(argv[1]);
     const int dimension = atoi(argv[2]); // read dimension from first cmd option
     const int dimension2 = 2*dimension;
@@ -86,8 +86,8 @@ int main(int argc, char *argv[]) {
             mean_e += ener[i];
         }
 
-        cout << "σ magnetization: " << sqrt(mean_m2*0.1 - mean_m*mean_m*0.01) << endl;
-        cout << "σ energy: " << sqrt(mean_e2*0.1 - mean_e*mean_e*0.01) << endl;
+        cout << "magnetization mean: " << mean_m/10 << " +- " << sqrt(mean_m2*0.1 - mean_m*mean_m*0.01) << endl;
+        cout << "energy mean: " << mean_e/10 << " +- " << sqrt(mean_e2*0.1 - mean_e*mean_e*0.01) << endl;
     } else if(problem == 1) {
         assert(argc == 9);
         const double b_stride = atof(argv[7]);
