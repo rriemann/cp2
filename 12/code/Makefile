@@ -23,7 +23,10 @@ runc1:	main
 runc2:	main
 	./main 10 2 0 0.15 0.5 1 0.01 1000 > output_c2.txt
 
+plot:	runc1 runc2
+	gnuplot plot.gp
+
 clean:
 	rm -f main main.o
 
-.PHONY:	run clean
+.PHONY:	run clean run11 run12 run13 run14 runc1 runc2 plot

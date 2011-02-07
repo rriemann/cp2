@@ -116,7 +116,7 @@ void sweep(field feld, TRandom3 *ran, int **neighbours, int dimension2, double b
 
 void hysteresis(field feld, TRandom3 *ran, int** neighbours, int dimension2, double beta, int volume, double b_min, double b_max, double b_stride, int n_max, double coupling) {
     cout << "#B magnetization energy" << endl;
-    for(double b = b_min; b <= b_max; b += b_stride) {
+    for(double b = b_min; b <= b_max+0.000002; b += b_stride) {
         for(int n = 0; n < n_max; ++n) {
             sweep(feld,ran,neighbours,dimension2,beta,volume,b);
         }
