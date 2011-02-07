@@ -81,8 +81,8 @@ int main(int argc, char *argv[]) {
         e_sum += m_array[i];
     }
     cout << std::setprecision(5) << std::fixed;
-    cout << "magnetization: " << magnetization(feld, volume) << endl;
-    cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
+    cout << "magnetization: " << m_sum/1000.0 << endl;
+    cout << "energy: " << e_sum/1000.0 << endl;
 //     cout << "magnetization: " << magnetization(feld, volume) << endl;
 //     cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
 
