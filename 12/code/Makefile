@@ -18,10 +18,10 @@ run14:	main
 	./main 10 2 0 0.2 0.4 0
 
 runc1:	main
-	./main 10 2 0 0.1 0.4 1 0.02 10000
+	./main 10 2 0 0.1 0.4 1 0.02 10000 > output_c1.txt
 
 runc2:	main
-	./main 10 2 0 0.15 0.5 1 0.01 1000
+	./main 10 2 0 0.15 0.5 1 0.01 1000 > output_c2.txt
 
 clean:
 	rm -f main main.o
