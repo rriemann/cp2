@@ -1,4 +1,4 @@
-CXXFLAGS=`root-config --cflags` -Wall -g -fopenmp
+CXXFLAGS=`root-config --cflags` -Wall -fopenmp
 LDLIBS=`root-config --libs` -lgomp
 
 all:	main

@@ -1,6 +1,7 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <TRandom3.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -26,7 +27,7 @@ void sweep(field feld, TRandom3 ran, int** neighbours, int dimension2, double be
 int main(int argc, char *argv[]) {
     // argv[0] is app name
 
-    const double coupling = 1;
+    const double coupling = 0.5;
     assert(argc == 6);
     const int length = atoi(argv[1]);
     const int dimension = atoi(argv[2]); // read dimension from first cmd option
@@ -61,8 +62,17 @@ int main(int argc, char *argv[]) {
 
     torus_hopping(neighbours[0], length, dimension, volume);
 
-    for (int i = 0; i < 10000; ++i) sweep(feld,ran,neighbours,dimension2,beta,volume,b);
-    
+    double m_array[1000];
+    double e_array[1000];
+    for (int i = 0; i < 10; ++i) {
+        for(int j = 0; j < 1e4; ++j) {
+            if(j % 10 == 0) {
+//                 m_array
+            }
+            sweep(feld,ran,neighbours,dimension2,beta,volume,b);
+        }
+    }
+    cout << std::setprecision(5) << std::fixed;
     cout << "magnetization: " << magnetization(feld, volume) << endl;
     cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
 
@@ -112,7 +122,7 @@ double energy(int feld[], int **neighbours, int volume, double coupling, double 
         energy_c += energy_n*feld[i];
         energy_b += feld[i];
     }
-    return -1*(energy_c*coupling+energy_b*b)*1./volume;
+    return -(energy_c*coupling+energy_b*b)/(double)volume;
 }
 
 
