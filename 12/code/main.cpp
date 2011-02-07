@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 
     torus_hopping(neighbours[0], length, dimension, volume);
 
-    for (int i = 0; i < 1000; ++i) sweep(feld,ran,neighbours,dimension2,beta,volume,b);
+    for (int i = 0; i < 10000; ++i) sweep(feld,ran,neighbours,dimension2,beta,volume,b);
     
     cout << "magnetization: " << magnetization(feld, volume) << endl;
     cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
@@ -112,7 +112,7 @@ double energy(int feld[], int **neighbours, int volume, double coupling, double 
         energy_c += energy_n*feld[i];
         energy_b += feld[i];
     }
-    return (energy_c*coupling+energy_b*b)*1./volume;
+    return -1*(energy_c*coupling+energy_b*b)*1./volume;
 }
 
 
