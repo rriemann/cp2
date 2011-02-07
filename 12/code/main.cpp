@@ -113,6 +113,16 @@ void sweep(field feld, TRandom3 ran, int **neighbours, int dimension2, double be
     }
 }
 
+void hysteresis(field feld, TRandom3 *ran, int** neighbours, int dimension2, double beta, int volume, double b_min, double b_max, double b_stride, int n_max, double coupling) {
+    cout << "#B magnetization energy" << endl;
+    for(double b = b_min; b <= b_max; b += b_stride) {
+        for(int n = 0; n < n_max; ++n) {
+            sweep(feld,ran,neighbours,dimension2,beta,volume,b);
+        }
+        cout << b << " " << magnetization(feld, volume) << " " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
+    }
+}
+
 double magnetization(int feld[], int volume) {
     int sum = 0;
     #pragma omp parallel for reduction(+:sum)
