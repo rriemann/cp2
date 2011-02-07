@@ -93,6 +93,7 @@ int main(int argc, char *argv[]) {
         const double b_stride = atof(argv[7]);
         const int n_max = atoi(argv[8]);
         cout << "#B magnetization energy" << endl;
+        for (int i = 0; i < 1e4; ++i) sweep(feld,ran,neighbours,dimension2,beta,volume,-b);
         hysteresis(feld, ran, neighbours, dimension2, beta, volume, -b, b, b_stride, n_max, coupling);
         hysteresis(feld, ran, neighbours, dimension2, beta, volume, b, -b, -b_stride, n_max, coupling);
     }
@@ -117,14 +118,18 @@ void sweep(field feld, TRandom3 *ran, int **neighbours, int dimension2, double b
 }
 
 void hysteresis(field feld, TRandom3 *ran, int** neighbours, int dimension2, double beta, int volume, double b_min, double b_max, double b_stride, int n_max, double coupling) {
-    int i_max = ((b_max>b_min)*2-1)*ceil(fabs((b_max-b_min)/b_stride));
+    int i_max = ceil(fabs((b_max-b_min)/b_stride));
     double b;
+    double mean_b = 0, mean_e = 0;
     for(int i = 0; i <= i_max; ++i) {
         b = b_min+i*b_stride;
+        mean_b = 0; mean_e = 0;
         for(int n = 0; n < n_max; ++n) {
+            mean_b += magnetization(feld, volume);
+            mean_e += energy(feld, neighbours, volume, coupling, b, dimension2);
             sweep(feld,ran,neighbours,dimension2,beta,volume,b);
         }
-        cout << b << " " << magnetization(feld, volume) << " " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
+        cout << b << " " << mean_b/n_max << " " << mean_e/n_max << endl;
     }
 }
 
