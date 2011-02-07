@@ -22,23 +22,23 @@ double magnetization(int feld[], int length);
 void torus_hopping(int* hop, int length, int dimension, int volume);
 double energy(int feld[], int** neighbours, int volume, double coupling, double b, int dimension2);
 void sweep(field feld, TRandom3 *ran, int** neighbours, int dimension2, double beta, int volume, double b);
+void hysteresis(field feld, TRandom3 *ran, int** neighbours, int dimension2, double beta, int volume, double b_min, double b_max, double b_stride, int n_max, double coupling);
 
-// arguments: L (lenght), D (dimension), i (r = 0 (random spin) or anything else (all spin up), b B field, beta
+// arguments: L (lenght), D (dimension), i (r = 0 (random spin) or anything else (all spin up), b B field, beta, problem (0 = b), 1 = c) ) [, b_step, n_max]
 int main(int argc, char *argv[]) {
     // argv[0] is app name
 
     const double coupling = 0.5;
-    assert(argc == 6);
+    assert(argc >= 7);
     const int length = atoi(argv[1]);
     const int dimension = atoi(argv[2]); // read dimension from first cmd option
     const int dimension2 = 2*dimension;
     const int rand_mode = atoi(argv[3]); // read random mode
     const double b = atof(argv[4]);
     const double beta = atof(argv[5]);
+    const int problem = atoi(argv[6]);
     const int volume = pow(length,dimension);
     TRandom3 *ran = new TRandom3(0);
-    double magn[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    double ener[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     // build field L^D with lengh L and dimension D
     field feld = (spin*)malloc(volume*sizeof(spin));
@@ -66,25 +66,34 @@ int main(int argc, char *argv[]) {
 
     cout << std::setprecision(5) << std::fixed;
 
-    double mean_m=0, mean_e=0, mean_m2=0, mean_e2=0;
-    for (int i = 0; i < 10; ++i) {
-        for(int j = 0; j < 1e4; ++j) {
-            magn[i] += magnetization(feld, volume);
-            ener[i] += energy(feld, neighbours, volume, coupling, b, dimension2);
-            sweep(feld,ran,neighbours,dimension2,beta,volume,b);
+    if(problem == 0) {
+        double magn[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        double ener[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        double mean_m=0, mean_e=0, mean_m2=0, mean_e2=0;
+        for (int i = 0; i < 10; ++i) {
+            for(int j = 0; j < 1e4; ++j) {
+                magn[i] += magnetization(feld, volume);
+                ener[i] += energy(feld, neighbours, volume, coupling, b, dimension2);
+                sweep(feld,ran,neighbours,dimension2,beta,volume,b);
+            }
+            magn[i] *= 1e-4;
+            ener[i] *= 1e-4;
+            cout << "magnetization: " << magn[i] << endl;
+            cout << "energy: " << ener[i] << endl;
+            mean_m2 += magn[i]*magn[i];
+            mean_m += magn[i];
+            mean_e2 += ener[i]*ener[i];
+            mean_e += ener[i];
         }
-        magn[i] *= 1e-4;
-        ener[i] *= 1e-4;
-        cout << "magnetization: " << magn[i] << endl;
-        cout << "energy: " << ener[i] << endl;
-        mean_m2 += magn[i]*magn[i];
-        mean_m += magn[i];
-        mean_e2 += ener[i]*ener[i];
-        mean_e += ener[i];
-    }
 
-    cout << "magnetization mean: " << mean_m/10 << " +- " << sqrt(mean_m2*0.1 - mean_m*mean_m*0.01) << endl;
-    cout << "energy mean: " << mean_e/10 << " +- " << sqrt(mean_e2*0.1 - mean_e*mean_e*0.01) << endl;
+        cout << "magnetization mean: " << mean_m/10 << " +- " << sqrt(mean_m2*0.1 - mean_m*mean_m*0.01) << endl;
+        cout << "energy mean: " << mean_e/10 << " +- " << sqrt(mean_e2*0.1 - mean_e*mean_e*0.01) << endl;
+    } else if(problem == 1) {
+        assert(argc == 9);
+        const double b_stride = atof(argv[7]);
+        const int n_max = atoi(argv[8]);
+        hysteresis(feld, ran, neighbours, dimension2, beta, volume, -b, b, b_stride, n_max, coupling);
+    }
 
     free(neighbours);
     free(feld);
@@ -139,7 +148,6 @@ double energy(field feld, int **neighbours, int volume, double coupling, double 
     }
     return -(energy_c*coupling+energy_b*b)/(double)volume;
 }
-
 
 void torus_hopping(int *hop, int length, int dimension, int volume) {
     int Lmu, n_x, r_x;
