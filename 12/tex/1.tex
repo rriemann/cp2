@@ -7,6 +7,11 @@ Der entsprechende Code ist in \lref{main} dargestellt.
 
 \lstinputlisting[label=lst:main,caption={main.cpp}]{../code/main.cpp}
 
+Der Aufruf wurde mit Hilfe des in \lref{make} dargestellten Codes durchgeführt,
+wobei an dieser Datei abgelesen kann, wie die Programm-Parameter gewählt sind.
+
+\lstinputlisting[label=lst:make,caption={Makefile}]{../code/Makefile}
+
 Der entsprechende Output ist in \lref{output} dargestellt, wobei jeweils alle
 zehn Block-Ergebnisse und der resultierende Mittelwert gezeigt wird.
 
@@ -115,6 +120,12 @@ energy mean: -1.66179 +- 0.00655
 Wie man erkennen kann, stimmen die \texttt{mean}-Werte gut mit den Referenzwerten
 überein.
 
+Die Standardabweichung σ wurde hierbei wie folgt berechnet:
+\begin{equation}
+σ = \sqrt{\langle x²\rangle - \langle x \rangle²},
+\end{equation}
+wobei $x$ durch die ensprechende Variable zu ersetzen ist.
+
 \subsection*{1c)}
 Hier wird eine Hysteresekurve für die mittlere Magnetisierung und für die mittlere
 Energie untersucht. Der Code ist bereits in \lref{main} dargestellt, die resultierenden
@@ -122,3 +133,8 @@ Plots sind in \fref{ev1} bis \fref{mv2} dargestellt.
 
 % Hier Text
 
+Die gezeigten Verläufe entsprechen den Erwartungen, da zum Einen die Magnetisierung
+einer normale Hysterekurve entspricht und zum Anderen die mittlere Energie nahe
+dem Punkt $B=0$ maximal, also vom Betrage her minimal wird. Dies ist zu erwarten,
+da hier die einzelnen Gitterpunkte zufällig belegt sind, sodass im Mittel die
+Abstoßung bzw. Anziehung verschwindet.
