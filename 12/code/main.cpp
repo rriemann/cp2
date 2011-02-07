@@ -21,7 +21,7 @@ const spin down = -1;
 double magnetization(int feld[], int length);
 void torus_hopping(int* hop, int length, int dimension, int volume);
 double energy(int feld[], int** neighbours, int volume, double coupling, double b, int dimension2);
-void sweep(field feld, TRandom3 ran, int** neighbours, int dimension2, double beta, int volume, double b);
+void sweep(field feld, TRandom3 *ran, int** neighbours, int dimension2, double beta, int volume, double b);
 
 // arguments: L (lenght), D (dimension), i (r = 0 (random spin) or anything else (all spin up), b B field, beta
 int main(int argc, char *argv[]) {
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
     const double b = atof(argv[4]);
     const double beta = atof(argv[5]);
     const int volume = pow(length,dimension);
-    TRandom3 ran(0);
+    TRandom3 *ran = new TRandom3(0);
     double magn[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     double ener[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 
     if (rand_mode == 0) {
         for (int i = 0; i < volume; ++i) {
-            feld[i] = 2*(ran.Uniform() > 0.5) - 1;
+            feld[i] = 2*(ran->Uniform() > 0.5) - 1;
         }
     } else {
         #pragma omp parallel for
@@ -73,16 +73,18 @@ int main(int argc, char *argv[]) {
             ener[i] += energy(feld, neighbours, volume, coupling, b, dimension2);
             sweep(feld,ran,neighbours,dimension2,beta,volume,b);
         }
-        cout << "magnetization: " << magn[i]*0.0001 << endl;
-        cout << "energy: " << ener[i]*0.0001 << endl;
-        mean_m2 += magn[i]*magn[i]*0.0001*0.0001;
-        mean_m += magn[i]*0.0001;
-        mean_e2 += ener[i]*ener[i]*0.0001*0.0001;
-        mean_e += ener[i]*0.0001;
+        magn[i] *= 1e-4;
+        ener[i] *= 1e-4;
+        cout << "magnetization: " << magn[i] << endl;
+        cout << "energy: " << ener[i] << endl;
+        mean_m2 += magn[i]*magn[i];
+        mean_m += magn[i];
+        mean_e2 += ener[i]*ener[i];
+        mean_e += ener[i];
     }
 
-    cout << "σ magnetization: " << sqrt(mean_m2*0.1 - mean_m*0.01) << endl;
-    cout << "σ energy: " << sqrt(mean_e2*0.1 + mean_e*0.01) << endl;	// energy negative
+    cout << "σ magnetization: " << sqrt(mean_m2*0.1 - mean_m*mean_m*0.01) << endl;
+    cout << "σ energy: " << sqrt(mean_e2*0.1 - mean_e*mean_e*0.01) << endl;
 
     free(neighbours);
     free(feld);
@@ -90,9 +92,8 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-void sweep(field feld, TRandom3 ran, int **neighbours, int dimension2, double beta, int volume, double b) {
+void sweep(field feld, TRandom3 *ran, int **neighbours, int dimension2, double beta, int volume, double b) {
     double bb, bbb;
-    ran.SetSeed();
     for(int i = 0; i < volume; ++i) {
         bb = 0;
         #pragma omp parallel for reduction(+:bb) private(bbb)
@@ -100,7 +101,7 @@ void sweep(field feld, TRandom3 ran, int **neighbours, int dimension2, double be
             bb += feld[neighbours[i][j]];
         }
         bbb = beta*(bb+b);
-        feld[i] = 2*(ran.Uniform() < exp(bbb)/(exp(bbb)+exp(-bbb)))-1;
+        feld[i] = 2*(ran->Uniform() < exp(bbb)/(exp(bbb)+exp(-bbb)))-1;
     }
 }
 
