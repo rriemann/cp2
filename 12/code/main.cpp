@@ -92,7 +92,9 @@ int main(int argc, char *argv[]) {
         assert(argc == 9);
         const double b_stride = atof(argv[7]);
         const int n_max = atoi(argv[8]);
+        cout << "#B magnetization energy" << endl;
         hysteresis(feld, ran, neighbours, dimension2, beta, volume, -b, b, b_stride, n_max, coupling);
+        hysteresis(feld, ran, neighbours, dimension2, beta, volume, b, -b, -b_stride, n_max, coupling);
     }
 
     free(neighbours);
@@ -115,8 +117,7 @@ void sweep(field feld, TRandom3 *ran, int **neighbours, int dimension2, double b
 }
 
 void hysteresis(field feld, TRandom3 *ran, int** neighbours, int dimension2, double beta, int volume, double b_min, double b_max, double b_stride, int n_max, double coupling) {
-    cout << "#B magnetization energy" << endl;
-    int i_max = ceil((b_max-b_min)/b_stride);
+    int i_max = ((b_max>b_min)*2-1)*ceil(fabs((b_max-b_min)/b_stride));
     double b;
     for(int i = 0; i <= i_max; ++i) {
         b = b_min+i*b_stride;
