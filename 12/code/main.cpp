@@ -61,10 +61,14 @@ int main(int argc, char *argv[]) {
 
     torus_hopping(neighbours[0], length, dimension, volume);
 
-    for (int i = 0; i < 10000; ++i) sweep(feld,ran,neighbours,dimension2,beta,volume,b);
-    
-    cout << "magnetization: " << magnetization(feld, volume) << endl;
-    cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
+    for (int i = 0; i < 10; ++i){
+      for (int j = 0; j < 1e4; ++j){
+        sweep(feld,ran,neighbours,dimension2,beta,volume,b);
+      }
+      cout << "loop " << i << endl;
+      cout << "magnetization: " << magnetization(feld, volume) << endl;
+      cout << "energy: " << energy(feld, neighbours, volume, coupling, b, dimension2) << endl;
+    }
 
 //     cout << "neighbours of (0,0,...):" << endl;
 //     for(int i = 0; i < dimension2; ++i) {
